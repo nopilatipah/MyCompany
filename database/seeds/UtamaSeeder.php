@@ -14,8 +14,8 @@ class UtamaSeeder extends Seeder
     {
         $map = new Vendor();
         $map->lokasi = "Jl Situtarate, Terusan Cibaduyut Bandung";
-        $map->lat = "27.718708332130223";
-        $map->lng = "85.35781131744386";
+        $map->lat = "-6.9659120000";
+        $map->lng = "107.5929320000";
         $map->save();
     }
 }
