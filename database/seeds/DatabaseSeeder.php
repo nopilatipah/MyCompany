@@ -16,5 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(KejuruansSeeder::class);
         $this->call(KategoriFasilitasSeeder::class);
         $this->call(KomponenSeeder::class);
+        $this->call(EkskulSeeder::class);
+        $this->call(UtamaSeeder::class);
     }
 }
