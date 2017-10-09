@@ -22,7 +22,7 @@ class AkunController extends Controller
     public function index(Request $request, Builder $htmlBuilder)
     {
         if ($request->ajax()){
-            $books = User::where('id','!=',1)->get();
+            $books = User::where('id','!=',1)->orderBy('id','desc')->get();
             return Datatables::of($books)
             ->addColumn('action',function($book){
                 return view('datatable._edit', [
@@ -60,7 +60,7 @@ class AkunController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'=>'required|unique:users|max:255',
+            'name'=>'required|max:255',
             'email'=>'required|email|max:255|unique:users'
             ]);
         $password = str_random(6);
@@ -73,7 +73,7 @@ class AkunController extends Controller
 
         $member->attachRole($memberRole);
 
-        alert()->success('Email '.$data['email'].' Dan Password '.$password,'Tersimpan')->autoclose(3500);
+        alert()->success('Akun Tersimpan')->autoclose(3500);
         return redirect()->route('akun.index');
     }
 

@@ -85,6 +85,63 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
+
+          <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Nama Sekolah &nbsp&nbsp&nbsp: <b>SMK ASSALAAM BANDUNG</b>
+              </h3>
+
+              <!-- tools box -->
+              <button class="btn btn-warning pull-right"><span class="fa fa-edit"></span> Ubah</button>
+              <hr>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+
+          </div>
+
+          <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Kontak & Media Sosial
+              </h3>
+
+              <!-- tools box -->
+              <button class="btn btn-warning pull-right"><span class="fa fa-edit"></span> Ubah</button>
+              <hr>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+
+          </div>
+
+          <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Tentang Sekolah
+              </h3>
+
+              <!-- tools box -->
+              <button class="btn btn-warning pull-right"><span class="fa fa-edit"></span> Ubah</button>
+              <hr>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+
+          </div>
+
+          <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Slider Utama
+              </h3>
+
+              <!-- tools box -->
+              <button class="btn btn-warning pull-right"><span class="fa fa-edit"></span> Ubah</button>
+              <hr>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+
+          </div>
+
           <div class="box box-info">
             <div class="box-header">
               

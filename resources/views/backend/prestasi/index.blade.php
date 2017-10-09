@@ -92,26 +92,21 @@
             <div class="box-body pad">
 
               @foreach($kejuruans as $kejuruan)
-              <div class="col-md-4">
-                <div class="panel">
-                  <div class="panel-heading" style="background-color:teal;color:#fff;"><strong>{{$kejuruan->nama}}</strong>
-                  <a href="{{ route('kejuruan.edit',$kejuruan->id) }}" class="btn btn-warning btn-xs pull-right"><span class="fa fa-edit"></span></a> 
-                  </div>
-                  <div class="panel-body" style="background-color:#000;color:#fff;height: 300px">
-                  
-                    <div class="boximg">
-                    <center>
-                      <img src="{{ asset('img/default.png') }}" class="img-responsive">
-                      <span class="label label-danger date">25 December 2015</span>
-                      </center>
-                      {!! Form::model($kejuruan, ['url'=>route('ekskul.destroy',$kejuruan->id), 'method'=>'delete', 'class'=>'form-inline js-confirm', 'data-confirm'=>'Apakah Anda Yakin Ingin Menghapus '.$kejuruan->nama.'?']) !!}
-                  <button type="submit" href="{{ route('kejuruan.destroy',$kejuruan->id) }}" class="btn btn-danger btn-xs pull-right"><span class="fa fa-trash"></span></button>
-                  {!! Form::close() !!}
-                    </div>  
-                    <br>
-                  </div>
+              <div class="col-sm-4" align="center">
+                <a href="">
+                    <div class="box box-primary">
+                      <div class="box-header">
+                        <h3 class="box-title">{{ $kejuruan->judul }}</h3>
+                        
+                      </div>
+                    <div class="box-body pad">
+                        <img src="{{asset('img/'.$kejuruan->gambar)}}" class="img-responsive img-thumbnail" alt="" style="width: 225px; height: 225px;">
+                        </a>
+                        <br><br><br>
+                        <a href="{{ route('ekskul.edit', $kejuruan->id) }}" class="btn btn-primary btn-block"><span class="fa fa-edit"></span> Ubah Detail</a>
+                    </div>
+                    </div>
                 </div>
-              </div> 
               @endforeach
             </div>
           </div>
@@ -132,28 +127,34 @@
                 <h4 class="modal-title">Tambah Prestasi Baru</h4>
               </div>
               <div class="modal-body">
-                {!! Form::open(['url'=>route('akun.store'), 'method'=>'post', 'files'=>'true','class'=>'form-horizontal']) !!}
-                    <div class="form-group{{ $errors->has('name') ? 'has-error' : '' }}">
-                      {!! Form::label('name','Nama Pengguna *',['class'=>'col-md-12']) !!}
+                {!! Form::open(['url'=>route('prestasi.store'), 'method'=>'post', 'files'=>'true','class'=>'form-horizontal']) !!}
+                    <div class="form-group{{ $errors->has('judul') ? 'has-error' : '' }}">
+                      {!! Form::label('judul','Judul Prestasi *',['class'=>'col-md-12']) !!}
                       <div class="col-md-12">
-                        {!! Form::text('name',null,['class'=>'form-control','required']) !!}
-                        {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+                        {!! Form::text('judul',null,['class'=>'form-control','required']) !!}
+                        {!! $errors->first('judul', '<p class="help-block">:message</p>') !!}
                       </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('email') ? 'has-error' : '' }}">
-                      {!! Form::label('email','Alamat Email *',['class'=>'col-md-12']) !!}
+                    <div class="form-group{{ $errors->has('keterangan') ? 'has-error' : '' }}">
+                      {!! Form::label('keterangan','Keterangan Prestasi *',['class'=>'col-md-12']) !!}
                       <div class="col-md-12">
-                        {!! Form::email('email',null,['class'=>'form-control','required']) !!}
-                        {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
+                        {!! Form::textarea('keterangan',null,['class'=>'form-control']) !!}
+                        {!! $errors->first('keterangan', '<p class="help-block">:message</p>') !!}
                       </div>
                     </div>
-                    <div class="form-group{{ $errors->has('role') ? 'has-error' : '' }}">
-                      {!! Form::label('role','Hak Akses *',['class'=>'col-md-12']) !!}
-                      <div class="col-md-12">
-                        {!! Form::select('role',App\Role::pluck('display_name','id')->all(),null,['class'=>'form-control','placeholder'=>'Pilih Hak Akses', 'required']) !!}
-                        {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
-                      </div>
+
+                    <div class="form-group{{ $errors->has('gambar') ? 'has-error' : '' }}">
+                      {!! Form::label('gambar','Foto Prestasi *',['class'=>'col-md-12']) !!}
+                        <div class="col-md-6">
+                          @if(isset($prestasi) && $prestasi->gambar)
+                            <p>
+                              {!! Html::image(asset('img/'.$prestasi->gambar),null,['class'=>'img-rounded img-responsive']) !!}
+                            </p>
+                          @endif
+                          <input type="file" name="gambar" class="btn btn-default btn-block" required=""></input>
+                          {!! $errors->first('gambar','<p class="help-block">:message</p>') !!}
+                        </div>
                     </div>
                 
               </div>

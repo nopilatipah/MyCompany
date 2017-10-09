@@ -36,7 +36,27 @@ class PrestasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'judul'=>'required',
+            'gambar'=>'image|max:20048']);
+        
+
+        $prestasi= new Prestasi;
+        $prestasi->judul = $request->judul;
+        $prestasi->keterangan = $request->keterangan;
+
+        if ($request->hasFile('gambar')) {
+        $file = $request->file('gambar');
+        $destinationPath = public_path().'/img/';
+        $filename = str_random(6).'_'.$file->getClientOriginalName();
+        $uploadSuccess = $file->move($destinationPath, $filename);
+        $prestasi->gambar = $filename;
+        }
+ 
+        $prestasi->save();
+        // dd($prestasi);
+        alert()->success('Tersimpan')->autoclose(3500);
+        return redirect()->route('prestasi.index');
     }
 
     /**

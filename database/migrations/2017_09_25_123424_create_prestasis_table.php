@@ -16,9 +16,8 @@ class CreatePrestasisTable extends Migration
         Schema::create('prestasis', function (Blueprint $table) {
             $table->increments('id');
             $table->string('judul');
-            $table->string('kategori');
             $table->string('gambar');
-            $table->string('keterangan');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

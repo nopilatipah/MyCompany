@@ -84,6 +84,7 @@
                 
               </h3>
               <a href="{{ route('kejuruan.create') }}" class="btn btn-primary btn-sm pull-right"><span class="fa fa-plus"></span> &nbsp &nbsp Tambah Kejuruan</a>
+              <a href="{{ route('perusahaan.index') }}" class="btn btn-danger btn-sm pull-right"><span class="fa fa-list"></span> &nbsp &nbsp Perusahaan</a>
               <hr>
             </div>
             <!-- /.box-header -->

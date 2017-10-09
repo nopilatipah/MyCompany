@@ -115,7 +115,7 @@
               </div>
               <!-- /. tools -->
             </div>
-            <!-- /.box-header -->
+            <!-- /.box-hzeader -->
             <div class="box-body pad">
                 <div>
                   {!! Form::textarea('sejarah',null,['class'=>'ckeditor', 'id'=>'editor1', 'name'=>'sejarah', 'rows'=>'10', 'cols'=>'80']) !!}

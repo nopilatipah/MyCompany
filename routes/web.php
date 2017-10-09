@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','FrontController@index');
+Route::get('/profil','FrontController@profil');
+Route::get('/kejuruan','FrontController@kejuruan');
+Route::get('/fasilitas','FrontController@fasilitas');
+Route::get('/ekstrakurikuler','FrontController@ekskul');
+Route::get('/prestasi','FrontController@prestasi');
+Route::get('/berita','FrontController@berita');
+Route::get('/kontak','FrontController@kontak');
 
 Auth::routes();
 
@@ -32,6 +37,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']], function(){
 	Route::resource('kategori-artikel','KatArtikelController');
 	Route::resource('utama','UtamaController');
 	Route::resource('maps','MapsController');
+	Route::resource('perusahaan','PerusahaanController');
 });
 
 Route::get('vendor/add', function()

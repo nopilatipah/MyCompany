@@ -147,7 +147,10 @@
     </section>
     <!-- /.content -->
 
-    <script>
+  
+@endsection
+@section('scripts')
+ <script>
       var lat = {{ $vendor->lat }};
       var lng = {{ $vendor->lng }};
 
@@ -197,5 +200,4 @@
       });
       
     </script>
-  
 @endsection

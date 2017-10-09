@@ -86,8 +86,9 @@
               <span class="fa fa-list"></span>
                 Kategori
               </button> 
+              <hr>
             </div>
-            <hr>
+            
             <!-- /.box-header -->
             <div class="box-body pad">
             @foreach($artikels as $artikel)
