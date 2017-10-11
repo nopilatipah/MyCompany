@@ -348,149 +348,50 @@ fieldset[disabled] .btn-template-main.active {
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-12">
                                     <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
                                     </div>
-                                    <div class="col-md-8">
-                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.... </p>
-                                        <div class="wow lightSpeedIn" data-wow-delay="0.1s">
-                                            <div class="cta-btn">
-                                                <a href="{{ url('/baca-selengkapnya') }}" class="btn btn-skin">Baca Selengkapnya</a>  
-                                            </div>
-                                        </div>
+                                    
+                                    <div class="col-md-12">
+                                        <p></p>
+                                        <p align="justify">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.</p>
+                                        <p align="justify">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.</p>
                                     </div>
                                 </div>  
                             </div>
                         </div>
                         <br>
-                        <div class="callaction bg-gray">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="wow fadeInUp" data-wow-delay="0.1s">
-                                        <div class="cta-text">
-                                            <h3>Santunan Anak Yatim SMK Assalaam Bandung</h3>
-                                            <p>
-                                                <span class="fa fa-user"></span> Nopi Latipah &nbsp&nbsp&nbsp
-                                                <span class="fa fa-calendar"></span> 08 September 2017 &nbsp&nbsp&nbsp
-                                                <span class="fa fa-eye"></span> 200 Views &nbsp&nbsp&nbsp
-                                                <span class="fa fa-comments"></span> 30 Komentar &nbsp&nbsp&nbsp
-                                                <span class="fa fa-tag"></span> Keagamaan &nbsp&nbsp&nbsp
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                    <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.... </p>
-                                        <div class="wow lightSpeedIn" data-wow-delay="0.1s">
-                                            <div class="cta-btn">
-                                                <a href="#" class="btn btn-skin">Baca Selengkapnya</a>  
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>  
+                        <div class="wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="cta-text">
+                                <h3>2 KOMENTAR</h3>
+                                <hr>
                             </div>
                         </div>
-                        <br>
-                        <div class="callaction bg-gray">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="wow fadeInUp" data-wow-delay="0.1s">
-                                        <div class="cta-text">
-                                            <h3>Santunan Anak Yatim SMK Assalaam Bandung</h3>
-                                            <p>
-                                                <span class="fa fa-user"></span> Nopi Latipah &nbsp&nbsp&nbsp
-                                                <span class="fa fa-calendar"></span> 08 September 2017 &nbsp&nbsp&nbsp
-                                                <span class="fa fa-eye"></span> 200 Views &nbsp&nbsp&nbsp
-                                                <span class="fa fa-comments"></span> 30 Komentar &nbsp&nbsp&nbsp
-                                                <span class="fa fa-tag"></span> Keagamaan &nbsp&nbsp&nbsp
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                    <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.... </p>
-                                        <div class="wow lightSpeedIn" data-wow-delay="0.1s">
-                                            <div class="cta-btn">
-                                                <a href="#" class="btn btn-skin">Baca Selengkapnya</a>  
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>  
-                            </div>
-                        </div>
-                        <br>
-                        
                     </div>
                     <div class="col-md-3">
                         <div class="panel panel-default sidebar-menu">
 
                             <div class="panel-heading">
-                                <h3 class="panel-title">Terpopuler</h3>
+                                <h3 class="panel-title">Text widget</h3>
                             </div>
 
                             <div class="panel-body text-widget">
-                              <div class="row">
-                                <div class="col-md-5">
-                                  <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
-                                </div>
-                                <div class="col-md-7">
-                                  Santunan Anak Yatim SMK Assalaam
-                                </div>
-                              </div>  
-                              <br>
-                              <div class="row">
-                                <div class="col-md-5">
-                                  <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
-                                </div>
-                                <div class="col-md-7">
-                                  Santunan Anak Yatim SMK Assalaam
-                                </div>
-                              </div>                                
+                                <p>Improved own provided blessing may peculiar domestic. Sight house has sex never. No visited raising gravity outward subject my cottage mr be. Hold do at tore in park feet near my case.
+                                </p>
+
                             </div>
                         </div>
 
                         <div class="panel panel-default sidebar-menu">
 
                             <div class="panel-heading">
-                                <h3 class="panel-title">Terbaru</h3>
-                            </div>
-
-                            <div class="panel-body text-widget">
-                               <div class="row">
-                                <div class="col-md-5">
-                                  <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
-                                </div>
-                                <div class="col-md-7">
-                                  Santunan Anak Yatim SMK Assalaam
-                                </div>
-                              </div>  
-                              <br>
-                              <div class="row">
-                                <div class="col-md-5">
-                                  <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
-                                </div>
-                                <div class="col-md-7">
-                                  Santunan Anak Yatim SMK Assalaam
-                                </div>
-                              </div>                                
-                            </div>
-
-                            </div>
-
-                        <div class="panel panel-default sidebar-menu">
-
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Pencarian</h3>
+                                <h3 class="panel-title">Search</h3>
                             </div>
 
                             <div class="panel-body">
                                 <form role="search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Cari Judul Artikel">
+                                        <input type="text" class="form-control" placeholder="Search">
                                         <span class="input-group-btn">
 
                                            <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
@@ -503,7 +404,7 @@ fieldset[disabled] .btn-template-main.active {
                         <div class="panel panel-default sidebar-menu">
 
                             <div class="panel-heading">
-                                <h3 class="panel-title">Kategori</h3>
+                                <h3 class="panel-title">Categories</h3>
                             </div>
 
                             <div class="panel-body">

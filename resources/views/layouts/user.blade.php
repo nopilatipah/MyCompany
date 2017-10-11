@@ -58,10 +58,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-6">
-                    <p class="bold text-left">SMK ASSALAAM BANDUNG</p>
+                    <p class="bold text-left">COMPANY PROFILE</p>
                     </div>
                     <div class="col-sm-6 col-md-6">
-                    <p class="bold text-right"><b>C</b>OMPANY <b>P</b>ROFILE</p>
+                    <p class="bold text-right">SEKOLAH IDAMAN</p>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="index.html">
-                    <img src="{{ asset('Frontend/Medicio/img/logo.png') }}" alt="" width="150" height="40" />
+                    <img src="{{ asset('img/logo-1.png') }}" alt="" height="50" />
                 </a>
             </div>
 
@@ -91,7 +91,7 @@
                 <div class="col-sm-6 col-md-4">
                     <div class="wow fadeInDown" data-wow-delay="0.1s">
                     <div class="widget">
-                        <h5>About Medicio</h5>
+                        <h5>Tentang Sekolah</h5>
                         <p>
                         Lorem ipsum dolor sit amet, ne nam purto nihil impetus, an facilisi accommodare sea
                         </p>
@@ -112,7 +112,7 @@
                 <div class="col-sm-6 col-md-4">
                     <div class="wow fadeInDown" data-wow-delay="0.1s">
                     <div class="widget">
-                        <h5>Medicio center</h5>
+                        <h5>Hubungi Kami</h5>
                         <p>
                         Nam leo lorem, tincidunt id risus ut, ornare tincidunt naqunc sit amet.
                         </p>
@@ -143,14 +143,14 @@
                 <div class="col-sm-6 col-md-4">
                     <div class="wow fadeInDown" data-wow-delay="0.1s">
                     <div class="widget">
-                        <h5>Our location</h5>
+                        <h5>Lokasi</h5>
                         <p>The Suithouse V303, Kuningan City, Jakarta Indonesia 12940</p>       
                         
                     </div>
                     </div>
                     <div class="wow fadeInDown" data-wow-delay="0.1s">
                     <div class="widget">
-                        <h5>Follow us</h5>
+                        <h5>Ikuti Kami</h5>
                         <ul class="company-social">
                                 <li class="social-facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li class="social-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>

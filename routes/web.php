@@ -19,6 +19,7 @@ Route::get('/ekstrakurikuler','FrontController@ekskul');
 Route::get('/prestasi','FrontController@prestasi');
 Route::get('/berita','FrontController@berita');
 Route::get('/kontak','FrontController@kontak');
+Route::get('/baca-selengkapnya','FrontController@selengkapnya');
 
 Auth::routes();
 

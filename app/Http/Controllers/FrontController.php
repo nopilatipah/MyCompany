@@ -47,4 +47,9 @@ class FrontController extends Controller
     	$vendor = Vendor::find(1);
         return view('frontend.kontak', compact('vendor'));
     }
+
+    public function selengkapnya()
+    {
+        return view('frontend.berita-lengkap');
+    }
 }
