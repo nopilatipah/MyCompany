@@ -392,6 +392,43 @@ fieldset[disabled] .btn-template-main.active {
                             </div>
                           </div>
                         </div>
+                        <hr>
+                        <div class="callaction bg-gray">
+                          <div class="wow fadeInDown" data-wow-delay="0.1s">
+                          <h3>Tambahkan Komentar</h3>
+                          <hr>
+                          <form>
+                                <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="firstname">Nama Depan</label>
+                                            <input type="text" class="form-control" id="firstname">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="lastname">Nama Belakang</label>
+                                            <input type="text" class="form-control" id="lastname">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="message">Komentar</label>
+                                            <textarea id="message" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                  <button class="btn btn-skin btn-lg pull-right">Kirim Komentar</button>
+                                </div>
+                                
+                                </div>
+                                <!-- /.row -->
+                                </div>
+                                
+                            </form>
+                          </div>
+                        </div>
                         <br>
                         
                     </div>

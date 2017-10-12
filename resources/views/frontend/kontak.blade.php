@@ -52,13 +52,13 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="firstname">Firstname</label>
+                                            <label for="firstname">Nama Depan</label>
                                             <input type="text" class="form-control" id="firstname">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="lastname">Lastname</label>
+                                            <label for="lastname">Nama Belakang</label>
                                             <input type="text" class="form-control" id="lastname">
                                         </div>
                                     </div>
@@ -70,13 +70,13 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="subject">Subject</label>
+                                            <label for="subject">Subjek</label>
                                             <input type="text" class="form-control" id="subject">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="message">Message</label>
+                                            <label for="message">Pesan</label>
                                             <textarea id="message" class="form-control"></textarea>
                                         </div>
                                     </div>
