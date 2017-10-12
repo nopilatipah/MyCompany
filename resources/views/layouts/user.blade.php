@@ -57,12 +57,16 @@
         <div class="top-area">
             <div class="container">
                 <div class="row">
+                <div class="wow fadeInLeft" data-wow-duration="2s" data-wow-delay="0.2s">
                     <div class="col-sm-6 col-md-6">
                     <p class="bold text-left">COMPANY PROFILE</p>
                     </div>
+                </div>
+                 <div class="wow fadeInRight" data-wow-delay="0.1s">
                     <div class="col-sm-6 col-md-6">
                     <p class="bold text-right">SEKOLAH IDAMAN</p>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -73,7 +77,9 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="index.html">
+                <div class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0.2s">
                     <img src="{{ asset('img/logo-1.png') }}" alt="" height="50" />
+                </div>
                 </a>
             </div>
 

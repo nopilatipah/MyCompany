@@ -48,6 +48,7 @@
                                 </div>
                             </div>
                             <form>
+                                <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -81,6 +82,7 @@
                                     </div>
                                 </div>
                                 <!-- /.row -->
+                                </div>
                             </form>
                         </div>
                     </div>

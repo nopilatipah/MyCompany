@@ -349,64 +349,141 @@ fieldset[disabled] .btn-template-main.active {
                                         </div>
                                     </div>
                                     <div class="col-md-12">
+                                    <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                                     <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
+                                    </div>
                                     </div>
                                     
                                     <div class="col-md-12">
+                                    <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                                         <p></p>
                                         <p align="justify">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.</p>
                                         <p align="justify">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.</p>
+                                      </div>
                                     </div>
                                 </div>  
                             </div>
                         </div>
                         <br>
-                        <div class="wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="row">
+                          <div class="wow fadeInUp" data-wow-delay="0.1s">
                             <div class="cta-text">
-                                <h3>2 KOMENTAR</h3>
-                                <hr>
+                              <div class="col-md-9">
+                                 <h3>2 KOMENTAR</h3>
+                              </div>
+                              <div class="col-md-3">
+                                 <a href="" class="btn btn-skin">60 <span class="fa fa-thumbs-o-down"></span></a>
+                                <a href="" class="btn btn-skin pull-right">2 <span class="fa fa-thumbs-o-up"></span></a>
+                              </div>
                             </div>
                         </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="col-md-2">
+                              <img src="{{ asset('img/default.png') }}" class="img-responsive img-circle">
+                            </div>
+                          </div>
+                          <div class="wow fadeInRight" data-wow-delay="0.1s">
+                            <div class="col-md-10">
+                                <p><b>Nopi Latipah</b></p>
+                                <p>feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae. </p>
+                            </div>
+                          </div>
+                        </div>
+                        <br>
+                        
                     </div>
                     <div class="col-md-3">
+
                         <div class="panel panel-default sidebar-menu">
-
+                            <div class="wow fadeInRight" data-wow-delay="0.1s">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Text widget</h3>
+                                <h3 class="panel-title">Terpopuler</h3>
                             </div>
-
+                            </div>
+                            <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                             <div class="panel-body text-widget">
-                                <p>Improved own provided blessing may peculiar domestic. Sight house has sex never. No visited raising gravity outward subject my cottage mr be. Hold do at tore in park feet near my case.
-                                </p>
-
+                              <div class="row">
+                                <div class="col-md-5">
+                                  <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
+                                </div>
+                                <div class="col-md-7">
+                                  Santunan Anak Yatim SMK Assalaam
+                                </div>
+                              </div>  
+                              <br>
+                              <div class="row">
+                                <div class="col-md-5">
+                                  <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
+                                </div>
+                                <div class="col-md-7">
+                                  Santunan Anak Yatim SMK Assalaam
+                                </div>
+                              </div>                                
+                            </div>
                             </div>
                         </div>
 
                         <div class="panel panel-default sidebar-menu">
-
+                            <div class="wow fadeInRight" data-wow-delay="0.1s">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Search</h3>
+                                <h3 class="panel-title">Terbaru</h3>
+                            </div>
+                            </div>
+                            <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
+                            <div class="panel-body text-widget">
+                               <div class="row">
+                                <div class="col-md-5">
+                                  <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
+                                </div>
+                                <div class="col-md-7">
+                                  Santunan Anak Yatim SMK Assalaam
+                                </div>
+                              </div>  
+                              <br>
+                              <div class="row">
+                                <div class="col-md-5">
+                                  <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
+                                </div>
+                                <div class="col-md-7">
+                                  Santunan Anak Yatim SMK Assalaam
+                                </div>
+                              </div>                                
+                            </div>
                             </div>
 
+                            </div>
+
+                        <div class="panel panel-default sidebar-menu">
+                            <div class="wow fadeInRight" data-wow-delay="0.1s">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Pencarian</h3>
+                            </div>
+                            </div>
                             <div class="panel-body">
                                 <form role="search">
+                                    <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search">
+                                        <input type="text" class="form-control" placeholder="Cari Judul Artikel">
                                         <span class="input-group-btn">
 
                                            <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
                                         </span>
+                                    </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
 
                         <div class="panel panel-default sidebar-menu">
-
+                            <div class="wow fadeInRight" data-wow-delay="0.1s">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Categories</h3>
+                                <h3 class="panel-title">Kategori</h3>
                             </div>
-
+                            </div>
+                            <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
                                     <li><a href="blog.html">Webdesign</a>
@@ -419,13 +496,16 @@ fieldset[disabled] .btn-template-main.active {
                                     </li>
                                 </ul>
                             </div>
+                            </div>
                         </div>
 
                         <div class="panel sidebar-menu">
+                            <div class="wow fadeInRight" data-wow-delay="0.1s">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Tags</h3>
                             </div>
-
+                            </div>
+                            <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                             <div class="panel-body">
                                 <ul class="tag-cloud">
                                     <li><a href="#"><i class="fa fa-tags"></i> html5</a> 
@@ -445,6 +525,7 @@ fieldset[disabled] .btn-template-main.active {
                                     <li><a href="#"><i class="fa fa-tags"></i> bootstrap</a> 
                                     </li>
                                 </ul>
+                            </div>
                             </div>
                         </div>
 
