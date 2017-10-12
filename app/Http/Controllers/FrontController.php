@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Vendor;
+use App\Artikel;
 
 class FrontController extends Controller
 {
@@ -39,7 +40,8 @@ class FrontController extends Controller
 
     public function berita()
     {
-        return view('frontend.berita');
+        $berita = Artikel::all();
+        return view('frontend.berita', compact('berita'));
     }
 
     public function kontak()

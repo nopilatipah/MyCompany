@@ -333,16 +333,17 @@ fieldset[disabled] .btn-template-main.active {
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
+                      @foreach($berita as $data)
                         <div class="callaction bg-gray">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="wow fadeInUp" data-wow-delay="0.1s">
                                         <div class="cta-text">
-                                            <h3>Santunan Anak Yatim SMK Assalaam Bandung</h3>
+                                            <h3>{{$data->judul}}</h3>
                                             <p>
-                                                <span class="fa fa-user"></span> Nopi Latipah &nbsp&nbsp&nbsp
-                                                <span class="fa fa-calendar"></span> 08 September 2017 &nbsp&nbsp&nbsp
-                                                <span class="fa fa-eye"></span> 200 Views &nbsp&nbsp&nbsp
+                                                <span class="fa fa-user"></span> {{$data->author}} &nbsp&nbsp&nbsp
+                                                <span class="fa fa-calendar"></span> {{$data->tgl_kegiatan}} &nbsp&nbsp&nbsp
+                                                <span class="fa fa-eye"></span> {{$data->views}} &nbsp&nbsp&nbsp
                                                 <span class="fa fa-comments"></span> 30 Komentar &nbsp&nbsp&nbsp
                                                 <span class="fa fa-tag"></span> Keagamaan &nbsp&nbsp&nbsp
                                             </p>
@@ -350,13 +351,13 @@ fieldset[disabled] .btn-template-main.active {
                                     </div>
                                     <div class="col-md-4">
                                     <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
-                                    <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
+                                    <img src="{{ asset('img/'.$data->foto) }}" class="img-responsive">
                                     </div>
                                     
                                     </div>
                                     <div class="col-md-8">
                                       <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
-                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.... </p>
+                                        {!! str_limit($data->konten, 250) !!}
                                       </div>
                                         <div class="wow lightSpeedIn" data-wow-delay="0.1s">
                                             <div class="cta-btn">
@@ -368,6 +369,7 @@ fieldset[disabled] .btn-template-main.active {
                             </div>
                         </div>
                         <br>
+                      @endforeach
                         
                     </div>
                     <div class="col-md-3">
