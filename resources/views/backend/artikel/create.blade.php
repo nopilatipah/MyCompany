@@ -1,6 +1,16 @@
 @extends('layouts.admin')
 
 @section('header')
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" />
+
+  <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
+
+  
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -136,7 +146,19 @@
                                     {!! $errors->first('foto','<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            
+                            <br>
+
+                            <div class="form-group">
+
+                              {!! Form::label('tags','Tags *',['class'=>'col-md-6']) !!}
+
+                              <div class="col-md-12">
+                                    {!! Form::text('tags',null,['data-role'=>'tagsinput']) !!}
+                                    {!! $errors->first('tags','<p class="help-block">:message</p>') !!}
+                                </div>
+
+                            </div>   
+
                             <hr>
                             <div class="form-group">
                                 <div class="col-md-12" align="right">

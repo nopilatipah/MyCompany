@@ -54,6 +54,8 @@ class ArtikelController extends Controller
         $artikel->tgl_kegiatan = $request->tgl_kegiatan;
         $artikel->kategori_id = $request->kategori_id;
 
+
+
         if ($request->hasFile('foto')) {
         $file = $request->file('foto');
         $destinationPath = public_path().'/img/';
@@ -63,6 +65,9 @@ class ArtikelController extends Controller
         }
 
         $artikel->save();
+        
+        $tags = explode(",", $request->tags);
+        $artikel->tag($tags);
         // dd($artikel);
         alert()->success('Tersimpan')->autoclose(3500);
         return redirect()->route('artikel.index');

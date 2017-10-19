@@ -87,7 +87,7 @@
         </div>
         <!-- /.container -->
     </nav>
-    
+    @include('sweet::alert')
     @yield('content') 
 
     <footer>

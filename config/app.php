@@ -182,6 +182,7 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Cornford\Googlmapper\MapperServiceProvider::class,
+        Conner\Tagging\Providers\TaggingServiceProvider::class,
 
     ],
 

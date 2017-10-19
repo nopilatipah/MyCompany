@@ -18,8 +18,13 @@ Route::get('/fasilitas','FrontController@fasilitas');
 Route::get('/ekstrakurikuler','FrontController@ekskul');
 Route::get('/prestasi','FrontController@prestasi');
 Route::get('/berita','FrontController@berita');
+Route::post('/berita', 'FrontController@search');
 Route::get('/kontak','FrontController@kontak');
-Route::get('/baca-selengkapnya','FrontController@selengkapnya');
+Route::get('/baca-selengkapnya/{id}','FrontController@selengkapnya');
+Route::get('/like/{id}','FrontController@like');
+Route::get('/unlike/{id}','FrontController@unlike');
+Route::get('/kategori/{id}','FrontController@kategori');
+Route::post('/komentar','FrontController@komentar');
 
 Auth::routes();
 

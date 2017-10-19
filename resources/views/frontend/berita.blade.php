@@ -324,6 +324,7 @@ fieldset[disabled] .btn-template-main.active {
   border-color: #38a7bb;
 }       
 </style>
+
 @endsection
 
 @section('content')
@@ -343,9 +344,12 @@ fieldset[disabled] .btn-template-main.active {
                                             <p>
                                                 <span class="fa fa-user"></span> {{$data->author}} &nbsp&nbsp&nbsp
                                                 <span class="fa fa-calendar"></span> {{$data->tgl_kegiatan}} &nbsp&nbsp&nbsp
-                                                <span class="fa fa-eye"></span> {{$data->views}} &nbsp&nbsp&nbsp
-                                                <span class="fa fa-comments"></span> 30 Komentar &nbsp&nbsp&nbsp
-                                                <span class="fa fa-tag"></span> Keagamaan &nbsp&nbsp&nbsp
+                                                <span class="fa fa-eye"></span> {{$data->views}} Pembaca &nbsp&nbsp&nbsp
+                                                @php
+                                                $komen = App\Komentar::where('artikel_id','=',$data->id)->count();
+                                                @endphp
+                                                <span class="fa fa-comments"></span> {{$komen}} Komentar &nbsp&nbsp&nbsp
+                                                <span class="fa fa-tag"></span> {{$data->kategori}} &nbsp&nbsp&nbsp
                                             </p>
                                         </div>
                                     </div>
@@ -358,10 +362,11 @@ fieldset[disabled] .btn-template-main.active {
                                     <div class="col-md-8">
                                       <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                                         {!! str_limit($data->konten, 250) !!}
+                                                
                                       </div>
                                         <div class="wow lightSpeedIn" data-wow-delay="0.1s">
                                             <div class="cta-btn">
-                                                <a href="{{ url('/baca-selengkapnya') }}" class="btn btn-skin">Baca Selengkapnya</a>  
+                                                <a href="{{ url('/baca-selengkapnya', $data->id) }}" class="btn btn-skin">Baca Selengkapnya</a>  
                                             </div>
                                         </div>
                                     </div>
@@ -380,25 +385,21 @@ fieldset[disabled] .btn-template-main.active {
                                 <h3 class="panel-title">Terpopuler</h3>
                             </div>
                             </div>
+                            @php
+                            $populer = App\Artikel::whereRaw('views = (select max(`views`) from artikels)')->first();
+                            @endphp
                             <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                             <div class="panel-body text-widget">
                               <div class="row">
                                 <div class="col-md-5">
-                                  <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
+                                <a href="{{ url('/baca-selengkapnya', $populer->id) }}">
+                                  <img src="{{ asset('img/'.$populer->foto) }}" class="img-responsive">
+
                                 </div>
                                 <div class="col-md-7">
-                                  Santunan Anak Yatim SMK Assalaam
+                                  {{$populer->judul}}</a>
                                 </div>
-                              </div>  
-                              <br>
-                              <div class="row">
-                                <div class="col-md-5">
-                                  <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
-                                </div>
-                                <div class="col-md-7">
-                                  Santunan Anak Yatim SMK Assalaam
-                                </div>
-                              </div>                                
+                              </div>                              
                             </div>
                             </div>
                         </div>
@@ -409,29 +410,24 @@ fieldset[disabled] .btn-template-main.active {
                                 <h3 class="panel-title">Terbaru</h3>
                             </div>
                             </div>
+                            @php
+                            $baru = App\Artikel::whereRaw('id = (select max(`id`) from artikels)')->first();
+                            @endphp
                             <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                             <div class="panel-body text-widget">
                                <div class="row">
                                 <div class="col-md-5">
-                                  <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
+                                <a href="{{ url('/baca-selengkapnya', $baru->id) }}">
+                                  <img src="{{ asset('img/'.$baru->foto) }}" class="img-responsive">
                                 </div>
                                 <div class="col-md-7">
-                                  Santunan Anak Yatim SMK Assalaam
+                                  {{$baru->judul}}</a>
                                 </div>
                               </div>  
-                              <br>
-                              <div class="row">
-                                <div class="col-md-5">
-                                  <img src="{{ asset('Frontend/universal/img/blog-medium.jpg') }}" class="img-responsive">
-                                </div>
-                                <div class="col-md-7">
-                                  Santunan Anak Yatim SMK Assalaam
-                                </div>
-                              </div>                                
+                                                             
                             </div>
                             </div>
-
-                            </div>
+                        </div>
 
                         <div class="panel panel-default sidebar-menu">
                             <div class="wow fadeInRight" data-wow-delay="0.1s">
@@ -440,17 +436,17 @@ fieldset[disabled] .btn-template-main.active {
                             </div>
                             </div>
                             <div class="panel-body">
-                                <form role="search">
+                                {!! Form::open(['url'=>url('/berita'), 'method'=>'post', 'class'=>'form-horizontal']) !!}
                                     <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Cari Judul Artikel">
+                                        <input type="text" name="judul" class="form-control" placeholder="Cari Judul Artikel">
                                         <span class="input-group-btn">
 
                                            <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
                                         </span>
                                     </div>
                                     </div>
-                                </form>
+                                {!! Form::close() !!}
                             </div>
                         </div>
 
@@ -463,14 +459,13 @@ fieldset[disabled] .btn-template-main.active {
                             <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="blog.html">Webdesign</a>
+                                    @php
+                                    $kategori = App\KategoriArtikel::all();
+                                    @endphp
+                                    @foreach($kategori as $kat)
+                                    <li><a href="{{ url('/kategori',$kat->id) }}">{{$kat->nama}}</a>
                                     </li>
-                                    <li class="active"><a href="blog.html">Tutorials</a>
-                                    </li>
-                                    <li><a href="blog.html">Print</a>
-                                    </li>
-                                    <li><a href="blog.html">Our tips</a>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             </div>
