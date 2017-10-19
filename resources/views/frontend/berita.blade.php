@@ -375,6 +375,8 @@ fieldset[disabled] .btn-template-main.active {
                         </div>
                         <br>
                       @endforeach
+                      
+                      {{ $berita->links() }}
                         
                     </div>
                     <div class="col-md-3">

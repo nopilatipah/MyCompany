@@ -334,6 +334,57 @@ fieldset[disabled] .btn-template-main.active {
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
+                    @if($jml == 0)
+                    <div class="callaction bg-gray">
+                    <div class="wow fadeInUp" data-wow-delay="0.1s">
+                      <div class="cta-text">
+                        <h5><span class="fa fa-search"></span>&nbsp&nbsp&nbsp<b><i>Artikel Dengan Kategori "{{$kateg->nama}}" Tidak Tersedia</i></b></h5>
+                      </div>
+                    </div>
+                    </div><br>
+                    @foreach($bb as $data)
+                        <div class="callaction bg-gray">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="wow fadeInUp" data-wow-delay="0.1s">
+                                        <div class="cta-text">
+                                            <h3>{{$data->judul}}</h3>
+                                            <p>
+                                                <span class="fa fa-user"></span> {{$data->author}} &nbsp&nbsp&nbsp
+                                                <span class="fa fa-calendar"></span> {{$data->tgl_kegiatan}} &nbsp&nbsp&nbsp
+                                                <span class="fa fa-eye"></span> {{$data->views}} Pembaca &nbsp&nbsp&nbsp
+                                                @php
+                                                $komen = App\Komentar::where('artikel_id','=',$data->id)->count();
+                                                @endphp
+                                                <span class="fa fa-comments"></span> {{$komen}} Komentar &nbsp&nbsp&nbsp
+                                                <span class="fa fa-tag"></span> {{$data->kategori}} &nbsp&nbsp&nbsp
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                    <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
+                                    <img src="{{ asset('img/'.$data->foto) }}" class="img-responsive">
+                                    </div>
+                                    
+                                    </div>
+                                    <div class="col-md-8">
+                                      <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
+                                        {!! str_limit($data->konten, 250) !!}
+                                                
+                                      </div>
+                                        <div class="wow lightSpeedIn" data-wow-delay="0.1s">
+                                            <div class="cta-btn">
+                                                <a href="{{ url('/baca-selengkapnya', $data->id) }}" class="btn btn-skin">Baca Selengkapnya</a>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                        <br>
+                      @endforeach
+                    @endif
+                    @if($jml > 0)
                       @foreach($berita as $data)
                         <div class="callaction bg-gray">
                             <div class="row">
@@ -375,6 +426,10 @@ fieldset[disabled] .btn-template-main.active {
                         </div>
                         <br>
                       @endforeach
+                    
+                      
+                      {{ $berita->links() }}
+                      @endif
                         
                     </div>
                     <div class="col-md-3">
@@ -463,7 +518,7 @@ fieldset[disabled] .btn-template-main.active {
                                     $kategori = App\KategoriArtikel::all();
                                     @endphp
                                     @foreach($kategori as $kat)
-                                    @if($kat->id == $kateg->kategori_id)
+                                    @if($kat->id == $kateg->id)
                                     <li class="active"><a href="{{ url('/kategori',$kat->id) }}">{{$kat->nama}}</a>
                                     </li>
                                     @else

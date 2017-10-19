@@ -7,6 +7,7 @@ use App\Vendor;
 use App\Artikel;
 use DB;
 use App\Komentar;
+use App\KategoriArtikel;
 
 class FrontController extends Controller
 {
@@ -44,8 +45,9 @@ class FrontController extends Controller
     {
         $berita = DB::table('artikels')
                         ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
-                        ->select('artikels.*', 'kategori_artikels.nama as kategori')->get();
-        return view('frontend.berita', compact('berita'));
+                        ->select('artikels.*', 'kategori_artikels.nama as kategori')
+                        ->orderBy('artikels.id','desc')->paginate(2);
+        return view('frontend.berita', ['berita' => $berita]);
     }
 
     public function search(Request $request)
@@ -56,7 +58,7 @@ class FrontController extends Controller
             ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
             ->select('artikels.*', 'kategori_artikels.nama as kategori')
             ->where('artikels.judul','LIKE','%'.$cari.'%')
-            ->get();
+            ->orderBy('artikels.id','desc')->paginate(2);
         $jml = DB::table('artikels')
             ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
             ->select('artikels.*', 'kategori_artikels.nama as kategori')
@@ -64,7 +66,8 @@ class FrontController extends Controller
             ->count();
         $berita = DB::table('artikels')
                         ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
-                        ->select('artikels.*', 'kategori_artikels.nama as kategori')->get();
+                        ->select('artikels.*', 'kategori_artikels.nama as kategori')
+                        ->orderBy('artikels.id','desc')->paginate(2);
     
         return view('frontend.pencarian', compact('hasil','jml','cari','berita'));
     }
@@ -93,19 +96,19 @@ class FrontController extends Controller
             ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
             ->select('artikels.*', 'kategori_artikels.nama as kategori')
             ->where('artikels.kategori_id','=',$id)
-            ->get();
+            ->orderBy('artikels.id','desc')->paginate(2);
+        $bb = DB::table('artikels')
+            ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
+            ->select('artikels.*', 'kategori_artikels.nama as kategori')
+            ->orderBy('artikels.id','desc')->paginate(2);
         $jml = DB::table('artikels')
             ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
             ->select('artikels.*', 'kategori_artikels.nama as kategori')
             ->where('artikels.kategori_id','=',$id)
             ->count();
-        $kateg = DB::table('artikels')
-            ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
-            ->select('artikels.*', 'kategori_artikels.nama as kategori')
-            ->where('artikels.kategori_id','=',$id)
-            ->first();
+        $kateg = KategoriArtikel::find($id);
         
-        return view('frontend.kategori', compact('berita','jml','kateg'));
+        return view('frontend.kategori', compact('berita','jml','kateg','bb'));
     }
 
     public function like($id)

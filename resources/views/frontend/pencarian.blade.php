@@ -434,6 +434,8 @@ fieldset[disabled] .btn-template-main.active {
                         </div>
                         <br>
                       @endforeach
+                      
+                      {{ $hasil->links() }}
                     @endif
                     </div>
                     <div class="col-md-3">
@@ -522,7 +524,7 @@ fieldset[disabled] .btn-template-main.active {
                                     $kategori = App\KategoriArtikel::all();
                                     @endphp
                                     @foreach($kategori as $kat)
-                                    <li><a href="blog.html">{{$kat->nama}}</a>
+                                    <li><a href="{{ url('/kategori',$kat->id) }}">{{$kat->nama}}</a>
                                     </li>
                                     @endforeach
                                 </ul>

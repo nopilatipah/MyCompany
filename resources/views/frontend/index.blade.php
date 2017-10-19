@@ -43,10 +43,10 @@
 
                         <ul class="lead-list">
                             <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Lokasi SMK Assalaam Bandung</strong><br />Jl.Situtarate Terusan Cibaduyut Kab.Bandung</span></li>
-                            <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Choose your favourite doctor</strong><br />Lorem ipsum dolor sit amet, in verterem persecuti vix, sit te meis</span></li>
+                            <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Visi SMK Assalaam</strong><br />Menjadikan SMK Assalaam sebagai sekolah <b>IDAMAN</b></span></li>
                         </ul>
                         <p class="text-right wow bounceIn" data-wow-delay="0.4s">
-                        <a href="#" class="btn btn-skin btn-lg">Learn more <i class="fa fa-angle-right"></i></a>
+                        <a href="{{ url('/profil') }}" class="btn btn-skin btn-lg">Pelajari Selengkapnya <i class="fa fa-angle-right"></i></a>
                         </p>
                         </div>
                         </div>
@@ -200,7 +200,7 @@
     </section>
     <!-- /Section: testimonial -->
     
-    <section id="partner" class="home-section paddingbot-60">   
+    <section id="nnn" class="home-section paddingbot-60">   
         <div class="container marginbot-50">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
@@ -220,7 +220,7 @@
                 <div class="col-sm-12 col-md-12 col-lg-12" >
                     <div>
                     <div id="owl-works" class="owl-carousel">
-                        <div class="item"><a href="{{ asset('Frontend/Medicio/img/photo/1.jpg') }}" title="Gambar Perusahaan" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="{{ asset('Frontend/Medicio/img/photo/1.jpg') }}" class="img-responsive" alt="img"></a></div>
+                        <div class="item"><a href="{{ asset('img/default.png') }}" title="Gambar Perusahaan" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="{{ asset('Frontend/Medicio/img/photo/1.jpg') }}" class="img-responsive" alt="img"></a></div>
                         <div class="item"><a href="{{ asset('Frontend/Medicio/img/photo/2.jpg') }}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/2@2x.jpg"><img src="{{ asset('Frontend/Medicio/img/photo/2.jpg') }}" class="img-responsive " alt="img"></a></div>
                         <div class="item"><a href="{{ asset('Frontend/Medicio/img/photo/3.jpg') }}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/3@2x.jpg"><img src="{{ asset('Frontend/Medicio/img/photo/3.jpg') }}" class="img-responsive " alt="img"></a></div>
                         <div class="item"><a href="{{ asset('Frontend/Medicio/img/photo/4.jpg') }}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/4@2x.jpg"><img src="{{ asset('Frontend/Medicio/img/photo/4.jpg') }}" class="img-responsive " alt="img"></a></div>
@@ -233,18 +233,4 @@
         </div>
     </section>
 
-    <section id="partner" class="home-section paddingbot-60">   
-        <div class="container marginbot-60">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="wow lightSpeedIn" data-wow-delay="0.1s">
-                    <div class="section-heading text-center">
-                    <h2 class="h-bold">Artikel Sekolah</h2>
-                    </div>
-                    </div>
-                    <div class="divider-short"></div>
-                </div>
-            </div>
-        </div>
-    </section> 
 @endsection
