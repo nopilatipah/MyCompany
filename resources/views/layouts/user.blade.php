@@ -24,6 +24,14 @@
     <link id="bodybg" href="{{ asset('Frontend/Medicio/bodybg/bg1.css') }}" rel="stylesheet" type="text/css" />
     <!-- template skin -->
     <link id="t-colors" href="{{ asset('Frontend/Medicio/color/default.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
+
+  <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     
     <!-- =======================================================
         Theme Name: Medicio

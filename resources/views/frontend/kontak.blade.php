@@ -39,51 +39,52 @@
                                     </div>
                                     </div>
                                 </div>
+                                {!! Form::open(['url'=>url('/kontak'), 'method'=>'post']) !!}
                                 <div class="col-md-4">
                                     <div class="wow lightSpeedIn" data-wow-delay="0.1s">
                                         <div class="cta-btn">
-                                        <a href="#" class="btn btn-skin btn-lg">Kirim Pesan</a>  
+                                        <button class="btn btn-skin btn-lg" type="submit">Kirim Pesan</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <form>
+                            
                                 <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="firstname">Nama Depan</label>
-                                            <input type="text" class="form-control" id="firstname">
+                                            <input type="text" name="nama_depan" class="form-control" id="firstname" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="lastname">Nama Belakang</label>
-                                            <input type="text" class="form-control" id="lastname">
+                                            <input type="text" name="nama_belakang" class="form-control" id="lastname">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="text" class="form-control" id="email">
+                                            <input type="text" name="email" class="form-control" id="email" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="subject">Subjek</label>
-                                            <input type="text" class="form-control" id="subject">
+                                            <input type="text" name="subjek" class="form-control" id="subject" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="message">Pesan</label>
-                                            <textarea id="message" class="form-control"></textarea>
+                                            <textarea id="message" name="pesan" class="form-control" required></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- /.row -->
                                 </div>
-                            </form>
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>

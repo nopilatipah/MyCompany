@@ -20,6 +20,7 @@ Route::get('/prestasi','FrontController@prestasi');
 Route::get('/berita','FrontController@berita');
 Route::post('/berita', 'FrontController@search');
 Route::get('/kontak','FrontController@kontak');
+Route::post('/kontak','PesanController@store');
 Route::get('/baca-selengkapnya/{id}','FrontController@selengkapnya');
 Route::get('/like/{id}','FrontController@like');
 Route::get('/unlike/{id}','FrontController@unlike');
