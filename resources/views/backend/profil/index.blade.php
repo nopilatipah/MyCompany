@@ -48,7 +48,7 @@
         </li>
         
         <li>
-          <a href="pages/mailbox/mailbox.html">
+          <a href="{{ route('pesan.index') }}">
             <i class="fa fa-envelope"></i> <span>Pesan</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-yellow">12</small>
@@ -126,6 +126,31 @@
 
           </div>
           <!-- /.box -->
+          <div class="col-md-4">
+          <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">
+                Foto Kepala Sekolah
+              </h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#Beranda">
+                  <i class="fa fa-edit"></i> Ubah</button>
+              </div>
+              <hr>
+
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body pad">
+            <center>
+                  <img src="{{asset('img/'.$profils->foto)}}" class="img-responsive" style="height: 320px">
+            </center>
+            </div>
+          </div>
+          <!-- /.box -->
+          </div>
+          <div class="col-md-8">
           <div class="box box-info">
             <div class="box-header">
               <h3 class="box-title">Sambutan Kepala
@@ -151,7 +176,7 @@
             </div>
           </div>
           <!-- /.box -->
-          
+          </div>
         </div>
         <!-- /.col-->
         <div class="col-md-6">
@@ -217,6 +242,45 @@
       <!-- ./row -->
     </section>
     <!-- /.content -->
+
+    <div class="modal modal-default fade" id="Beranda">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Ubah Foto Utama Beranda</h4>
+              </div>
+              <div class="modal-body">
+                {!! Form::model($profils, ['url'=>route('profil.update',$profils->id), 'method'=>'put', 'files'=>'true','class'=>'form-horizontal']) !!}
+
+                    <div class="form-group{{ $errors->has('foto') ? 'has-error' : '' }}">
+                            {!! Form::label('foto','Foto Utama Beranda *',['class'=>'col-md-12']) !!}
+                                <div class="col-md-6 col-md-offset-2">
+                                
+                                @if(isset($profils) && $profils->foto)
+                                <center>
+                                    {!! Html::image(asset('img/'.$profils->foto),null,['class'=>'img-rounded img-responsive','height'=>'50px']) !!}
+                      
+                                @endif
+                                
+                                    <input type="file" name="foto" class="btn btn-default btn-block"></input>
+                                    {!! $errors->first('foto','<p class="help-block">:message</p>') !!}
+                                    </center>
+                                </div>
+                            </div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>
+                {!! Form::submit('Simpan', ['class'=>'btn btn-primary']) !!}
+              </div>
+              {!! Form::close() !!}
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+          </div>
 
 {!! Form::close() !!}
   

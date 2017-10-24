@@ -2,6 +2,19 @@
 
 @section('header')
 <aside class="main-sidebar">
+<style type="text/css">
+  .custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+.custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
+</style>
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
@@ -48,7 +61,7 @@
         </li>
         
         <li>
-          <a href="pages/mailbox/mailbox.html">
+          <a href="{{ route('pesan.index') }}">
             <i class="fa fa-envelope"></i> <span>Pesan</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-yellow">12</small>
@@ -86,9 +99,106 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-            <div class="col-md-12">
-               {!! $html->table(['class'=>'table-striped']) !!}
+            <div class="col-md-10 col-md-offset-1">
+               <!-- tabel akun -->
+               <table class="table table-striped custab">
+                  <thead>
+                  
+                      <tr>
+                   <th>No</th>
+                   <th>Nama Pengguna</th>
+                   <th>Alamat Email</th>
+                   <th>Hak Akses</th>
+                   <th colspan="2">Opsi</th>
+                  </tr>
+                  @php
+                  $no = 1;
+                  @endphp
+                  @foreach($akun as $data)
+                  <tr>
+                    <td>{{$no}}</td>
+                    <td>{{$data->name}}</td>
+                    <td>{{$data->email}}</td>
+                    <td>{{$data->display_name}}</td>
+                    <td>
+                    <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit{{$data->id}}">
+                    <span class="fa fa-edit"></span>
+                      Ubah
+                    </button>
+                    <div class="modal modal-warning fade" id="edit{{$data->id}}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Ubah Akun</h4>
+                          </div>
+                          <div class="modal-body">
+                            {!! Form::model($data,['url'=>route('akun.update',$data->id), 'method'=>'put', 'files'=>'true','class'=>'form-horizontal']) !!}
+                                <div class="form-group{{ $errors->has('name') ? 'has-error' : '' }}">
+                                  {!! Form::label('name','Nama Pengguna *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::text('name',null,['class'=>'form-control','required','placeholder'=>'Contoh : Raihan Herdiansyah']) !!}
+                                    {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('email') ? 'has-error' : '' }}">
+                                  {!! Form::label('email','Alamat Email *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::email('email',null,['class'=>'form-control','required','placeholder'=>'Contoh : Admin@admin.com']) !!}
+                                    {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                                <div class="form-group{{ $errors->has('role') ? 'has-error' : '' }}">
+                                  {!! Form::label('role','Hak Akses *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    <select name="role" class="js-selectize" placeholder="Pilih Hak Akses" required="">
+                                    <option></option>
+                                      @php
+                                        $hak = App\Role::where('id','!=','1')->get();
+                                        $role = DB::table('role_user')->where('user_id',$data->id)->first();
+                                      @endphp
+                                      @foreach($hak as $data)
+                                      <option value="{{$data->id}}" <?php if($data->id == $role->role_id) echo 'selected' ?>>{{$data->display_name}}</option>
+                                      @endforeach
+                                    </select>
+                                    {!! $errors->first('rore', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>
+                              {!! Form::submit('Simpan', ['class'=>'btn btn-warning']) !!}
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                            <!-- /.modal-content -->
+                      </div>
+                          <!-- /.modal-dialog -->
+                    </div></td>
+                    {!! Form::open(['url'=>route('akun.destroy',$data->id), 'method'=>'delete','class'=>'form-horizontal','id'=>'myform']) !!}
+                    {!! Form::close() !!}
+                    <td>
+                    <button id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+                    </td>
+                    
+                  </tr>
+
+
+                  @php
+                  $no++;
+                  @endphp
+
+                  @endforeach
+                  </thead>
+                         
+                  </table>
+                <div class="pull-right">
+                {{ $akun->links() }}
+                </div>
             </div>
+            
             </div>
           </div>
           <!-- /.box -->
@@ -110,24 +220,32 @@
               <div class="modal-body">
                 {!! Form::open(['url'=>route('akun.store'), 'method'=>'post', 'files'=>'true','class'=>'form-horizontal']) !!}
                     <div class="form-group{{ $errors->has('name') ? 'has-error' : '' }}">
-                      {!! Form::label('name','Nama Pengguna *',['class'=>'col-md-12']) !!}
-                      <div class="col-md-12">
-                        {!! Form::text('name',null,['class'=>'form-control','required']) !!}
+                      {!! Form::label('name','Nama Pengguna *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::text('name',null,['class'=>'form-control','required','placeholder'=>'Contoh : Raihan Herdiansyah']) !!}
                         {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
                       </div>
                     </div>
 
                     <div class="form-group{{ $errors->has('email') ? 'has-error' : '' }}">
-                      {!! Form::label('email','Alamat Email *',['class'=>'col-md-12']) !!}
-                      <div class="col-md-12">
-                        {!! Form::email('email',null,['class'=>'form-control','required']) !!}
+                      {!! Form::label('email','Alamat Email *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::email('email',null,['class'=>'form-control','required','placeholder'=>'Contoh : Admin@admin.com']) !!}
                         {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
                       </div>
                     </div>
                     <div class="form-group{{ $errors->has('role') ? 'has-error' : '' }}">
-                      {!! Form::label('role','Hak Akses *',['class'=>'col-md-12']) !!}
-                      <div class="col-md-12">
-                        {!! Form::select('role',App\Role::pluck('display_name','id')->all(),null,['class'=>'form-control','placeholder'=>'Pilih Hak Akses', 'required']) !!}
+                      {!! Form::label('role','Hak Akses *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        <select name="role" class="js-selectize" placeholder="Pilih Hak Akses" required="">
+                        <option></option>
+                          @php
+                            $hak = App\Role::where('id','!=','1')->get();
+                          @endphp
+                          @foreach($hak as $data)
+                          <option value="{{$data->id}}">{{$data->display_name}}</option>
+                          @endforeach
+                        </select>
                         {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
                       </div>
                     </div>
@@ -143,9 +261,21 @@
           </div>
           <!-- /.modal-dialog -->
         </div>
+        
+<script type="text/javascript">
+  $('button#delete').on('click', function(){
+  swal({   
+    title: "Apakah Anda Yakin ?",
+    text: "Anda Tidak Dapat Mengembalikan Data Akun !",         type: "warning",   
+    showCancelButton: true,   
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Ya, Hapus Akun !", 
+    closeOnConfirm: false 
+  }, 
+       function(){   
+    $("#myform3").submit();
+  });
+})
+</script>
   
-@endsection
-
-@section('scripts')
-{!! $html->scripts() !!}
 @endsection

@@ -63,7 +63,7 @@
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>P</span>
-      <!-- logo for regular state and mobile devices -->
+      <!-- logo for regular state and mobile devices --> 
       <span class="logo-lg"><b>Company</b> PROFILE</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
@@ -111,7 +111,7 @@
                   <!-- end message -->
                 </ul>
               </li>
-              <li class="footer"><a href="#">Lihat Semua Pesan</a></li>
+              <li class="footer"><a href="{{ route('pesan.index') }}">Lihat Semua Pesan</a></li>
             </ul>
             @endif
           </li>

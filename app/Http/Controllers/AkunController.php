@@ -11,6 +11,8 @@ use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use DB;
+
 
 class AkunController extends Controller
 {
@@ -21,24 +23,14 @@ class AkunController extends Controller
      */
     public function index(Request $request, Builder $htmlBuilder)
     {
-        if ($request->ajax()){
-            $books = User::where('id','!=',1)->orderBy('id','desc')->get();
-            return Datatables::of($books)
-            ->addColumn('action',function($book){
-                return view('datatable._edit', [
-                    'model'     => $book,
-                    'form_url'  => route('akun.destroy',$book->id),
-                    'edit_url'  => route('akun.update',$book->id),
-                    'modal'  => $book->id,
-                    'confirm_message' => 'Yakin Ingin Menghapus '.$book->name.' ?' ]);
-            })->make(true);
-        }
-        $html = $htmlBuilder
-        ->addColumn(['data'=>'name','name'=>'name','title'=>'Nama Pengguna'])
-        ->addColumn(['data'=>'email','name'=>'email','title'=>'Email'])
-        ->addColumn(['data'=>'akses','name'=>'akses','title'=>'Hak Akses'])
-        ->addColumn(['data'=>'action','name'=>'action','title'=>'','orderable'=>false,'searchable'=>false]);
-        return view('backend.akun.index')->with(compact('html'));
+        
+        $akun = DB::table('role_user')
+        ->join('roles','roles.id','=','role_user.role_id')
+        ->join('users','users.id','=','role_user.user_id')
+        ->select('roles.display_name','users.*')
+        ->where('users.id','!=',1)->orderBy('users.id','desc')->paginate(10);
+            
+        return view('backend.akun.index')->with(compact('akun'));
     }
 
     /**
@@ -108,7 +100,22 @@ class AkunController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $this->validate($request, [
+            'name'=>'required|max:255',
+            'email'=>'required|unique:users,email,'.$user->id
+            ]);
+
+        $user->update($request->only('name','email'));
+
+        
+        $memberRole = DB::table('role_user')->where('user_id',$user->id)->first();
+        
+        $user->roles()->detach($memberRole->role_id);
+        $user->roles()->attach($request->role);
+
+        alert()->success('Akun Tersimpan')->autoclose(3500);
+        return redirect()->route('akun.index');
     }
 
     /**

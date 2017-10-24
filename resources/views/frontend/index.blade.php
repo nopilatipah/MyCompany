@@ -16,6 +16,7 @@
                   </ul>
                 </li>
                 <li><a href="{{url('/berita')}}">Berita</a></li>
+                <li><a href="{{url('/galeri')}}">Galeri</a></li>
                 <li><a href="{{url('/kontak')}}">Kontak</a></li>
                 
               </ul>
@@ -32,18 +33,18 @@
                     <div class="col-lg-6">
                     <div class="well well-trans">
                     <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
-                    <h2 class="h-ultra">SMK Assalaam Bandung</h2>
+                    <h2 class="h-ultra">{{$komponen->nama_sekolah}}</h2>
                     </div>
                     <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
-                    <h4 class="h-light">Industries Education Based</h4>
+                    <h4 class="h-light">{{$komponen->deskripsi}}</h4>
                     </div>
                     </div>
                         <div class="well well-trans">
                         <div class="wow fadeInRight" data-wow-delay="0.1s">
 
                         <ul class="lead-list">
-                            <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Lokasi SMK Assalaam Bandung</strong><br />Jl.Situtarate Terusan Cibaduyut Kab.Bandung</span></li>
-                            <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Visi SMK Assalaam</strong><br />Menjadikan SMK Assalaam sebagai sekolah <b>IDAMAN</b></span></li>
+                            <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Lokasi {{$komponen->nama_sekolah}}</strong><br />{{$lokasi->lokasi}}</span></li>
+                            <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Visi {{$komponen->nama_sekolah}}</strong><br />{!!$sambutan->visi!!}</span></li>
                         </ul>
                         <p class="text-right wow bounceIn" data-wow-delay="0.4s">
                         <a href="{{ url('/profil') }}" class="btn btn-skin btn-lg">Pelajari Selengkapnya <i class="fa fa-angle-right"></i></a>
@@ -55,7 +56,9 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
-                        <img src="{{ asset('img/ms4.png') }}" class="img-responsive" alt=""/>
+                        <center>
+                        <img src="{{ asset('img/'.$komponen->foto_utama) }}" class="img-responsive" alt=""/>
+                        </center>
                         </div>
                     </div>                  
                 </div>      
@@ -73,7 +76,7 @@
         <div class="row">
             <div class="col-sm-5">
                 <div class="wow fadeInUp" data-wow-delay="0.2s">
-                <img src="{{ asset('img/ms6.png') }}" class="img-responsive" alt="" />
+                <img src="{{ asset('img/'.$sambutan->foto) }}" class="img-responsive" alt="" />
                 </div>
             </div>
             <div class="col-sm-7">
@@ -82,7 +85,7 @@
                     <h2 class="h-bold">Sambutan Kepala Sekolah</h2>
                     </div>
                     <hr>
-                    <p align="justify">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.</p>
+                    <p align="justify">{!!$sambutan->sambutan!!}</p>
                 </div>
             </div>
             

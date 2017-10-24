@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pesan;
+use DB;
 
 class PesanController extends Controller
 {
@@ -14,7 +15,8 @@ class PesanController extends Controller
      */
     public function index()
     {
-        //
+        $pesan = DB::table('pesans')->select('pesans.*')->paginate(10);
+        return view('backend.pesan.index', compact('pesan'));
     }
 
     /**

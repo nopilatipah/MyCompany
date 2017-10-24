@@ -48,7 +48,7 @@
         </li>
         
         <li>
-          <a href="pages/mailbox/mailbox.html">
+          <a href="{{ route('pesan.index') }}">
             <i class="fa fa-envelope"></i> <span>Pesan</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-yellow">12</small>

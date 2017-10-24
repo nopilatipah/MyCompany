@@ -1,69 +1,79 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Company Login</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'>
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
+      <link rel="stylesheet" href="{{asset('Login/modal/css/style.css')}}">
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+  
+</head>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+<body>
+  
+<!-- Form-->
+<div class="form">
+  <div class="form-toggle"></div>
+  <div class="form-panel one">
+    <div class="form-header">
+      <h1>Masuk Dengan Akun Anda</h1>
     </div>
+    <div class="form-content">
+      {!! Form::open(['url'=>'login', 'class'=>'form-horizontal']) !!}
+        <div class="form-group">
+          <label for="username">Email</label>
+          <input type="text" id="username" name="email" required="required"/>
+        </div>
+        <div class="form-group">
+          <label for="password">Kata Sandi</label>
+          <input type="password" id="password" name="password" required="required"/>
+        </div>
+        <div class="form-group">
+          <label class="form-remember">
+            <input type="checkbox" name="remember" />Ingat Saya
+          </label><a href="{{ url('/password/reset')}}" class="form-recovery">Lupa Kata Sandi</a>
+        </div>
+        <div class="form-group">
+          <button type="submit">Masuk</button>
+        </div>
+
+      {!! Form::close() !!}
+    </div>
+  </div>
+  <div class="form-panel two">
+    <div class="form-header">
+      <h1>Registrasi Akun</h1>
+    </div>
+    <div class="form-content">
+      <form>
+        
+        <div class="form-group">
+          <label for="password">Anda Dapat Menghubungi <b>Admin Utama</b> Secara Langsung Untuk Mendaftarkan Akun</label>
+        </div>
+        <div class="form-group">
+          <label for="cpassword">Perhatian: Akun Hanya Dapat Digunakan Oleh Petugas Sekolah</label>
+        </div>
+        <div class="form-group">
+          <label for="email">_________________________________________________________</label>
+        </div>
+        <div class="form-group">
+          <label for="email"></label>
+        </div>
+        <div class="form-group">
+          <button type="submit">adminutama@gmail.com</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
-@endsection
+
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script  src="{{asset('Login/modal/js/index.js')}}"></script>
+
+</body>
+</html>

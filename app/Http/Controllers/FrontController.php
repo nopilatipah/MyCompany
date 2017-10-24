@@ -8,17 +8,26 @@ use App\Artikel;
 use DB;
 use App\Komentar;
 use App\KategoriArtikel;
+use App\Komponen;
+use App\Profil;
+use App\Kontak;
 
 class FrontController extends Controller
 {
     public function index()
     {
-        return view('frontend.index');
+        $komponen = Komponen::find(1);
+        $sambutan = Profil::find(1);
+        $lokasi = Vendor::find(1);
+        return view('frontend.index',compact('komponen','sambutan','lokasi'));
     }
 
     public function profil()
     {
-        return view('frontend.profil');
+        $profil = Profil::find(1);
+        $komponen = Komponen::find(1);
+        $lokasi = Vendor::find(1);
+        return view('frontend.profil',compact('profil','komponen','lokasi'));
     }
 
     public function kejuruan()
@@ -39,6 +48,24 @@ class FrontController extends Controller
     public function prestasi()
     {
         return view('frontend.prestasi');
+    }
+
+    public function galeri()
+    {
+        $link = Kontak::find(5);
+        $items = [];
+
+        
+        $client = new \GuzzleHttp\Client;
+
+        $url = sprintf('https://www.instagram.com/smkassalaam/media');
+
+        $response = $client->get($url);
+
+        $items = json_decode((string) $response->getBody(), true)['items'];
+
+
+        return view('frontend.galeri',compact('items'));
     }
 
     public function berita()
@@ -75,7 +102,8 @@ class FrontController extends Controller
     public function kontak()
     {
     	$vendor = Vendor::find(1);
-        return view('frontend.kontak', compact('vendor'));
+        $komponen = Komponen::find(1);
+        return view('frontend.kontak', compact('vendor','komponen'));
     }
 
     public function selengkapnya($id)

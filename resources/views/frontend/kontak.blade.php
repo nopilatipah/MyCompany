@@ -16,6 +16,7 @@
                   </ul>
                 </li>
                 <li><a href="{{url('/berita')}}">Berita</a></li>
+                <li><a href="{{url('/galeri')}}">Galeri</a></li>
                 <li class="active"><a href="{{url('/kontak')}}">Kontak</a></li>
                 
               </ul>
@@ -24,7 +25,7 @@
 @endsection
 
 @section('content')
-<br><br><br><br><br>
+<br><br><br><br><br><br>
 <section id="callaction" class="home-section paddingtop-40">    
            <div class="container">
                 <div class="row">
@@ -35,7 +36,7 @@
                                     <div class="wow fadeInUp" data-wow-delay="0.1s">
                                     <div class="cta-text">
                                     <h3>Hubungi Kami</h3>
-                                    <p>Anda dapat mengirim kritik dan saran untuk <b>SMK Assalaam Bandung</b> Disini. </p>
+                                    <p>Anda dapat mengirim kritik dan saran untuk <b>{{$komponen->nama_sekolah}}</b> Disini. </p>
                                     </div>
                                     </div>
                                 </div>

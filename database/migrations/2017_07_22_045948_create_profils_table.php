@@ -19,7 +19,6 @@ class CreateProfilsTable extends Migration
             $table->text('sejarah');
             $table->text('misi');
             $table->text('visi');
-            $table->text('lokasi');
             $table->text('sambutan');
             $table->string('foto');
             $table->timestamps();

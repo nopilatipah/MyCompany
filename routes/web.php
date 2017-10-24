@@ -26,6 +26,7 @@ Route::get('/like/{id}','FrontController@like');
 Route::get('/unlike/{id}','FrontController@unlike');
 Route::get('/kategori/{id}','FrontController@kategori');
 Route::post('/komentar','FrontController@komentar');
+Route::get('/galeri','FrontController@galeri');
 
 Auth::routes();
 
@@ -45,6 +46,8 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']], function(){
 	Route::resource('utama','UtamaController');
 	Route::resource('maps','MapsController');
 	Route::resource('perusahaan','PerusahaanController');
+	Route::resource('pesan','PesanController');
+	Route::resource('kontak','KontakController');
 });
 
 Route::get('vendor/add', function()

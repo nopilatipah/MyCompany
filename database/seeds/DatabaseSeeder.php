@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(KomponenSeeder::class);
         $this->call(EkskulSeeder::class);
         $this->call(UtamaSeeder::class);
+        $this->call(ArtikelSeeder::class);
     }
 }

@@ -16,6 +16,7 @@
                   </ul>
                 </li>
                 <li class="active"><a href="{{url('/berita')}}">Berita</a></li>
+                <li><a href="{{url('/galeri')}}">Galeri</a></li>
                 <li><a href="{{url('/kontak')}}">Kontak</a></li>
                 
               </ul>
@@ -328,7 +329,7 @@ fieldset[disabled] .btn-template-main.active {
 @endsection
 
 @section('content')
-<br><br><br><br><br>
+<br><br><br><br><br><br>
 
         <section id="callaction" class="home-section paddingtop-40">    
             <div class="container">

@@ -48,7 +48,6 @@ class UserSeeder extends Seeder
         $admin->name="Nopi Latipah";
         $admin->email="admin@gmail.com";
         $admin->password=bcrypt('rahasia');
-        $admin->akses="Super Admin";
         $admin->save();
         $admin->attachRole($adminRole);
 
@@ -57,7 +56,6 @@ class UserSeeder extends Seeder
         $kejuruan->name="Nopi Latipah";
         $kejuruan->email="kejuruan@gmail.com";
         $kejuruan->password=bcrypt('rahasia');
-        $kejuruan->akses="Author Kejuruan";
         $kejuruan->save();
         $kejuruan->attachRole($kejuruanRole);
 
@@ -66,7 +64,6 @@ class UserSeeder extends Seeder
         $fasilitas->name="Nopi Latipah";
         $fasilitas->email="fasilitas@gmail.com";
         $fasilitas->password=bcrypt('rahasia');
-        $fasilitas->akses="Author Fasilitas";
         $fasilitas->save();
         $fasilitas->attachRole($fasilitasRole);
 
@@ -75,7 +72,6 @@ class UserSeeder extends Seeder
         $ekskul->name="Nopi Latipah";
         $ekskul->email="ekskul@gmail.com";
         $ekskul->password=bcrypt('rahasia');
-        $ekskul->akses="Author Ekstrakurikuler";
         $ekskul->save();
         $ekskul->attachRole($ekskulRole);
 
@@ -84,7 +80,6 @@ class UserSeeder extends Seeder
         $artikel->name="Nopi Latipah";
         $artikel->email="artikel@gmail.com";
         $artikel->password=bcrypt('rahasia');
-        $artikel->akses="Author Artikel";
         $artikel->save();
         $artikel->attachRole($artikelRole);
     }

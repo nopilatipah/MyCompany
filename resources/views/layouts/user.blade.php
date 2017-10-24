@@ -53,11 +53,14 @@
 
 .card {background: #FFF none repeat scroll 0% 0%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); margin-bottom: 30px; }
 
+
 </style>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-
+@php
+$komponen = App\Komponen::find(1);
+@endphp
 
 <div id="wrapper">
     
@@ -72,7 +75,7 @@
                 </div>
                  <div class="wow fadeInRight" data-wow-delay="0.1s">
                     <div class="col-sm-6 col-md-6">
-                    <p class="bold text-right">SEKOLAH IDAMAN</p>
+                    <p class="bold text-right">{{$komponen->motto}}</p>
                     </div>
                 </div>
                 </div>
@@ -86,7 +89,7 @@
                 </button>
                 <a class="navbar-brand" href="index.html">
                 <div class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0.2s">
-                    <img src="{{ asset('img/logo-1.png') }}" alt="" height="50" />
+                    <img src="{{ asset('img/'.$komponen->logo) }}" alt="" height="50" />
                 </div>
                 </a>
             </div>
@@ -107,58 +110,56 @@
                     <div class="widget">
                         <h5>Tentang Sekolah</h5>
                         <p>
-                        Lorem ipsum dolor sit amet, ne nam purto nihil impetus, an facilisi accommodare sea
+                        {{$komponen->tentang}}
                         </p>
                     </div>
                     </div>
-                    <div class="wow fadeInDown" data-wow-delay="0.1s">
-                    <div class="widget">
-                        <h5>Information</h5>
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Laboratory</a></li>
-                            <li><a href="#">Medical treatment</a></li>
-                            <li><a href="#">Terms & conditions</a></li>
-                        </ul>
-                    </div>
-                    </div>
+                    
                 </div>
+                @php
+                        $lokasi = App\Vendor::find(1);
+                        $fb = App\Kontak::find(1);
+                        $tw = App\Kontak::find(2);
+                        $fx = App\Kontak::find(3);
+                        $yt = App\Kontak::find(4);
+                        $ig = App\Kontak::find(5);
+                        $wa = App\Kontak::find(6);
+                        $email = App\Kontak::find(7);
+                        $tlp = App\Kontak::find(8);
+                        @endphp
                 <div class="col-sm-6 col-md-4">
                     <div class="wow fadeInDown" data-wow-delay="0.1s">
                     <div class="widget">
                         <h5>Hubungi Kami</h5>
                         <p>
-                        Nam leo lorem, tincidunt id risus ut, ornare tincidunt naqunc sit amet.
+                        Anda dapat menghubungi {{$komponen->nama_sekolah}} melalui kontak dibawah ini.
                         </p>
                         <ul>
                             <li>
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-calendar-o fa-stack-1x fa-inverse"></i>
-                                </span> Monday - Saturday, 8am to 10pm
-                            </li>
-                            <li>
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
-                                </span> +62 0888 904 711
+                                </span> {{$tlp->kontak}}
                             </li>
                             <li>
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
-                                </span> hello@medicio.com
+                                </span> {{$email->kontak}}
                             </li>
 
                         </ul>
+                        
                     </div>
+                    
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4">
                     <div class="wow fadeInDown" data-wow-delay="0.1s">
                     <div class="widget">
                         <h5>Lokasi</h5>
-                        <p>The Suithouse V303, Kuningan City, Jakarta Indonesia 12940</p>       
+                        
+                        <p>{{$lokasi->lokasi}}</p>  
                         
                     </div>
                     </div>
@@ -166,12 +167,12 @@
                     <div class="widget">
                         <h5>Ikuti Kami</h5>
                         <ul class="company-social">
-                                <li class="social-facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="social-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="social-google"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li class="social-vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
-                                <li class="social-dribble"><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li class="social-facebook"><a href="{{$fb->link}}"><i class="fa fa-facebook"></i></a></li>
+                                <li class="social-twitter"><a href="{{$tw->link}}"><i class="fa fa-twitter"></i></a></li>
+                                <li class="social-vimeo"><a href="{{$yt->link}}"><i class="fa fa-youtube"></i></a></li>
+                                <li class="social-dribble"><a href="{{$ig->link}}"><i class="fa fa-instagram"></i></a></li>
                         </ul>
+                        
                     </div>
                     </div>
                 </div>

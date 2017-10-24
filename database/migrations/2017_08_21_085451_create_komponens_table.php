@@ -17,9 +17,11 @@ class CreateKomponensTable extends Migration
             $table->increments('id');
             $table->string('logo');
             $table->string('nama_sekolah');
-            $table->string('alamat');
+            $table->string('deskripsi');
             $table->text('tentang');
             $table->string('akreditasi');
+            $table->string('motto');
+            $table->string('foto_utama');
             $table->timestamps();
         });
     }
