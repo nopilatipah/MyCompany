@@ -73,7 +73,7 @@
 
             /*#region responsive code begin*/
 
-            var MAX_WIDTH = 960;
+            var MAX_WIDTH = 1000;
 
             function ScaleSlider() {
                 var containerElement = jssor_1_slider.$Elmt.parentNode;
@@ -152,12 +152,7 @@
                 <img data-u="thumb" src="{{ $item['images']['standard_resolution']['url'] }}" />
             </div>
         @endforeach
-            <div style="background-color:#ff7c28;">
-                <div style="position:absolute;top:50px;left:50px;width:450px;height:62px;z-index:0;font-size:16px;color:#000000;line-height:24px;text-align:left;padding:5px;box-sizing:border-box;">Photos in this slider are to demostrate jssor slider,<br />
-                    which are not licensed for any other purpose.
-                </div>
-                <img data-u="thumb" src="{{ asset('slider/img/gallery/720x480/019.jpg') }}" />
-            </div>
+            
             <a data-u="any" href="https://www.jssor.com" style="display:none">bootstrap slider</a>
         </div>
         <!-- Thumbnail Navigator -->
@@ -174,7 +169,7 @@
             </div>
         </div>
         <!-- Arrow Navigator -->
-        <div data-u="arrowleft" class="jssora093" style="width:50px;height:50px;top:0px;left:270px;" data-autocenter="2">
+        <div data-u="arrowleft" class="jssora093" style="width:0px;height:50px;top:0px;left:0px;" data-autocenter="2">
             <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
                 <circle class="c" cx="8000" cy="8000" r="5920"></circle>
                 <polyline class="a" points="7777.8,6080 5857.8,8000 7777.8,9920 "></polyline>

@@ -37,10 +37,10 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']], function(){
 	Route::resource('artikel','ArtikelController');
 	Route::resource('profil','ProfilController');
 	Route::resource('kejuruan','KejuruanController');
-	Route::resource('fasilitas','FasilitasController');
+	// Route::resource('fasilitas','FasilitasController');
 	Route::resource('prestasi','PrestasiController');
 	Route::resource('ekskul','EkskulController');
-	Route::resource('komponen','KomponenController');
+	// Route::resource('komponen','KomponenController');
 	Route::resource('kategori-ekskul','KatEkskulController');
 	Route::resource('kategori-artikel','KatArtikelController');
 	Route::resource('utama','UtamaController');

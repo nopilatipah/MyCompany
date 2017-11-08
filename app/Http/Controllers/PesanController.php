@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pesan;
 use DB;
+use App\Komponen;
 
 class PesanController extends Controller
 {
@@ -38,8 +39,9 @@ class PesanController extends Controller
     public function store(Request $request)
     {
         $pesan = Pesan::create($request->all());
+        $komponen = Komponen::find(1);
         alert()->success('Terimakasih Anda Telah Menghubungi Kami','Pesan Terkirim')->autoclose(3500);
-        return view('frontend.kontak');
+        return view('frontend.kontak', compact('komponen'));
     }
 
     /**

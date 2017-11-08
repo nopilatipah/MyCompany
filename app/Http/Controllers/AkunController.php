@@ -126,8 +126,8 @@ class AkunController extends Controller
      */
     public function destroy($id)
     {
-        $member = User::find($id);
-            $member->delete();
+        $user = User::findOrFail($id);
+        $user->delete();
             alert()->success('Terhapus')->autoclose(3500);
 
         return redirect()->route('akun.index');

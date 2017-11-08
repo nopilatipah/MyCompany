@@ -102,7 +102,7 @@
                       </div>
                       <h4>
                         {{$data->nama_depan}} {{$data->nama_belakang}}
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                        <small><i class="fa fa-clock-o"></i> {{$data->created_at->diffForHumans()}}</small>
                       </h4>
                       <p>{!! str_limit($data->pesan, 30) !!}</p>
                     </a>

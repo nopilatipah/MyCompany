@@ -177,10 +177,10 @@
                       </div>
                           <!-- /.modal-dialog -->
                     </div></td>
-                    {!! Form::open(['url'=>route('akun.destroy',$data->id), 'method'=>'delete','class'=>'form-horizontal','id'=>'myform']) !!}
+                    {!! Form::model($data, ['url'=>route('akun.destroy',$data->id), 'method'=>'delete', 'id'=>'myform']) !!}
                     {!! Form::close() !!}
                     <td>
-                    <button id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+                    <button id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</button>
                     </td>
                     
                   </tr>
@@ -273,7 +273,7 @@
     closeOnConfirm: false 
   }, 
        function(){   
-    $("#myform3").submit();
+    $("#myform").submit();
   });
 })
 </script>

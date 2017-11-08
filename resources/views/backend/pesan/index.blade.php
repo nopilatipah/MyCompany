@@ -101,7 +101,7 @@
                   <!-- todo text -->
                   <span class="text">{{$data->nama_depan}} {{$data->nama_belakang}}</span>
                   <!-- Emphasis label -->
-                  <small class="label label-warning"><i class="fa fa-clock-o"></i> 2 mins</small>&nbsp
+                  <small class="label label-warning"><i class="fa fa-clock-o"></i> {{$data->created_at}}</small>&nbsp
                   Subjek : {{$data->subjek}} || <i>{!! str_limit($data->pesan, 90) !!}</i>
                   <!-- General tools such as edit or delete-->
                   <div class="tools">
