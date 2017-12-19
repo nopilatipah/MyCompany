@@ -17,7 +17,7 @@ class CreateFasilitasTable extends Migration
             $table->increments('id');
             $table->string('judul');
             $table->integer('kategori');
-            $table->string('keterangan')->nullable();
+            $table->string('keterangan')->nullable()->default('-');
             $table->string('foto');
             $table->timestamps();
         });

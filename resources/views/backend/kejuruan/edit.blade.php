@@ -2,6 +2,19 @@
 
 @section('header')
 <aside class="main-sidebar">
+  <style type="text/css">
+  .custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+.custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
+</style>
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
@@ -41,9 +54,11 @@
           <ul class="treeview-menu">
             <li><a href="{{ route('profil.edit', 1 ) }}"><i class="fa fa-circle-o"></i> Profil Umum</a></li>
             <li class="active"><a href="{{ route('kejuruan.index') }}"><i class="fa fa-circle-o"></i> Kejuruan</a></li>
+            <li><a href="{{ route('fasilitas.index') }}"><i class="fa fa-circle-o"></i> Fasilitas</a></li>
             <li><a href="{{ route('ekskul.index') }}"><i class="fa fa-circle-o"></i> Ekstrakurikuler</a></li>
             <li><a href="{{ route('prestasi.index') }}"><i class="fa fa-circle-o"></i> Prestasi</a></li>
             <li><a href="{{ route('artikel.index') }}"><i class="fa fa-circle-o"></i> Artikel</a></li>
+            <li><a href="{{ route('alumni.index') }}"><i class="fa fa-circle-o"></i> Testimoni</a></li>
           </ul>
         </li>
         
@@ -73,15 +88,15 @@
       <div class="row">
         <div class="col-md-12">
           <div class="box box-info">
-          <form method="delete" action="{{route('kejuruan.destroy',$kejuruan->id)}}" class="form-inline js-confirm" data-confirm="Apakah Anda Yakin Ingin Menghapus {{$kejuruan->nama}} ?">
+            {!! Form::model($kejuruan, ['url'=>route('kejuruan.destroy',$kejuruan->id), 'method'=>'delete', 'id'=>'myform']) !!}
+            {!! Form::close() !!}
             <div class="box-header">
               <h3 class="box-title">Ubah Kejuruan {{ $kejuruan->nama }}
                 <small>SMK Assalaam Bandung</small>
               </h3>
-              
-                <button type="submit" class="btn btn-danger pull-right"><span class="fa fa-trash"></span> Hapus Kejuruan</button>
-              </form>
+                <button id="delete" class="btn btn-danger pull-right"><span class="fa fa-trash"></span> Hapus Kejuruan</button>
               <hr>
+
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
@@ -123,7 +138,7 @@
                                     {!! Html::image(asset('img/'.$kejuruan->ruangan),null,['class'=>'img-rounded img-responsive']) !!}
                                 </p>
                                 @endif
-                                    <input type="file" name="ruangan" class="btn btn-default btn-block" required=""></input>
+                                    <input type="file" name="ruangan" class="btn btn-default btn-block"></input>
                                     {!! $errors->first('ruangan','<p class="help-block">:message</p>') !!}
                                 </div>
                                 {!! Form::label('siswa','Foto Siswa *',['class'=>'col-md-2 control-label']) !!}
@@ -133,7 +148,7 @@
                                     {!! Html::image(asset('img/'.$kejuruan->siswa),null,['class'=>'img-rounded img-responsive']) !!}
                                 </p>
                                 @endif
-                                    <input type="file" name="siswa" class="btn btn-default btn-block" required=""></input>
+                                    <input type="file" name="siswa" class="btn btn-default btn-block"></input>
                                     {!! $errors->first('siswa','<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
@@ -153,5 +168,21 @@
 
       <!-- ./row -->
     </section>
+
+    <script type="text/javascript">
+  $('button#delete').on('click', function(){
+  swal({   
+    title: "Apakah Anda Yakin ?",
+    text: "Anda Tidak Dapat Mengembalikan Data Kejuruan !",         type: "warning",   
+    showCancelButton: true,   
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Ya, Hapus Kejuruan !", 
+    closeOnConfirm: false 
+  }, 
+       function(){   
+    $("#myform").submit();
+  });
+})
+</script>
 
 @endsection

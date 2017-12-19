@@ -11,6 +11,7 @@ use App\KategoriArtikel;
 use App\Komponen;
 use App\Profil;
 use App\Kontak;
+use App\Kejuruan;
 
 class FrontController extends Controller
 {
@@ -32,7 +33,9 @@ class FrontController extends Controller
 
     public function kejuruan()
     {
-        return view('frontend.kejuruan');
+        $komponen = Komponen::find(1);
+        $kejuruan = Kejuruan::all();
+        return view('frontend.kejuruan', compact('komponen','kejuruan'));
     }
 
     public function fasilitas()
@@ -115,6 +118,15 @@ class FrontController extends Controller
         $berita->save();
 
         return view('frontend.berita-lengkap', compact('berita'));
+    }
+
+    public function detailkejuruan($id)
+    {   
+        
+        $kejuruan = Kejuruan::find($id);
+        $komponen = Komponen::find(1);
+
+        return view('frontend.detailkejuruan', compact('kejuruan','komponen'));
     }
 
     public function kategori($id)

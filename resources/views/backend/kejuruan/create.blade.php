@@ -41,9 +41,11 @@
           <ul class="treeview-menu">
             <li><a href="{{ route('profil.edit', 1 ) }}"><i class="fa fa-circle-o"></i> Profil Umum</a></li>
             <li class="active"><a href="{{ route('kejuruan.index') }}"><i class="fa fa-circle-o"></i> Kejuruan</a></li>
+            <li><a href="{{ route('fasilitas.index') }}"><i class="fa fa-circle-o"></i> Fasilitas</a></li>
             <li><a href="{{ route('ekskul.index') }}"><i class="fa fa-circle-o"></i> Ekstrakurikuler</a></li>
             <li><a href="{{ route('prestasi.index') }}"><i class="fa fa-circle-o"></i> Prestasi</a></li>
             <li><a href="{{ route('artikel.index') }}"><i class="fa fa-circle-o"></i> Artikel</a></li>
+            <li><a href="{{ route('alumni.index') }}"><i class="fa fa-circle-o"></i> Testimoni</a></li>
           </ul>
         </li>
         
@@ -121,6 +123,7 @@
                                 @endif
                                     <input type="file" name="ruangan" class="btn btn-default btn-block" required=""></input>
                                     {!! $errors->first('ruangan','<p class="help-block">:message</p>') !!}
+                                    <font color="gray" size="2">* Disarankan : Ukuran 600 x 400 px (Maksimal 2 Mb)</font>
                                 </div>
                                 {!! Form::label('siswa','Foto Siswa *',['class'=>'col-md-2 control-label']) !!}
                                 <div class="col-md-4">
@@ -131,6 +134,8 @@
                                 @endif
                                     <input type="file" name="siswa" class="btn btn-default btn-block" required=""></input>
                                     {!! $errors->first('siswa','<p class="help-block">:message</p>') !!}
+                                  
+                                    <font color="gray" size="2">* Disarankan : Ukuran 300 x 300 px (Maksimal 2 Mb)</font>
                                 </div>
                             </div>
                             

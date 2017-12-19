@@ -1,6 +1,19 @@
 @extends('layouts.admin')
 
 @section('header')
+<style type="text/css">
+  .custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+.custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
+</style>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -41,9 +54,11 @@
           <ul class="treeview-menu">
             <li><a href="{{ route('profil.edit', 1 ) }}"><i class="fa fa-circle-o"></i> Profil Umum</a></li>
             <li><a href="{{ route('kejuruan.index') }}"><i class="fa fa-circle-o"></i> Kejuruan</a></li>
+            <li><a href="{{ route('fasilitas.index') }}"><i class="fa fa-circle-o"></i> Fasilitas</a></li>
             <li class="active"><a href="{{ route('ekskul.index') }}"><i class="fa fa-circle-o"></i> Ekstrakurikuler</a></li>
             <li><a href="{{ route('prestasi.index') }}"><i class="fa fa-circle-o"></i> Prestasi</a></li>
             <li><a href="{{ route('artikel.index') }}"><i class="fa fa-circle-o"></i> Artikel</a></li>
+            <li><a href="{{ route('alumni.index') }}"><i class="fa fa-circle-o"></i> Testimoni</a></li>
           </ul>
         </li>
         
@@ -95,6 +110,132 @@
             <!-- /.box-header -->
             <div class="box-body pad">
 
+              @php
+              $kat = App\KategoriEkskul::all();
+              @endphp
+              <a href="{{route('ekskul.index')}}" class="btn btn-info">Semua</a>
+              @foreach($kat as $kt)
+              <a href="{{url('/admin/ekskuls',$kt->id)}}" class="btn btn-info">{{$kt->nama}}</a>
+              @endforeach
+              
+              <div class="col-md-10 col-md-offset-1">
+               <!-- tabel akun -->
+               <table class="table table-striped custab">
+                  <thead>
+                  
+                      <tr>
+                   <th>No</th>
+                   <th>Foto Fasilitas</th>
+                   <th>Judul</th>
+                   <th>Keterangan</th>
+                   <th colspan="2">Opsi</th>
+                  </tr>
+                  @php
+                  $no = 1;
+                  @endphp
+                  @foreach($fasilitas as $data)
+                  <tr>
+                    <td>{{$no}}</td>
+                    <td><img src="{{asset('img/'.$data->foto)}}" class="img-responsive img-thumbnail" alt="" style="height: 40px;"></td>
+                    <td>{{$data->nama}}</td>
+                    <td>
+                    <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit{{$data->id}}">
+                    <span class="fa fa-edit"></span>
+                      Ubah
+                    </button>
+                    <div class="modal modal-warning fade" id="edit{{$data->id}}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Ubah Data Fasilitas</h4>
+                          </div>
+                          <div class="modal-body">
+                            {!! Form::model($data,['url'=>route('fasilitas.update',$data->id), 'method'=>'put', 'files'=>'true','class'=>'form-horizontal']) !!}
+                                
+                                <div class="form-group{{ $errors->has('kategori') ? 'has-error' : '' }}">
+                                  {!! Form::label('kategori','Kategori Fasilitas *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    <select name="kategori" class="js-selectize" placeholder="Pilih Kategori" required="">
+                                    <option></option>
+                                      @php
+                                        $hak = App\KategoriFasilitas::all();
+                                        $kj = DB::table('fasilitas')->where('kategori',$data->kategori)->first();
+                                      @endphp
+                                      @foreach($hak as $kk)
+                                      <option value="{{$kk->id}}" <?php if($kk->id == $kj->kategori) echo 'selected' ?>>{{$kk->nama}}</option>
+                                      @endforeach
+                                    </select>
+                                    {!! $errors->first('kategori', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                                <div class="form-group{{ $errors->has('judul') ? 'has-error' : '' }}">
+                                  {!! Form::label('name','Judul Fasilitas *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::text('judul',null,['class'=>'form-control','required','placeholder'=>'Contoh : Proyektor Tiap Kelas']) !!}
+                                    {!! $errors->first('judul', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                                <div class="form-group{{ $errors->has('keterangan') ? 'has-error' : '' }}">
+                                  {!! Form::label('name','Keterangan Fasilitas *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::textarea('keterangan',null,['class'=>'form-control','required','size'=>'5x3']) !!}
+                                    {!! $errors->first('keterangan', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                                <div class="form-group{{ $errors->has('foto') ? 'has-error' : '' }}">
+                            {!! Form::label('foto','Foto Fasilitas *',['class'=>'col-md-4']) !!}
+                                <div class="col-md-8">
+                                @if(isset($data) && $data->foto)
+                                <p>
+                                    {!! Html::image(asset('img/'.$data->foto),null,['class'=>'img-rounded img-responsive','style'=>'height:170px']) !!}
+                                </p>
+                                @endif
+                                    <input type="file" name="foto" class="btn btn-default btn-block"></input>
+                                    {!! $errors->first('foto','<p class="help-block">:message</p>') !!}
+                                    <font color="white" size="2">* Disarankan : Ukuran 250 x 250 px (Maksimal 1.5 Mb)</font>
+                                </div>
+                            </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>
+                              {!! Form::submit('Simpan', ['class'=>'btn btn-warning']) !!}
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                            <!-- /.modal-content -->
+                      </div>
+                          <!-- /.modal-dialog -->
+                    </div></td>
+                    {!! Form::model($data, ['url'=>route('fasilitas.destroy',$data->id), 'method'=>'delete', 'id'=>'myform']) !!}
+                    {!! Form::close() !!}
+                    <td>
+                    <button id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+                    </td>
+                    
+                  </tr>
+
+
+                  @php
+                  $no++;
+                  @endphp
+
+                  @endforeach
+                  </thead>
+                         
+                  </table>
+                <div class="pull-right">
+                {{ $fasilitas->links() }}
+                </div>
+            </div>
+             
+            </div>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+
               @foreach($kejuruans as $kejuruan)
               <div class="col-sm-4" align="center">
                 <a href="">
@@ -141,12 +282,20 @@
                     </div>
 
                     <div class="form-group{{ $errors->has('kategori_id') ? 'has-error' : '' }}">
-                      {!! Form::label('kategori_id','Kategori Kejuruan *',['class'=>'col-md-12']) !!}
-                      <div class="col-md-12">
-                        {!! Form::select('kategori_id',App\KategoriEkskul::pluck('nama','id')->all(),null,['class'=>'form-control','placeholder'=>'Pilih Kategori', 'required']) !!}
-                        {!! $errors->first('kategori_id', '<p class="help-block">:message</p>') !!}
-                      </div>
-                    </div>
+                                  {!! Form::label('kategori_id','Kategori Ekstrakurikuler *',['class'=>'col-md-12']) !!}
+                                  <div class="col-md-12">
+                                    <select name="kategori_id" class="js-selectize" placeholder="Pilih Kategori Ekstrakurikuler" required="">
+                                    <option></option>
+                                      @php
+                                        $hak = App\KategoriEkskul::all();
+                                      @endphp
+                                      @foreach($hak as $data)
+                                      <option value="{{$data->id}}">{{$data->nama}}</option>
+                                      @endforeach
+                                    </select>
+                                    {!! $errors->first('rore', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
 
                     <div class="form-group{{ $errors->has('foto') ? 'has-error' : '' }}">
                             {!! Form::label('foto','Foto Ekstrakurikuler *',['class'=>'col-md-12']) !!}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f46fcc0581fe1d299fcf8dd52977f657",
+    "content-hash": "d60fc538b4183b54c766c3eca9680783",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -2139,7 +2139,6 @@
                 "tagging",
                 "tags"
             ],
-            "abandoned": "spatie/laravel-tags",
             "time": "2017-09-06T03:49:28+00:00"
         },
         {

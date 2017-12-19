@@ -97,7 +97,6 @@
     
     <!-- Section: testimonial -->
     <section id="testimonial" class="home-section paddingbot-60 parallax" data-stellar-background-ratio="0.5">
-
         <div class="carousel-reviews broun-block">
             <div class="container">
                 <div class="row">
@@ -108,7 +107,7 @@
                                 <div class="col-md-4 col-sm-6">
                                     <div class="block-text rel zmin">
                                         <a title="" href="#">Emergency Contraception</a>
-                                        <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
+                                        
                                         <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
                                         <ins class="ab zmin sprite sprite-i-triangle block"></ins>
                                     </div>
@@ -118,84 +117,39 @@
                                         <span>Chicago, Illinois</span>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-6 hidden-xs">
-                                    <div class="block-text rel zmin">
-                                        <a title="" href="#">Orthopedic Surgery</a>
-                                        <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span><span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
-                                        <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
-                                        <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-                                    </div>
-                                    <div class="person-text rel text-light">
-                                        <img src="{{ asset('/Frontend/Medicio/img/testimonials/2.jpg') }}" alt="" class="person img-circle" />
-                                        <a title="" href="#">Matthew G</a>
-                                        <span>San Antonio, Texas</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
-                                    <div class="block-text rel zmin">
-                                        <a title="" href="#">Medical consultation</a>
-                                        <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star"></span><span data-value="5" class="glyphicon glyphicon-star"></span>  </span></div>
-                                        <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
-                                        <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-                                    </div>
-                                    <div class="person-text rel text-light">
-                                        <img src="{{ asset('/Frontend/Medicio/img/testimonials/3.jpg') }}" alt="" class="person img-circle" />
-                                        <a title="" href="#">Scarlet Smith</a>
-                                        <span>Dallas, Texas</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
                                 <div class="col-md-4 col-sm-6">
                                     <div class="block-text rel zmin">
-                                        <a title="" href="#">Birth control pills</a>
-                                        <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
+                                        <a title="" href="#">Emergency Contraception</a>
+                                        
                                         <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
                                         <ins class="ab zmin sprite sprite-i-triangle block"></ins>
                                     </div>
-                                    <div class="person-text rel text-light">
-                                        <img src="{{ asset('/Frontend/Medicio/img/testimonials/4.jpg') }}" alt="" class="person img-circle" />
-                                        <a title="" href="#">Lucas Thompson</a>
-                                        <span>Austin, Texas</span>
+                                    <div class="person-text rel text-light">                    
+                                        <img src="{{ asset('/Frontend/Medicio/img/testimonials/1.jpg') }}" alt="" class="person img-circle" />
+                                        <a title="" href="#">Anna</a>
+                                        <span>Chicago, Illinois</span>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-6 hidden-xs">
+                                <div class="col-md-4 col-sm-6">
                                     <div class="block-text rel zmin">
-                                        <a title="" href="#">Radiology</a>
-                                        <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star-empty"></span><span data-value="3" class="glyphicon glyphicon-star-empty"></span><span data-value="4" class="glyphicon glyphicon-star-empty"></span><span data-value="5" class="glyphicon glyphicon-star-empty"></span>  </span></div>
+                                        <a title="" href="#">Emergency Contraception</a>
+                                        
                                         <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
                                         <ins class="ab zmin sprite sprite-i-triangle block"></ins>
                                     </div>
-                                    <div class="person-text rel text-light">
-                                        <img src="{{ asset('/Frontend/Medicio/img/testimonials/5.jpg') }}" alt="" class="person img-circle" />
-                                        <a title="" href="#">Ella Mentree</a>
-                                        <span>Fort Worth, Texas</span>
+                                    <div class="person-text rel text-light">                    
+                                        <img src="{{ asset('/Frontend/Medicio/img/testimonials/1.jpg') }}" alt="" class="person img-circle" />
+                                        <a title="" href="#">Anna</a>
+                                        <span>Chicago, Illinois</span>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
-                                    <div class="block-text rel zmin">
-                                        <a title="" href="#">Cervical Lesions</a>
-                                        <div class="mark">My rating: <span class="rating-input"><span data-value="0" class="glyphicon glyphicon-star"></span><span data-value="1" class="glyphicon glyphicon-star"></span><span data-value="2" class="glyphicon glyphicon-star"></span><span data-value="3" class="glyphicon glyphicon-star"></span><span data-value="4" class="glyphicon glyphicon-star"></span><span data-value="5" class="glyphicon glyphicon-star"></span>  </span></div>
-                                        <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
-                                        <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-                                    </div>
-                                    <div class="person-text rel text-light">
-                                        <img src="{{ asset('/Frontend/Medicio/img/testimonials/6.jpg') }}" alt="" class="person img-circle" />
-                                        <a title="" href="#">Suzanne Adam</a>
-                                        <span>Detroit, Michigan</span>
-                                    </div>
-                                </div>
+                                
                             </div>
                             
                            
                         </div>
                         
-                        <a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-reviews" role="button" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                        </a>
+                        
                     </div>
                 </div>
             </div>
@@ -223,11 +177,11 @@
                 <div class="col-sm-12 col-md-12 col-lg-12" >
                     <div>
                     <div id="owl-works" class="owl-carousel">
-                        <div class="item"><a href="{{ asset('img/default.png') }}" title="Gambar Perusahaan" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="{{ asset('Frontend/Medicio/img/photo/1.jpg') }}" class="img-responsive" alt="img"></a></div>
-                        <div class="item"><a href="{{ asset('Frontend/Medicio/img/photo/2.jpg') }}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/2@2x.jpg"><img src="{{ asset('Frontend/Medicio/img/photo/2.jpg') }}" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="{{ asset('Frontend/Medicio/img/photo/3.jpg') }}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/3@2x.jpg"><img src="{{ asset('Frontend/Medicio/img/photo/3.jpg') }}" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="{{ asset('Frontend/Medicio/img/photo/4.jpg') }}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/4@2x.jpg"><img src="{{ asset('Frontend/Medicio/img/photo/4.jpg') }}" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="{{ asset('Frontend/Medicio/img/photo/5.jpg') }}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/5@2x.jpg"><img src="{{ asset('Frontend/Medicio/img/photo/5.jpg') }}" class="img-responsive " alt="img"></a></div>
+                        <div class="item"><a href="{{ asset('img/default.png') }}" title="Gambar Perusahaan" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="{{ asset('img/logo1.png') }}" class="img-responsive" alt="img"></a></div>
+                        <div class="item"><a href="{{ asset('img/logo1.png') }}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/2@2x.jpg"><img src="{{ asset('img/logo2.png') }}" class="img-responsive " alt="img"></a></div>
+                        <div class="item"><a href="{{ asset('img/logo2.png') }}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/3@2x.jpg"><img src="{{ asset('img/logo3.png') }}" class="img-responsive " alt="img"></a></div>
+                        <div class="item"><a href="{{ asset('img/logo3.png') }}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/4@2x.jpg"><img src="{{ asset('img/logo4.png') }}" class="img-responsive " alt="img"></a></div>
+                        <div class="item"><a href="{{ asset('img/logo4.png') }}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/5@2x.jpg"><img src="{{ asset('Frontend/Medicio/img/photo/5.jpg') }}" class="img-responsive " alt="img"></a></div>
                         <div class="item"><a href="{{ asset('Frontend/Medicio/img/photo/6.jpg') }}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/6@2x.jpg"><img src="{{ asset('img/honda.png') }}" class="img-responsive " alt="img"></a></div>
                     </div>
                     </div>

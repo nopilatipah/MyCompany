@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\KategoriEkskul;
+use App\Ekskul;
 
 class EkskulSeeder extends Seeder
 {
@@ -27,5 +28,17 @@ class EkskulSeeder extends Seeder
         $kategori4 = new KategoriEkskul();
         $kategori4->nama = "Multimedia";
         $kategori4->save();
+
+        $futsal = new Ekskul();
+        $futsal->nama = "Futsal";
+        $futsal->kategori_id = "1";
+        $futsal->foto = "futsal.jpeg";
+        $futsal->save();
+
+        $basket = new Ekskul();
+        $basket->nama = "Basket";
+        $basket->kategori_id = "1";
+        $basket->foto = "Basketball.jpg";
+        $basket->save();
     }
 }

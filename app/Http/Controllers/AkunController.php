@@ -28,7 +28,7 @@ class AkunController extends Controller
         ->join('roles','roles.id','=','role_user.role_id')
         ->join('users','users.id','=','role_user.user_id')
         ->select('roles.display_name','users.*')
-        ->where('users.id','!=',1)->orderBy('users.id','desc')->paginate(10);
+        ->where('users.id','!=',1)->orderBy('users.id','desc')->paginate(5);
             
         return view('backend.akun.index')->with(compact('akun'));
     }
@@ -65,7 +65,7 @@ class AkunController extends Controller
 
         $member->attachRole($memberRole);
 
-        alert()->success('Akun Tersimpan')->autoclose(3500);
+        alert()->success('Akun Berhasil Ditambahkan')->autoclose(3500);
         return redirect()->route('akun.index');
     }
 
@@ -110,11 +110,15 @@ class AkunController extends Controller
 
         
         $memberRole = DB::table('role_user')->where('user_id',$user->id)->first();
+        $Role = Role::where('id',$request->role)->first();
         
         $user->roles()->detach($memberRole->role_id);
         $user->roles()->attach($request->role);
 
-        alert()->success('Akun Tersimpan')->autoclose(3500);
+        $user->akses = $Role->display_name;
+        $user->save();
+
+        alert()->success('Perubahan Tersimpan')->autoclose(3500);
         return redirect()->route('akun.index');
     }
 
@@ -128,7 +132,7 @@ class AkunController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-            alert()->success('Terhapus')->autoclose(3500);
+            alert()->success('Akun Terhapus')->autoclose(3500);
 
         return redirect()->route('akun.index');
     }

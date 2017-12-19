@@ -33,12 +33,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     
-    <!-- =======================================================
-        Theme Name: Medicio
-        Theme URL: https://bootstrapmade.com/medicio-free-bootstrap-theme/
-        Author: BootstrapMade
-        Author URL: https://bootstrapmade.com
-    ======================================================= -->
+    
     <style type="text/css">
 
 .nav-tabs { border-bottom: 2px solid #DDD; }
@@ -167,7 +162,7 @@ $komponen = App\Komponen::find(1);
                     <div class="widget">
                         <h5>Ikuti Kami</h5>
                         <ul class="company-social">
-                                <li class="social-facebook"><a href="{{$fb->link}}"><i class="fa fa-facebook"></i></a></li>
+                                <li class="social-facebook"><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
                                 <li class="social-twitter"><a href="{{$tw->link}}"><i class="fa fa-twitter"></i></a></li>
                                 <li class="social-vimeo"><a href="{{$yt->link}}"><i class="fa fa-youtube"></i></a></li>
                                 <li class="social-dribble"><a href="{{$ig->link}}"><i class="fa fa-instagram"></i></a></li>
