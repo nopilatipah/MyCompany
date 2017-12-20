@@ -64,7 +64,7 @@ class PerusahaanController extends Controller
  
         $perusahaan->save();
         // dd($perusahaan);
-        alert()->success('Perusahaan Berhasil Ditambahkan')->autoclose(3500);
+        alert()->success('Perusahaan Tersimpan')->autoclose(3500);
         return redirect()->route('perusahaan.index');
     }
 

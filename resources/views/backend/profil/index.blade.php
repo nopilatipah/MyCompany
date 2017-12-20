@@ -49,14 +49,17 @@
           </ul>
         </li>
         
+        @php
+        $pes = App\Pesan::where('status','=',0)->count();
+        @endphp
         <li>
           <a href="{{ route('pesan.index') }}">
             <i class="fa fa-envelope"></i> <span>Pesan</span>
+            @if($pes > 0)
             <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
+              <small class="label pull-right bg-yellow">{{$pes}}</small>
             </span>
+            @endif
           </a>
         </li>
         
@@ -98,7 +101,7 @@
                   {!! Form::textarea('profil',null,['class'=>'ckeditor', 'id'=>'editor1', 'name'=>'profil', 'rows'=>'10', 'cols'=>'80']) !!}
                 </div>
                 <br>
-                {!! Form::submit('Simpan Perubahan Profil', ['class'=>'btn btn-primary pull-right']) !!}
+                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Simpan Perubahan Profil</button>
             </div>
           </div>
           <!-- /.box -->
@@ -123,7 +126,7 @@
                   {!! Form::textarea('sejarah',null,['class'=>'ckeditor', 'id'=>'editor1', 'name'=>'sejarah', 'rows'=>'10', 'cols'=>'80']) !!}
                 </div>
                 <br>
-                {!! Form::submit('Simpan Perubahan Sejarah', ['class'=>'btn btn-primary pull-right']) !!}
+                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Simpan Perubahan Sejarah</button>
             </div>
 
           </div>
@@ -174,7 +177,7 @@
                   {!! Form::textarea('sambutan',null,['class'=>'ckeditor', 'id'=>'editor1', 'name'=>'sambutan', 'rows'=>'10', 'cols'=>'80']) !!}
                 </div>
                 <br>
-                {!! Form::submit('Simpan Perubahan Sambutan', ['class'=>'btn btn-primary pull-right']) !!}
+                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Simpan Perubahan Sambutan</button>
             </div>
           </div>
           <!-- /.box -->
@@ -203,7 +206,7 @@
                   {!! Form::textarea('visi',null,['class'=>'ckeditor', 'id'=>'editor1', 'name'=>'visi', 'rows'=>'10', 'cols'=>'80']) !!}
                 </div>
                 <br>
-                {!! Form::submit('Simpan Perubahan Visi', ['class'=>'btn btn-primary pull-right']) !!}
+                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Simpan Perubahan Visi</button>
             </div>
           </div>
           <!-- /.box -->
@@ -230,14 +233,14 @@
                   {!! Form::textarea('misi',null,['class'=>'ckeditor', 'id'=>'editor1', 'name'=>'misi', 'rows'=>'10', 'cols'=>'80']) !!}
                 </div>
                 <br>
-                {!! Form::submit('Simpan Perubahan Misi', ['class'=>'btn btn-primary pull-right']) !!}
+                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Simpan Perubahan Misi</button>
             </div>
           </div>
           <!-- /.box -->
           </div>
           <div class="col-md-12">
           <br>
-          {!! Form::submit('Simpan Semua Perubahan', ['class'=>'btn btn-warning btn-lg btn-block']) !!}
+          <button type="submit" class="btn btn-primary btn-lg btn-block pull-right"><i class="fa fa-save"></i> Simpan Semua Perubahan</button>
           </div>
       </div>
 

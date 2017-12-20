@@ -1,6 +1,19 @@
 @extends('layouts.admin')
 
 @section('header')
+<style type="text/css">
+  .custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+.custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
+</style>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -49,14 +62,17 @@
           </ul>
         </li>
         
+        @php
+        $pes = App\Pesan::where('status','=',0)->count();
+        @endphp
         <li>
           <a href="{{ route('pesan.index') }}">
             <i class="fa fa-envelope"></i> <span>Pesan</span>
+            @if($pes > 0)
             <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
+              <small class="label pull-right bg-yellow">{{$pes}}</small>
             </span>
+            @endif
           </a>
         </li>
         
@@ -83,42 +99,73 @@
               <h3 class="box-title">Total Artikel ( {{$jml}} )
                 <small>SMK Assalaam Bandung</small>
               </h3>
-              <a href="{{ route('artikel.create') }}" class="btn btn-primary pull-right"><span class="fa fa-plus"></span> &nbsp &nbsp Tambah Artikel Baru</a>
-              <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#kategori">
+              <a href="{{ route('artikel.create') }}" class="btn btn-sm btn-primary pull-right"><span class="fa fa-plus"></span> &nbsp &nbsp Tambah Artikel Baru</a>
+              <button type="button" class="btn btn-sm btn-success pull-right" data-toggle="modal" data-target="#kategori">
               <span class="fa fa-list"></span>
-                Kategori
+                &nbsp &nbsp Kategori
               </button> 
               <hr>
             </div>
             
             <!-- /.box-header -->
             <div class="box-body pad">
-            @foreach($artikels as $artikel)
-            <form method="delete" action="{{route('artikel.destroy',$artikel->id)}}" class="form-inline js-confirm" data-confirm="Apakah Anda Yakin Ingin Menghapus Artikel ?">
-              <div class="box box-danger">
-                <div class="box-header">
-                  <h4 class="box-title"><span class="fa fa-tag"></span> {{ $artikel->kategori }}</h4>
-                  <a href="{{ route('artikel.edit',$artikel->id) }}" class="btn btn-warning btn-sm pull-right"><span class="fa fa-edit"></span> Ubah</a>
-                  <button type="submit" class="btn btn-danger btn-sm pull-right"><span class="fa fa-trash"></span> Hapus</button>
-                  </form>
-                </div>
-                <div class="box-body pad">
-                  <div class="col-md-4">
-                    <img src="{{ asset('img/'.$artikel->foto) }}" class="img-thumbnail img-responsive" style="width: 300px;">
-                  </div>
-                  <div class="col-md-8">
-                    <h3>{{ $artikel->judul }}</h3>
-                    <span class="fa fa-clock-o"></span> <b>{{ $artikel->tgl_kegiatan }}</b>&nbsp&nbsp&nbsp
-                    <span class="fa fa-user"></span> <b>{{ $artikel->author }}</b>&nbsp&nbsp&nbsp
-                    <span class="fa fa-eye"></span> <b>{{ $artikel->views }}</b>&nbsp&nbsp&nbsp
-                    <span class="fa fa-comments"></span> <b>30</b>&nbsp&nbsp&nbsp
-                  </div>
-                  <div class="col-md-8">
-                    <p align="justify">{!! str_limit($artikel->konten, 300) !!} <a href="{{ route('artikel.show',$artikel->id) }}" class="btn btn-info btn-xs">Selengkapnya</a></p>
-                  </div>
-                </div>
-              </div>
+              @php
+              $kat = App\KategoriArtikel::all();
+              @endphp
+              <a href="{{route('artikel.index')}}" class="btn btn-info btn-sm">Semua</a>
+              @foreach($kat as $kt)
+              <a href="{{url('/admin/artikels',$kt->id)}}" class="btn btn-sm btn-info">{{$kt->nama}}</a>
               @endforeach
+            <div class="col-md-10 col-md-offset-1">
+               <!-- tabel akun -->
+               <table class="table table-striped custab">
+                  <thead>
+                  
+                      <tr>
+                   <th>No</th>
+                   <th>Foto Artikel</th>
+                   <th>Judul</th>
+                   <th>Konten</th>
+                   <th colspan="2">Opsi</th>
+                  </tr>
+                  @php
+                  $no = 1;
+                  @endphp
+                  @foreach($artikels as $data)
+                  <tr>
+                    <td>{{$no}}</td>
+                    <td><img src="{{asset('img/'.$data->foto)}}" class="img-responsive img-thumbnail" alt="" style="height: 40px;"></td>
+                    <td>{!! str_limit($data->judul, 30) !!}</td>
+                    <td>{!! str_limit($data->konten, 30) !!}</td>
+                    <td><a href="{{route('artikel.edit',$data->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Lihat</a></td>
+                    {!! Form::model($data, ['url'=>route('artikel.destroy',$data->id), 'method'=>'delete', 'id'=>'myform']) !!}
+                    {!! Form::close() !!}
+                    <td>
+                    <button id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+                    </td>
+                    
+                  </tr>
+
+
+                  @php
+                  $no++;
+                  @endphp
+
+                  @endforeach
+                  </thead>
+                         
+                  </table>
+                <div class="pull-right">
+                {{ $artikels->links() }}
+                </div>
+            </div>
+             
+            </div>
+            </div>
+          </div>
+            </div>
+          </div>
+          <!-- /.box -->
             </div>
           </div>
           <!-- /.box -->
@@ -159,7 +206,11 @@
                 <hr>
                 
                     @foreach($kat as $data)
-                      <p class="col-sm-4"><span class="fa fa-tag"></span> {{$data->nama}} <a href=""><span class="fa fa-trash"></span></a></p>
+                     {!! Form::model($data, ['url'=>route('kategori-artikel.destroy',$data->id), 'method'=>'delete', 'id'=>'myform']) !!}
+                    <p class="col-sm-4"><span class="fa fa-tag"></span> {{$data->nama}}
+                    <button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+                    </p>
+                    {!! Form::close() !!}
                     @endforeach
               <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
               </div>
@@ -169,5 +220,19 @@
           </div>
           <!-- /.modal-dialog -->
         </div>
-  
+<script type="text/javascript">
+  $('button#delete').on('click', function(){
+  swal({   
+    title: "Apakah Anda Yakin ?",
+    text: "Anda Tidak Dapat Mengembalikan Data Artikel !",         type: "warning",   
+    showCancelButton: true,   
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Ya, Hapus Artikel !", 
+    closeOnConfirm: false 
+  }, 
+       function(){   
+    $("#myform").submit();
+  });
+})
+</script>
 @endsection

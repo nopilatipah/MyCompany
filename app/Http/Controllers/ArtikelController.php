@@ -17,7 +17,14 @@ class ArtikelController extends Controller
     public function index()
     {
         $artikels = DB::table('artikels')->join('kategori_artikels','artikels.kategori_id','=','kategori_artikels.id')
-                            ->select('artikels.*','kategori_artikels.nama as kategori')->orderBy('artikels.id','desc')->get();
+                            ->select('artikels.*','kategori_artikels.nama as kategori')->orderBy('artikels.id','desc')->paginate(5);
+        return view('backend.artikel.index', compact('artikels'));
+    }
+
+    public function art($id)
+    {
+        $artikels = DB::table('artikels')->join('kategori_artikels','artikels.kategori_id','=','kategori_artikels.id')
+                            ->select('artikels.*','kategori_artikels.nama as kategori')->where('kategori_id',$id)->orderBy('artikels.id','desc')->paginate(5);
         return view('backend.artikel.index', compact('artikels'));
     }
 
@@ -66,10 +73,9 @@ class ArtikelController extends Controller
 
         $artikel->save();
         
-        $tags = explode(",", $request->tags);
-        $artikel->tag($tags);
+        
         // dd($artikel);
-        alert()->success('Tersimpan')->autoclose(3500);
+        alert()->success('Artikel Tersimpan')->autoclose(3500);
         return redirect()->route('artikel.index');
     }
 
@@ -133,7 +139,7 @@ class ArtikelController extends Controller
 
         $artikel->save();
         // dd($artikel);
-        alert()->success('Tersimpan')->autoclose(3500);
+        alert()->success('Perubahan Tersimpan')->autoclose(3500);
         return redirect()->route('artikel.index');
     }
 
@@ -147,7 +153,7 @@ class ArtikelController extends Controller
     {
         $member = Artikel::find($id);
             $member->delete();
-            alert()->success('Terhapus')->autoclose(3500);
+            alert()->success('Artikel Terhapus')->autoclose(3500);
 
         return redirect()->route('artikel.index');
     }

@@ -39,6 +39,9 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']], function(){
 	Route::resource('perusahaan','PerusahaanController');
 	Route::get('perusahaans/{id}','PerusahaanController@pers');
 	Route::get('fasilitass/{id}','FasilitasController@fas');
+	Route::get('ekskuls/{id}','EkskulController@eks');
+	Route::get('artikels/{id}','ArtikelController@art');
+	Route::get('alumnis/{id}','AlumniController@alm');
 	Route::resource('pesan','PesanController');
 	Route::resource('kontak','KontakController');
 	Route::resource('fasilitas','FasilitasController');
@@ -64,3 +67,4 @@ Route::post('vendor/add', function()
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

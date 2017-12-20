@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Pesan;
 use DB;
 use App\Komponen;
+use Mail;
+use App\Balasan;
 
 class PesanController extends Controller
 {
@@ -16,8 +18,9 @@ class PesanController extends Controller
      */
     public function index()
     {
-        $pesan = DB::table('pesans')->select('pesans.*')->paginate(10);
-        return view('backend.pesan.index', compact('pesan'));
+        $pesan = DB::table('pesans')->select('pesans.*')->where('status',0)->paginate(10);
+        $dulu = DB::table('pesans')->select('pesans.*')->where('status',1)->paginate(10);
+        return view('backend.pesan.index', compact('pesan','dulu'));
     }
 
     /**
@@ -52,7 +55,13 @@ class PesanController extends Controller
      */
     public function show($id)
     {
-        //
+        $pesan = Pesan::find($id);
+        $pesan->status = 1;
+        $pesan->save();
+
+        $pesans = DB::table('pesans')->select('pesans.*')->where('status',0)->paginate(10);
+
+        return view('backend.pesan.balas', compact('pesan','pesans'));
     }
 
     /**
@@ -75,7 +84,21 @@ class PesanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pesan = Pesan::find($id);
+        $balas = new Balasan;
+        $balas->pesan_id = $id;
+        $balas->balasan = $request->balasan;
+        $balas->save();
+
+        Mail::raw($request->balasan, function($message)
+        {
+            $message->subject('Terimakasih Anda Telah Menghubungi Kami');
+            $message->from('smkassalaambandung@gmail.com', 'SMK Assalaam Bandung');
+            $message->to('nopilatipah.nola@gmail.com');
+        });
+
+        alert()->success('Balasan Terkirim')->autoclose(3500);
+        return redirect()->route('pesan.index');
     }
 
     /**
@@ -86,6 +109,26 @@ class PesanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Pesan::findOrFail($id);
+        $user->delete();
+            alert()->success('Pesan Terhapus')->autoclose(3500);
+
+        return redirect()->route('pesan.index');
+    }
+
+    public function kirim(Request $request, $id)
+    {
+        $pesan = Pesan::find($id);
+        $balas = new Balas;
+        $balas->pesan_id = $id;
+        $balas->balasan = $request->balasan;
+        $balas->save();
+
+        Mail::raw($request->balasan, function($message)
+        {
+            $message->subject('Terimakasih Anda Telah Menghubungi Kami');
+            $message->from('smkassalaambandung@gmail.com', 'SMK Assalaam Bandung');
+            $message->to($pesan->email);
+        });
     }
 }

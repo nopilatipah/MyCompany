@@ -65,7 +65,7 @@ class AkunController extends Controller
 
         $member->attachRole($memberRole);
 
-        alert()->success('Akun Berhasil Ditambahkan')->autoclose(3500);
+        alert()->success('Akun Tersimpan')->autoclose(3500);
         return redirect()->route('akun.index');
     }
 

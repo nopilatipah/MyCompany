@@ -69,7 +69,7 @@ class KejuruanController extends Controller
  
         $kejuruan->save();
         // dd($kejuruan);
-        alert()->success('Tersimpan')->autoclose(3500);
+        alert()->success('Kejuruan Tersimpan')->autoclose(3500);
         return redirect()->route('kejuruan.index');
     }
 
@@ -151,7 +151,7 @@ class KejuruanController extends Controller
             $kejuruan->siswa=$filename;
             $kejuruan->save();
         }
-        alert()->success('Tersimpan')->autoclose(3500);
+        alert()->success('Perubahan Tersimpan')->autoclose(3500);
         return redirect()->route('kejuruan.index');
     }
 
@@ -165,7 +165,7 @@ class KejuruanController extends Controller
     {
         $member = Kejuruan::find($id);
             $member->delete();
-            alert()->success('Terhapus')->autoclose(3500);
+            alert()->success('Kejuruan Terhapus')->autoclose(3500);
 
         return redirect()->route('kejuruan.index');
     }

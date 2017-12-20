@@ -1,6 +1,16 @@
 @extends('layouts.admin')
 
 @section('header')
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" />
+
+  <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
+
+  
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -49,14 +59,17 @@
           </ul>
         </li>
         
+        @php
+        $pes = App\Pesan::where('status','=',0)->count();
+        @endphp
         <li>
           <a href="{{ route('pesan.index') }}">
             <i class="fa fa-envelope"></i> <span>Pesan</span>
+            @if($pes > 0)
             <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
+              <small class="label pull-right bg-yellow">{{$pes}}</small>
             </span>
+            @endif
           </a>
         </li>
         
@@ -83,39 +96,34 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
-                {!! Form::model($artikel, ['url'=>route('artikel.update',$artikel->id), 'method'=>'put', 'files'=>'true', 'enctype'=>'multipart/form-data', 'class'=>'form-horizontal']) !!}
+              <div class="col-md-10 col-md-offset-1">
+                {!! Form::model($artikel,['url'=>route('artikel.update',$artikel->id), 'method'=>'put', 'files'=>'true', 'enctype'=>'multipart/form-data', 'class'=>'form-horizontal']) !!}
                    
                             
                             <div class="form-group{{ $errors->has('judul') ? 'has-error' : '' }}">
                             <div>
                                 {!! Form::label('judul','Judul Artikel *',['class'=>'col-md-3']) !!}
                             </div>
-                                <div class="col-md-6">
-                                    {!! Form::text('judul',null,['class'=>'form-control']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('judul',null,['class'=>'form-control','required','placeholder'=>'Contoh : Memperingati Hari Sumpah Pemuda']) !!}
                                     {!! $errors->first('judul','<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <br>
 
-                            <div class="form-group{{ $errors->has('kategori_id') ? 'has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('kategori_id','tgl_kegiatan') ? 'has-error' : '' }}">
                               {!! Form::label('kategori_id','Kategori *',['class'=>'col-md-3']) !!}
-                              <div class="col-md-6">
+                              <div class="col-md-3">
                                 {!! Form::select('kategori_id',App\KategoriArtikel::pluck('nama','id')->all(),null,['class'=>'js-selectize','placeholder'=>'Pilih Kategori']) !!}
                                 {!! $errors->first('kategori_id', '<p class="help-block">:message</p>') !!}
                               </div>
-                            </div>
-                            <br>
-
-                            <div class="form-group{{ $errors->has('tgl_kegiatan') ? 'has-error' : '' }}">
-                            <div>
-                                {!! Form::label('tgl_kegiatan','Tanggal Kegiatan *',['class'=>'col-md-3']) !!}
-                            </div>
-                                <div class="col-md-6">
+                              {!! Form::label('tgl_kegiatan','Tgl Kegiatan *',['class'=>'col-md-2 col-md-offset-1']) !!}
+                              <div class="col-md-3">
                                     {!! Form::text('tgl_kegiatan',null,['class'=>'form-control']) !!}
                                     {!! $errors->first('tgl_kegiatan','<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <br>
+                            
+
                         
                             <div class="form-group{{ $errors->has('konten') ? 'has-error' : '' }}">
                             {!! Form::label('konten','Konten Artikel *',['class'=>'col-md-6']) !!}
@@ -128,17 +136,20 @@
                             
                             <div class="form-group{{ $errors->has('foto') ? 'has-error' : '' }}">
                             {!! Form::label('foto','Foto Artikel *',['class'=>'col-md-2']) !!}
-                                <div class="col-md-8">
+                                <div class="col-md-4">
                                 @if(isset($artikel) && $artikel->foto)
                                 <p>
                                     {!! Html::image(asset('img/'.$artikel->foto),null,['class'=>'img-rounded img-responsive']) !!}
                                 </p>
                                 @endif
-                                    <input type="file" name="foto" class="btn btn-default btn-block" required=""></input>
+                                    <input type="file" name="foto" class="btn btn-default btn-block"></input>
                                     {!! $errors->first('foto','<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            
+                            <br>
+
+                           
+
                             <hr>
                             <div class="form-group">
                                 <div class="col-md-12" align="right">
@@ -147,6 +158,7 @@
                             </div>
                 {!! Form::close() !!}
             </div>
+          </div>
           </div>
           <!-- /.box -->
         </div>

@@ -82,19 +82,35 @@
             <div class="box-header">
               <i class="ion ion-android-mail"></i>
 
-              <h3 class="box-title">Pesan Belum Dibaca</h3>
-
-              <div class="box-tools pull-right">
-                {{ $pesan->links() }}
-              </div>
+              <h3 class="box-title">Pesan Dari {{$pesan->nama_depan}} {{$pesan->nama_belakang}}</h3>
+              <small><i>Dikirim Pada {{$pesan->created_at}}</i></small>
+              <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal-info">
+              <span class="fa fa-plus"></span>
+                &nbsp &nbsp Balas Pesan
+              </button> 
 
             </div>
             <br>
             <!-- /.box-header -->
             <div class="box-body">
-              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+              <b>Subjek :</b> <i>{{$pesan->subjek}}</i> <br><br>
+              <b>Isi Pesan</b>
+              <textarea class="form-control">{{$pesan->pesan}}</textarea>
+            </div>
+            
+          </div>
+          <div class="box box-primary">
+            <div class="box-header">
+              <i class="ion ion-android-mail"></i>
+
+              <h3 class="box-title">Pesan Lainnya Yang Belum Dibaca</h3>
+
+            </div>
+            <br>
+            <!-- /.box-header -->
+            <div class="box-body">
               <ul class="todo-list">
-              @foreach($pesan as $data)
+              @foreach($pesans as $data)
                 <li>
                   <!-- drag handle -->
                   <i class="ion ion-android-mail"></i>
@@ -116,44 +132,6 @@
             </div>
             
           </div>
-
-          <div class="box box-default">
-            <div class="box-header">
-              <i class="ion ion-android-mail"></i>
-
-              <h3 class="box-title">Pesan Terdahulu</h3>
-
-              <div class="box-tools pull-right">
-                {{ $dulu->links() }}
-              </div>
-
-            </div>
-            <br>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-              <ul class="todo-list">
-              @foreach($dulu as $data)
-                <li>
-                  <!-- drag handle -->
-                  <i class="ion ion-android-mail"></i>
-                  <!-- todo text -->
-                  <span class="text">{{$data->nama_depan}} {{$data->nama_belakang}}</span>
-                  <!-- Emphasis label -->
-                  <small class="label label-warning"><i class="fa fa-clock-o"></i> {{$data->created_at}}</small>&nbsp
-                  Subjek : {{$data->subjek}} || <i>{!! str_limit($data->pesan, 90) !!}</i>
-                  <!-- General tools such as edit or delete-->
-                  <div class="tools">
-                    {!! Form::model($data, ['url'=>route('pesan.destroy',$data->id), 'method'=>'delete', 'id'=>'myform']) !!}
-                    {!! Form::close() !!}
-                    <button id="delete" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
-                  </div>
-                </li>
-                @endforeach
-              </ul>
-            </div>
-            
-          </div>
         </div>
       </div>
 
@@ -161,20 +139,39 @@
     </section>
     <!-- /.content -->
 
-<script type="text/javascript">
-  $('button#delete').on('click', function(){
-  swal({   
-    title: "Apakah Anda Yakin ?",
-    text: "Anda Tidak Dapat Mengembalikan Pesan !",         type: "warning",   
-    showCancelButton: true,   
-    confirmButtonColor: "#DD6B55",
-    confirmButtonText: "Ya, Hapus Pesan !", 
-    closeOnConfirm: false 
-  }, 
-       function(){   
-    $("#myform").submit();
-  });
-})
-</script>
+    <div class="modal modal-default fade" id="modal-info">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Balas Pesan</h4>
+              </div>
+              <div class="modal-body">
+                {!! Form::model($pesan, ['url'=>route('pesan.update',$pesan->id), 'method'=>'put', 'files'=>'true','class'=>'form-horizontal']) !!}
+                    <div class="form-group">
+                      {!! Form::label('balasan','Penerima *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::text('balasan',$pesan->email,['class'=>'form-control']) !!}
+                      </div>
+                    </div>
+                    <div class="form-group{{ $errors->has('balasan') ? 'has-error' : '' }}">
+                      {!! Form::label('balasan','Isi Pesan *',['class'=>'col-md-12']) !!}
+                      <div class="col-md-12">
+                        {!! Form::textarea('balasan',null,['class'=>'form-control','required']) !!}
+                        {!! $errors->first('balasan', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>
+                {!! Form::submit('Kirim Balasan', ['class'=>'btn btn-primary']) !!}
+              </div>
+              {!! Form::close() !!}
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+    </div>
 
 @endsection

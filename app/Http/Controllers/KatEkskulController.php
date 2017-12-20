@@ -36,7 +36,7 @@ class KatEkskulController extends Controller
     public function store(Request $request)
     {
         $kategori = KategoriEkskul::create($request->all());
-        alert()->success('Kategori Ekstrakurikuler Tersimpan')->autoclose(3500);
+        alert()->success('Kategori Tersimpan')->autoclose(3500);
         return redirect()->route('ekskul.index');
     }
 
@@ -84,7 +84,7 @@ class KatEkskulController extends Controller
     {
         $member = KategoriEkskul::find($id);
             $member->delete();
-            alert()->success('Terhapus')->autoclose(3500);
+            alert()->success('Kategori Terhapus')->autoclose(3500);
 
         return redirect()->route('ekskul.index');
     }

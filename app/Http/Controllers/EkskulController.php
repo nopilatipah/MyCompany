@@ -14,13 +14,13 @@ class EkskulController extends Controller
      */
     public function index()
     {
-        $kejuruans = Ekskul::all();
+        $kejuruans = Ekskul::paginate(5);
         return view('backend.ekskul.index', compact('kejuruans'));
     }
 
-    public function kategori()
+    public function eks($id)
     {
-        $kejuruans = Ekskul::all();
+        $kejuruans = Ekskul::where('kategori_id',$id)->paginate(5);
         return view('backend.ekskul.index', compact('kejuruans'));
     }
 
@@ -62,7 +62,7 @@ class EkskulController extends Controller
  
         $ekskul->save();
         // dd($ekskul);
-        alert()->success('Tersimpan')->autoclose(3500);
+        alert()->success('Ekstrakurikuler Tersimpan')->autoclose(3500);
         return redirect()->route('ekskul.index');
     }
 
@@ -97,7 +97,31 @@ class EkskulController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ekskul = Ekskul::find($id);
+        $ekskul->update($request->all());
+        if($request->hasFile('foto'))
+        {
+            $filename=null;
+            $uploaded_foto=$request->file('foto');
+            $extension=$uploaded_foto->getClientOriginalExtension();
+            $filename=md5(time()).'.'.$extension;
+            $destinationPath=public_path().DIRECTORY_SEPARATOR.'img';
+            $uploaded_foto->move($destinationPath, $filename);
+            if($ekskul->foto)
+            {
+                $old_foto=$ekskul->foto;
+                $filepath=public_path().DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$ekskul->foto;
+                try {
+                    File::delete($filepath);
+                } catch(FileNotFoundException $e) {
+
+                }
+            }
+            $ekskul->foto=$filename;
+            $ekskul->save();
+        }
+        alert()->success('Perubahan Tersimpan')->autoclose(3500);
+        return redirect()->route('ekskul.index');
     }
 
     /**
@@ -108,6 +132,10 @@ class EkskulController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Ekskul::findOrFail($id);
+        $user->delete();
+            alert()->success('Ekstrakurikuler Terhapus')->autoclose(3500);
+
+        return redirect()->route('ekskul.index');
     }
 }

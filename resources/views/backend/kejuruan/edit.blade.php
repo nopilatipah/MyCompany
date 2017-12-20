@@ -62,14 +62,17 @@
           </ul>
         </li>
         
+        @php
+        $pes = App\Pesan::where('status','=',0)->count();
+        @endphp
         <li>
           <a href="{{ route('pesan.index') }}">
             <i class="fa fa-envelope"></i> <span>Pesan</span>
+            @if($pes > 0)
             <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
+              <small class="label pull-right bg-yellow">{{$pes}}</small>
             </span>
+            @endif
           </a>
         </li>
         
@@ -100,6 +103,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
+              <div class="col-md-10 col-md-offset-1">
                 {!! Form::model($kejuruan,['url'=>route('kejuruan.update',$kejuruan->id), 'method'=>'put', 'files'=>'true', 'enctype'=>'multipart/form-data', 'class'=>'form-horizontal']) !!}
                    
                             
@@ -135,7 +139,7 @@
                                 <div class="col-md-4">
                                 @if(isset($kejuruan) && $kejuruan->ruangan)
                                 <p>
-                                    {!! Html::image(asset('img/'.$kejuruan->ruangan),null,['class'=>'img-rounded img-responsive']) !!}
+                                    {!! Html::image(asset('img/'.$kejuruan->ruangan),null,['class'=>'img-rounded img-responsive','style'=>'height:200px']) !!}
                                 </p>
                                 @endif
                                     <input type="file" name="ruangan" class="btn btn-default btn-block"></input>
@@ -145,7 +149,7 @@
                                 <div class="col-md-4">
                                 @if(isset($kejuruan) && $kejuruan->siswa)
                                 <p>
-                                    {!! Html::image(asset('img/'.$kejuruan->siswa),null,['class'=>'img-rounded img-responsive']) !!}
+                                    {!! Html::image(asset('img/'.$kejuruan->siswa),null,['class'=>'img-rounded img-responsive','style'=>'height:200px']) !!}
                                 </p>
                                 @endif
                                     <input type="file" name="siswa" class="btn btn-default btn-block"></input>
@@ -160,6 +164,7 @@
                                 </div>
                             </div>
                 {!! Form::close() !!}
+                </div>
             </div>
           </div>
           <!-- /.box -->

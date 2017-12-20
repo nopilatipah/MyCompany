@@ -62,14 +62,17 @@
           </ul>
         </li>
         
+        @php
+        $pes = App\Pesan::where('status','=',0)->count();
+        @endphp
         <li>
           <a href="{{ route('pesan.index') }}">
             <i class="fa fa-envelope"></i> <span>Pesan</span>
+            @if($pes > 0)
             <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
+              <small class="label pull-right bg-yellow">{{$pes}}</small>
             </span>
+            @endif
           </a>
         </li>
         
@@ -97,13 +100,13 @@
                 <small>SMK Assalaam Bandung</small>
                 
               </h3>
-              <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modal-info">
+              <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal-info">
               <span class="fa fa-plus"></span>
-                Tambah Fasilitas
+                &nbsp &nbsp Tambah Fasilitas
               </button> 
-              <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#kategori">
+              <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#kategori">
               <span class="fa fa-list"></span>
-                Kategori
+                &nbsp &nbsp Kategori
               </button> 
               <hr>
             </div>
@@ -113,9 +116,9 @@
               @php
               $kat = App\KategoriFasilitas::all();
               @endphp
-              <a href="{{route('fasilitas.index')}}" class="btn btn-info">Semua</a>
+              <a href="{{route('fasilitas.index')}}" class="btn btn-info btn-sm">Semua</a>
               @foreach($kat as $kt)
-              <a href="{{url('/admin/fasilitass',$kt->id)}}" class="btn btn-info">{{$kt->nama}}</a>
+              <a href="{{url('/admin/fasilitass',$kt->id)}}" class="btn btn-sm btn-info">{{$kt->nama}}</a>
               @endforeach
               
               <div class="col-md-10 col-md-offset-1">

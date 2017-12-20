@@ -36,7 +36,7 @@ class KatFasilitasController extends Controller
     public function store(Request $request)
     {
         $kategori = KategoriFasilitas::create($request->all());
-        alert()->success('Kategori Fasilitas Tersimpan')->autoclose(3500);
+        alert()->success('Kategori Tersimpan')->autoclose(3500);
         return redirect()->route('fasilitas.index');
     }
 

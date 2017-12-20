@@ -14,7 +14,7 @@ class PrestasiController extends Controller
      */
     public function index()
     {
-        $kejuruans = Prestasi::all();
+        $kejuruans = Prestasi::paginate(5);
         return view('backend.prestasi.index', compact('kejuruans'));
     }
 
@@ -55,7 +55,7 @@ class PrestasiController extends Controller
  
         $prestasi->save();
         // dd($prestasi);
-        alert()->success('Tersimpan')->autoclose(3500);
+        alert()->success('Prestasi Tersimpan')->autoclose(3500);
         return redirect()->route('prestasi.index');
     }
 
@@ -90,7 +90,34 @@ class PrestasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ekskul = Ekskul::find($id);
+        $ekskul->update($request->all());
+        if ($request->has('keterangan')){
+        $ekskul->keterangan = $request->keterangan;
+        }
+        if($request->hasFile('gambar'))
+        {
+            $filename=null;
+            $uploaded_gambar=$request->file('gambar');
+            $extension=$uploaded_gambar->getClientOriginalExtension();
+            $filename=md5(time()).'.'.$extension;
+            $destinationPath=public_path().DIRECTORY_SEPARATOR.'img';
+            $uploaded_gambar->move($destinationPath, $filename);
+            if($ekskul->gambar)
+            {
+                $old_gambar=$ekskul->gambar;
+                $filepath=public_path().DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$ekskul->gambar;
+                try {
+                    File::delete($filepath);
+                } catch(FileNotFoundException $e) {
+
+                }
+            }
+            $ekskul->gambar=$filename;
+            $ekskul->save();
+        }
+        alert()->success('Perubahan Tersimpan')->autoclose(3500);
+        return redirect()->route('prestasi.index');
     }
 
     /**
@@ -101,6 +128,10 @@ class PrestasiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Prestasi::findOrFail($id);
+        $user->delete();
+            alert()->success('Prestasi Terhapus')->autoclose(3500);
+
+        return redirect()->route('prestasi.index');
     }
 }

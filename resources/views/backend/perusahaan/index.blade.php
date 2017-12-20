@@ -62,14 +62,17 @@
           </ul>
         </li>
         
+        @php
+        $pes = App\Pesan::where('status','=',0)->count();
+        @endphp
         <li>
           <a href="{{ route('pesan.index') }}">
             <i class="fa fa-envelope"></i> <span>Pesan</span>
+            @if($pes > 0)
             <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
+              <small class="label pull-right bg-yellow">{{$pes}}</small>
             </span>
+            @endif
           </a>
         </li>
         
@@ -96,9 +99,9 @@
                 <small>Kerja Sama</small>
                 
               </h3>
-              <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modal-info">
+              <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal-info">
               <span class="fa fa-plus"></span>
-                Tambah Perusahaan
+               &nbsp &nbsp Tambah Perusahaan
               </button> 
               <hr>
             </div>
@@ -239,7 +242,7 @@
                     <div class="form-group{{ $errors->has('nama') ? 'has-error' : '' }}">
                       {!! Form::label('nama','Nama Perusahaan *',['class'=>'col-md-4']) !!}
                       <div class="col-md-8">
-                        {!! Form::text('nama',null,['class'=>'form-control','required']) !!}
+                        {!! Form::text('nama',null,['class'=>'form-control','required','placeholder'=>'Contoh : PT. Putra Jaya']) !!}
                         {!! $errors->first('nama', '<p class="help-block">:message</p>') !!}
                       </div>
                     </div>

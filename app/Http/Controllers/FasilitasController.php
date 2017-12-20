@@ -65,7 +65,7 @@ class FasilitasController extends Controller
  
         $fasilitas->save();
         // dd($fasilitas);
-        alert()->success('Fasilitas Berhasil Ditambahkan')->autoclose(3500);
+        alert()->success('Fasilitas Tersimpan')->autoclose(3500);
         return redirect()->route('fasilitas.index');
     }
 

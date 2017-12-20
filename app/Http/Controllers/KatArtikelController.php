@@ -36,7 +36,7 @@ class KatArtikelController extends Controller
     public function store(Request $request)
     {
         $kategori = KategoriArtikel::create($request->all());
-        alert()->success('Kategori Artikel Tersimpan')->autoclose(3500);
+        alert()->success('Kategori Tersimpan')->autoclose(3500);
         return redirect()->route('artikel.index');
     }
 
@@ -82,6 +82,10 @@ class KatArtikelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $member = KategoriArtikel::find($id);
+        $member->delete();
+        alert()->success('Kategori Terhapus')->autoclose(3500);
+
+        return redirect()->route('artikel.index');
     }
 }

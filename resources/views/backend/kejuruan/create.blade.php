@@ -49,14 +49,17 @@
           </ul>
         </li>
         
+        @php
+        $pes = App\Pesan::where('status','=',0)->count();
+        @endphp
         <li>
           <a href="{{ route('pesan.index') }}">
             <i class="fa fa-envelope"></i> <span>Pesan</span>
+            @if($pes > 0)
             <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
+              <small class="label pull-right bg-yellow">{{$pes}}</small>
             </span>
+            @endif
           </a>
         </li>
         
@@ -83,6 +86,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
+              <div class="col-md-10 col-md-offset-1">
                 {!! Form::open(['url'=>route('kejuruan.store'), 'method'=>'post', 'files'=>'true', 'enctype'=>'multipart/form-data', 'class'=>'form-horizontal']) !!}
                    
                             
@@ -146,6 +150,7 @@
                                 </div>
                             </div>
                 {!! Form::close() !!}
+                </div>
             </div>
           </div>
           <!-- /.box -->

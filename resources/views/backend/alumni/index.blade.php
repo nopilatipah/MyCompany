@@ -1,6 +1,19 @@
 @extends('layouts.admin')
 
 @section('header')
+<style type="text/css">
+  .custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+.custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
+</style>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -49,14 +62,17 @@
           </ul>
         </li>
         
+        @php
+        $pes = App\Pesan::where('status','=',0)->count();
+        @endphp
         <li>
           <a href="{{ route('pesan.index') }}">
             <i class="fa fa-envelope"></i> <span>Pesan</span>
+            @if($pes > 0)
             <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
+              <small class="label pull-right bg-yellow">{{$pes}}</small>
             </span>
+            @endif
           </a>
         </li>
         
@@ -84,29 +100,153 @@
                 <small>SMK Assalaam Bandung</small>
                 
               </h3>
-              <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modal-info">
+              <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal-info">
               <span class="fa fa-plus"></span>
-                Tambah Testimoni
+                &nbsp &nbsp Tambah Testimoni
               </button> 
               <hr>
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
 
-              <div class="col-md-4 col-sm-6">
-                                    <div class="block-text rel zmin">
-                                        <a title="" href="#">Emergency Contraception</a>
-                                        
-                                        <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
-                                        <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-                                    </div>
-                                    <div class="person-text rel text-light">                    
-                                        <img src="{{ asset('/Frontend/Medicio/img/testimonials/1.jpg') }}" alt="" class="person img-circle" />
-                                        <a title="" href="#">Anna</a>
-                                        <span>Chicago, Illinois</span>
-                                    </div>
+              @php
+              $kat = App\Kejuruan::all();
+              @endphp
+              <a href="{{route('alumni.index')}}" class="btn btn-sm btn-info">Semua</a>
+              @foreach($kat as $kt)
+              <a href="{{url('/admin/alumnis',$kt->nama)}}" class="btn btn-sm btn-info">{{$kt->nama}}</a>
+              @endforeach
+              
+              <div class="col-md-10 col-md-offset-1">
+               <!-- tabel akun -->
+               <table class="table table-striped custab">
+                  <thead>
+                  
+                      <tr>
+                   <th>No</th>
+                   <th>Foto Alumni</th>
+                   <th>Nama</th>
+                   <th>Pekerjaan</th>
+                   <th>Testimoni</th>
+                   <th colspan="2">Opsi</th>
+                  </tr>
+                  @php
+                  $no = 1;
+                  @endphp
+                  @foreach($alumni as $data)
+                  <tr>
+                    <td>{{$no}}</td>
+                    <td><img src="{{asset('img/'.$data->foto)}}" class="img-responsive img-thumbnail" alt="" style="height: 40px;"></td>
+                    <td>{{$data->nama}}</td>
+                    <td>{{$data->pekerjaan}}</td>
+                    <td>{!! str_limit($data->testimoni, 30) !!}</td>
+                    <td>
+                    <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit{{$data->id}}">
+                    <span class="fa fa-edit"></span>
+                      Ubah
+                    </button>
+                    <div class="modal modal-warning fade" id="edit{{$data->id}}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Ubah Testimoni</h4>
+                          </div>
+                          <div class="modal-body">
+                            {!! Form::model($data,['url'=>route('alumni.update',$data->id), 'method'=>'put', 'files'=>'true','class'=>'form-horizontal']) !!}
+                                
+                                <div class="form-group{{ $errors->has('nama') ? 'has-error' : '' }}">
+                                  {!! Form::label('name','Nama Ekstrakurikuler *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::text('nama',null,['class'=>'form-control','required','placeholder'=>'Contoh : Nopi Latipah']) !!}
+                                    {!! $errors->first('nama', '<p class="help-block">:message</p>') !!}
+                                  </div>
                                 </div>
+
+                                <div class="form-group{{ $errors->has('kejuruan') ? 'has-error' : '' }}">
+                                  {!! Form::label('kejuruan','Kejuruan *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    <select name="kejuruan" class="js-selectize" placeholder="Pilih Kejuruan" required="">
+                                    <option></option>
+                                      @php
+                                        $hak = App\Kejuruan::all();
+                                        $kj = DB::table('alumnis')->where('kejuruan',$data->kejuruan)->first();
+                                      @endphp
+                                      @foreach($hak as $kk)
+                                      <option value="{{$kk->nama}}" <?php if($kk->nama == $kj->kejuruan) echo 'selected' ?>>{{$kk->nama}}</option>
+                                      @endforeach
+                                    </select>
+                                    {!! $errors->first('kejuruan', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                                
+                                <div class="form-group{{ $errors->has('pekerjaan') ? 'has-error' : '' }}">
+                                  {!! Form::label('name','Pekerjaan *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::text('pekerjaan',null,['class'=>'form-control','required','placeholder'=>'Contoh : Programmer']) !!}
+                                    {!! $errors->first('pekerjaan', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('testimoni') ? 'has-error' : '' }}">
+                                  {!! Form::label('name','Testimoni *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::textarea('testimoni',null,['class'=>'form-control','required','size'=>'5x3']) !!}
+                                    {!! $errors->first('testimoni', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                                
+                                <div class="form-group{{ $errors->has('foto') ? 'has-error' : '' }}">
+                            {!! Form::label('foto','Foto Alumni *',['class'=>'col-md-4']) !!}
+                                <div class="col-md-8">
+                                @if(isset($data) && $data->foto)
+                                <p>
+                                    {!! Html::image(asset('img/'.$data->foto),null,['class'=>'img-rounded img-responsive','style'=>'height:130px']) !!}
+                                </p>
+                                @endif
+                                    <input type="file" name="foto" class="btn btn-default btn-block"></input>
+                                    {!! $errors->first('foto','<p class="help-block">:message</p>') !!}
+                                    <font color="white" size="2">* Disarankan : Ukuran 250 x 250 px (Maksimal 1.5 Mb)</font>
+                                </div>
+                            </div>
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>
+                              {!! Form::submit('Simpan', ['class'=>'btn btn-warning']) !!}
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                            <!-- /.modal-content -->
+                      </div>
+                          <!-- /.modal-dialog -->
+                    </div></td>
+                    {!! Form::model($data, ['url'=>route('alumni.destroy',$data->id), 'method'=>'delete', 'id'=>'myform']) !!}
+                    {!! Form::close() !!}
+                    <td>
+                    <button id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+                    </td>
+                    
+                  </tr>
+
+
+                  @php
+                  $no++;
+                  @endphp
+
+                  @endforeach
+                  </thead>
+                         
+                  </table>
+                <div class="pull-right">
+                {{ $alumni->links() }}
+                </div>
+            </div>
              
+            </div>
+            </div>
+          </div>
+              
             </div>
           </div>
           <!-- /.box -->
@@ -123,36 +263,61 @@
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Tambah Prestasi Baru</h4>
+                <h4 class="modal-title">Tambah Testimoni Baru</h4>
               </div>
               <div class="modal-body">
-                {!! Form::open(['url'=>route('prestasi.store'), 'method'=>'post', 'files'=>'true','class'=>'form-horizontal']) !!}
-                    <div class="form-group{{ $errors->has('judul') ? 'has-error' : '' }}">
-                      {!! Form::label('judul','Judul Prestasi *',['class'=>'col-md-12']) !!}
-                      <div class="col-md-12">
-                        {!! Form::text('judul',null,['class'=>'form-control','required']) !!}
-                        {!! $errors->first('judul', '<p class="help-block">:message</p>') !!}
+                {!! Form::open(['url'=>route('alumni.store'), 'method'=>'post', 'files'=>'true','class'=>'form-horizontal']) !!}
+                    <div class="form-group{{ $errors->has('nama') ? 'has-error' : '' }}">
+                      {!! Form::label('nama','Nama Alumni *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::text('nama',null,['class'=>'form-control','required','placeholder'=>'Contoh : Nopi Latipah']) !!}
+                        {!! $errors->first('nama', '<p class="help-block">:message</p>') !!}
                       </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('keterangan') ? 'has-error' : '' }}">
-                      {!! Form::label('keterangan','Keterangan Prestasi *',['class'=>'col-md-12']) !!}
-                      <div class="col-md-12">
-                        {!! Form::textarea('keterangan',null,['class'=>'form-control']) !!}
-                        {!! $errors->first('keterangan', '<p class="help-block">:message</p>') !!}
+                    <div class="form-group{{ $errors->has('kejuruan') ? 'has-error' : '' }}">
+                                  {!! Form::label('kejuruan','Kejuruan *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    <select name="kejuruan" class="js-selectize" placeholder="Pilih Kejuruan" required="">
+                                    <option></option>
+                                      @php
+                                        $hak = App\Kejuruan::all();
+                                      @endphp
+                                      @foreach($hak as $data)
+                                      <option value="{{$data->nama}}">{{$data->nama}}</option>
+                                      @endforeach
+                                    </select>
+                                    {!! $errors->first('rore', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+
+                    <div class="form-group{{ $errors->has('pekerjaan') ? 'has-error' : '' }}">
+                      {!! Form::label('pekerjaan','Pekerjaan *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::text('pekerjaan',null,['class'=>'form-control','required','placeholder'=>'Contoh : Programmer']) !!}
+                        {!! $errors->first('pekerjaan', '<p class="help-block">:message</p>') !!}
                       </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('gambar') ? 'has-error' : '' }}">
-                      {!! Form::label('gambar','Foto Prestasi *',['class'=>'col-md-12']) !!}
-                        <div class="col-md-6">
-                          @if(isset($prestasi) && $prestasi->gambar)
+                    <div class="form-group{{ $errors->has('testimoni') ? 'has-error' : '' }}">
+                      {!! Form::label('testimoni','Testimoni *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::textarea('testimoni',null,['class'=>'form-control','size'=>'5x3']) !!}
+                        {!! $errors->first('testimoni', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('foto') ? 'has-error' : '' }}">
+                      {!! Form::label('foto','Foto Alumni *',['class'=>'col-md-4']) !!}
+                        <div class="col-md-8">
+                          @if(isset($prestasi) && $prestasi->foto)
                             <p>
-                              {!! Html::image(asset('img/'.$prestasi->gambar),null,['class'=>'img-rounded img-responsive']) !!}
+                              {!! Html::image(asset('img/'.$prestasi->foto),null,['class'=>'img-rounded img-responsive']) !!}
                             </p>
                           @endif
-                          <input type="file" name="gambar" class="btn btn-default btn-block" required=""></input>
-                          {!! $errors->first('gambar','<p class="help-block">:message</p>') !!}
+                          <input type="file" name="foto" class="btn btn-default btn-block" required=""></input>
+                          {!! $errors->first('foto','<p class="help-block">:message</p>') !!}
+                          <font color="white" size="2">* Disarankan : Ukuran 250 x 250 px (Maksimal 1.5 Mb)</font>
                         </div>
                     </div>
                 
@@ -167,6 +332,20 @@
           </div>
           <!-- /.modal-dialog -->
         </div>
-  
+<script type="text/javascript">
+  $('button#delete').on('click', function(){
+  swal({   
+    title: "Apakah Anda Yakin ?",
+    text: "Anda Tidak Dapat Mengembalikan Data Testimoni !",         type: "warning",   
+    showCancelButton: true,   
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Ya, Hapus Testimoni !", 
+    closeOnConfirm: false 
+  }, 
+       function(){   
+    $("#myform").submit();
+  });
+})
+</script>
 @endsection
   

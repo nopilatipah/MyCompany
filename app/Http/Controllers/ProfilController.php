@@ -66,7 +66,7 @@ class ProfilController extends Controller
         }
 
 
-        alert()->success('Perubahan Berhasil Disimpan')->autoclose(3500);
+        alert()->success('Perubahan Tersimpan')->autoclose(3500);
         return redirect()->route('profil.edit',1)->with(compact('profils'));
     }
 

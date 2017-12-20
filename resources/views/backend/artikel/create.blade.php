@@ -59,14 +59,17 @@
           </ul>
         </li>
         
+        @php
+        $pes = App\Pesan::where('status','=',0)->count();
+        @endphp
         <li>
           <a href="{{ route('pesan.index') }}">
             <i class="fa fa-envelope"></i> <span>Pesan</span>
+            @if($pes > 0)
             <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
+              <small class="label pull-right bg-yellow">{{$pes}}</small>
             </span>
+            @endif
           </a>
         </li>
         
@@ -93,6 +96,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body pad">
+              <div class="col-md-10 col-md-offset-1">
                 {!! Form::open(['url'=>route('artikel.store'), 'method'=>'post', 'files'=>'true', 'enctype'=>'multipart/form-data', 'class'=>'form-horizontal']) !!}
                    
                             
@@ -100,32 +104,26 @@
                             <div>
                                 {!! Form::label('judul','Judul Artikel *',['class'=>'col-md-3']) !!}
                             </div>
-                                <div class="col-md-6">
-                                    {!! Form::text('judul',null,['class'=>'form-control']) !!}
+                                <div class="col-md-9">
+                                    {!! Form::text('judul',null,['class'=>'form-control','required','placeholder'=>'Contoh : Memperingati Hari Sumpah Pemuda']) !!}
                                     {!! $errors->first('judul','<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <br>
 
-                            <div class="form-group{{ $errors->has('kategori_id') ? 'has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('kategori_id','tgl_kegiatan') ? 'has-error' : '' }}">
                               {!! Form::label('kategori_id','Kategori *',['class'=>'col-md-3']) !!}
-                              <div class="col-md-6">
+                              <div class="col-md-3">
                                 {!! Form::select('kategori_id',App\KategoriArtikel::pluck('nama','id')->all(),null,['class'=>'js-selectize','placeholder'=>'Pilih Kategori']) !!}
                                 {!! $errors->first('kategori_id', '<p class="help-block">:message</p>') !!}
                               </div>
-                            </div>
-                            <br>
-
-                            <div class="form-group{{ $errors->has('tgl_kegiatan') ? 'has-error' : '' }}">
-                            <div>
-                                {!! Form::label('tgl_kegiatan','Tanggal Kegiatan *',['class'=>'col-md-3']) !!}
-                            </div>
-                                <div class="col-md-6">
+                              {!! Form::label('tgl_kegiatan','Tgl Kegiatan *',['class'=>'col-md-2 col-md-offset-1']) !!}
+                              <div class="col-md-3">
                                     {!! Form::text('tgl_kegiatan',null,['class'=>'form-control']) !!}
                                     {!! $errors->first('tgl_kegiatan','<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <br>
+                            
+
                         
                             <div class="form-group{{ $errors->has('konten') ? 'has-error' : '' }}">
                             {!! Form::label('konten','Konten Artikel *',['class'=>'col-md-6']) !!}
@@ -150,16 +148,7 @@
                             </div>
                             <br>
 
-                            <div class="form-group">
-
-                              {!! Form::label('tags','Tags *',['class'=>'col-md-6']) !!}
-
-                              <div class="col-md-12">
-                                    {!! Form::text('tags',null,['data-role'=>'tagsinput']) !!}
-                                    {!! $errors->first('tags','<p class="help-block">:message</p>') !!}
-                                </div>
-
-                            </div>   
+                           
 
                             <hr>
                             <div class="form-group">
@@ -169,6 +158,7 @@
                             </div>
                 {!! Form::close() !!}
             </div>
+          </div>
           </div>
           <!-- /.box -->
         </div>
