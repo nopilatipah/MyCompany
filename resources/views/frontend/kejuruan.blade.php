@@ -25,12 +25,6 @@
 
 @section('content') 
 
-    <link rel="stylesheet" type="text/css" href="{{asset('Modal/bootstrap/css/bootstrap.min.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('Modal/font-awesome/css/font-awesome.min.css')}}" />
-
-    <script type="text/javascript" src="{{asset('Modal/js/jquery-1.10.2.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('Modal/bootstrap/js/bootstrap.min.js')}}"></script>
-
 <br><br><br><br><br><br>
 @foreach($kejuruan as $data)
         
@@ -51,21 +45,16 @@
                     </div>
                     <hr>
                     <p align="justify">{!!$data->profil!!}</p>
+                    <h3>Program Pembelajaran</h3>
+                    <p>{!!$data->program!!}</p>
                 </div>
-                <button class="btn btn-skin btn-lg pull-right" type="button" data-toggle="collapse" data-target="#collapseExample{{$data->id}}" aria-expanded="false" aria-controls="collapseExample{{$data->id}}">Program Pembelajaran</button>
+                
             </div>
             
-        </div>      
+        </div>
+        <hr>      
         </div>
     </section>
-
-    <div class="collapse" id="collapseExample{{$data->id}}">
-        <section id="service" class="home-section nopadding paddingtop-60">
-
-            
-        </section>
-    </div>
-
 @endforeach
 <section id="service" class="home-section nopadding paddingtop-60">
 <br>       

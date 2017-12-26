@@ -12,6 +12,8 @@ use App\Komponen;
 use App\Profil;
 use App\Kontak;
 use App\Kejuruan;
+use App\Ekskul;
+use App\Fasilitas;
 
 class FrontController extends Controller
 {
@@ -40,12 +42,16 @@ class FrontController extends Controller
 
     public function fasilitas()
     {
-        return view('frontend.fasilitas');
+        $komponen = Komponen::find(1);
+        $fasilitas = Fasilitas::all();
+        return view('frontend.fasilitas',compact('fasilitas','komponen'));
     }
 
     public function ekskul()
     {
-        return view('frontend.ekskul');
+        $komponen = Komponen::find(1);
+        $ekskul = Ekskul::all();
+        return view('frontend.ekskul',compact('ekskul','komponen'));
     }
 
     public function prestasi()
