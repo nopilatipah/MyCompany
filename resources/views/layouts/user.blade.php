@@ -1,3 +1,6 @@
+@php
+$komponen = App\Komponen::find(1);
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +11,8 @@
     <meta name="author" content="">
 
     <title>SMK Assalaam</title>
+
+    <link rel="shortcut icon" href="{{ asset('img/'.$komponen->logo) }}">
     
     <!-- css -->
     <link href="{{ asset('Frontend/Medicio/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">

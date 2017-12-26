@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('navbar')
-			<!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
               <ul class="nav navbar-nav">
                 <li><a href="{{url('/')}}">Beranda</a></li>
@@ -12,7 +12,6 @@
                     <li><a href="{{url('/kejuruan')}}">Kejuruan</a></li>
                     <li class="active"><a href="{{url('/fasilitas')}}">Fasilitas</a></li>
                     <li><a href="{{url('/ekstrakurikuler')}}">Ekstrakurikuler</a></li>
-                    <li><a href="{{url('/prestasi')}}">Prestasi</a></li>
                   </ul>
                 </li>
                 <li><a href="{{url('/berita')}}">Berita</a></li>

@@ -1,6 +1,9 @@
 @extends('layouts.user')
 
 @section('navbar')
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmOH1T0Znrn7UqKm8mxNU0c4au_SWIFo&amp;libraries=places"></script>
 			<!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
               <ul class="nav navbar-nav">
@@ -12,7 +15,6 @@
                     <li><a href="{{url('/kejuruan')}}">Kejuruan</a></li>
                     <li><a href="{{url('/fasilitas')}}">Fasilitas</a></li>
                     <li><a href="{{url('/ekstrakurikuler')}}">Ekstrakurikuler</a></li>
-                    <li><a href="{{url('/prestasi')}}">Prestasi</a></li>
                   </ul>
                 </li>
                 <li><a href="{{url('/berita')}}">Berita</a></li>
@@ -25,11 +27,31 @@
 @endsection
  
 @section('content')
-<br><br><br><br><br><br>
+<style>
+  #map-canvas{
+    width: 1080px;
+    height: 400px;
+  }
+</style>
+
+<br><br><br><br><br>
 <section id="callaction" class="home-section paddingtop-40">    
            <div class="container">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="col-lg-8 col-lg-offset-2">
+                    <div class="wow lightSpeedIn" data-wow-delay="0.1s">
+                    <div class="section-heading text-center">
+                    <h2 class="h-bold">Lokasi <b>{{$komponen->nama_sekolah}}</b></h2>
+                    <p>{{$vendor->lokasi}}</p>
+                    </div>
+                    </div>
+                    <div class="divider-short"></div>
+                    </div><br>
+                        <center>
+                        <div id="map-canvas"></div>
+                        </center>
+                        <br><br>
                         <div class="callaction bg-gray">
                             <div class="row">
                                 <div class="col-md-8">
@@ -86,11 +108,35 @@
                                 <!-- /.row -->
                                 </div>
                             {!! Form::close() !!}
-                        </div>
+                        </div><br><br>
+                    
                     </div>
                 </div>
             </div>
             <br><br>
     </section>
+
+<script>
+
+      var lat = {{ $vendor->lat }};
+      var lng = {{ $vendor->lng }};
+
+      var map = new google.maps.Map(document.getElementById('map-canvas'),{
+        center:{
+          lat: lat,
+          lng: lng
+        },
+        zoom:15
+      });
+
+      var marker = new google.maps.Marker({
+        position: {
+          lat: lat,
+          lng: lng
+        },
+        map: map
+      });
+      
+    </script>
 
 @endsection

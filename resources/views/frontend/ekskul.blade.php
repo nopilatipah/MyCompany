@@ -12,7 +12,6 @@
                     <li><a href="{{url('/kejuruan')}}">Kejuruan</a></li>
                     <li><a href="{{url('/fasilitas')}}">Fasilitas</a></li>
                     <li class="active"><a href="{{url('/ekstrakurikuler')}}">Ekstrakurikuler</a></li>
-                    <li><a href="{{url('/prestasi')}}">Prestasi</a></li>
                   </ul>
                 </li>
                 <li><a href="{{url('/berita')}}">Berita</a></li>

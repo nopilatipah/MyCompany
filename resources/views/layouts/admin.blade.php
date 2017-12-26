@@ -1,9 +1,13 @@
+@php
+$komponen = App\Komponen::find(1);
+@endphp
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>SMK Assalaam</title>
+  <link rel="shortcut icon" href="{{ asset('img/'.$komponen->logo) }}">
 
   <script type="text/javascript" src="{{ asset('ckeditor/ckeditor.js') }}"></script>
   <!-- Tell the browser to be responsive to screen width -->

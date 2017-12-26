@@ -12,7 +12,6 @@
                     <li class="active"><a href="{{url('/kejuruan')}}">Kejuruan</a></li>
                     <li><a href="{{url('/fasilitas')}}">Fasilitas</a></li>
                     <li><a href="{{url('/ekstrakurikuler')}}">Ekstrakurikuler</a></li>
-                    <li><a href="{{url('/prestasi')}}">Prestasi</a></li>
                   </ul>
                 </li>
                 <li><a href="{{url('/berita')}}">Berita</a></li>
@@ -24,39 +23,51 @@
             <!-- /.navbar-collapse -->
 @endsection
 
-@section('content')
+@section('content') 
 
-    
+    <link rel="stylesheet" type="text/css" href="{{asset('Modal/bootstrap/css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('Modal/font-awesome/css/font-awesome.min.css')}}" />
+
+    <script type="text/javascript" src="{{asset('Modal/js/jquery-1.10.2.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('Modal/bootstrap/js/bootstrap.min.js')}}"></script>
+
+<br><br><br><br><br><br>
+@foreach($kejuruan as $data)
         
-    <!-- Section: works -->
-    <section id="facilities" class="home-section paddingbot-60">
-    <br>
-        <div class="container marginbot-50">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="wow fadeInDown" data-wow-delay="0.1s">
-                    <div class="section-heading">
-                    <h2 class="h-bold">Kejuruan {{$komponen->nama_sekolah}}</h2>
-                    </div>
-                    </div>
-                    <hr>
-                </div>
-            </div>
-        </div>
+    <section id="service" class="home-section nopadding paddingtop-60">
 
         <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12" >
-                    <div class="wow bounceInUp" data-wow-delay="0.2s">
-                    <div id="owl-works" class="owl-carousel">
-                        @foreach($kejuruan as $data)
-                        <div class="item"><a href="{{ url('/detail-kejuruan',$data->id) }}" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="{{ asset('img/'.$data->siswa) }}" class="img-responsive" alt="img"></a></div>
-                        @endforeach
-                    </div>
-                    </div>
+
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="wow fadeInUp" data-wow-delay="0.2s">
+                <img src="{{ asset('img/'.$data->siswa) }}" class="img-responsive" alt="" />
                 </div>
             </div>
+            <div class="col-sm-7">
+                <div class="wow fadeInDown" data-wow-delay="0.1s">
+                    <div class="section-heading">
+                    <h2 class="h-bold">{{$data->nama}}</h2>
+                    </div>
+                    <hr>
+                    <p align="justify">{!!$data->profil!!}</p>
+                </div>
+                <button class="btn btn-skin btn-lg pull-right" type="button" data-toggle="collapse" data-target="#collapseExample{{$data->id}}" aria-expanded="false" aria-controls="collapseExample{{$data->id}}">Program Pembelajaran</button>
+            </div>
+            
+        </div>      
         </div>
     </section>
-    <!-- /Section: works -->
+
+    <div class="collapse" id="collapseExample{{$data->id}}">
+        <section id="service" class="home-section nopadding paddingtop-60">
+
+            
+        </section>
+    </div>
+
+@endforeach
+<section id="service" class="home-section nopadding paddingtop-60">
+<br>       
+</section>
 @endsection

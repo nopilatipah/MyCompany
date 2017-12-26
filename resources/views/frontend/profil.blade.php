@@ -12,7 +12,6 @@
                     <li><a href="{{url('/kejuruan')}}">Kejuruan</a></li>
                     <li><a href="{{url('/fasilitas')}}">Fasilitas</a></li>
                     <li><a href="{{url('/ekstrakurikuler')}}">Ekstrakurikuler</a></li>
-                    <li><a href="{{url('/prestasi')}}">Prestasi</a></li>
                   </ul>
                 </li>
                 <li><a href="{{url('/berita')}}">Berita</a></li>
@@ -69,7 +68,7 @@
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
                         <div class="box text-center">
                             
-                            <img src="{{asset('img/ms5.png')}}" class="img img-responsive">
+                            <img src="{{asset('img/ms2.png')}}" class="img img-responsive">
                         </div>
                     </div>
                 </div>

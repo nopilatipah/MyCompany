@@ -40,13 +40,25 @@ class KejuruansSeeder extends Seeder
         $pers = new Perusahaan();
         $pers->nama = "PT. Honda";
         $pers->kejuruan_id = "1";
-        $pers->logo = "logo1.png";
+        $pers->logo = "logo2.png";
         $pers->save();
 
         $pers2 = new Perusahaan();
-        $pers2->nama = "PT. Yamaha";
+        $pers2->nama = "PT. Belogix";
         $pers2->kejuruan_id = "2";
-        $pers2->logo = "logo2.png";
+        $pers2->logo = "logo1.png";
         $pers2->save();
+
+        $pers3 = new Perusahaan();
+        $pers3->nama = "PT. Len";
+        $pers3->kejuruan_id = "2";
+        $pers3->logo = "logo3.png";
+        $pers3->save();
+
+        $pers5 = new Perusahaan();
+        $pers5->nama = "PT. Mitsubishi";
+        $pers5->kejuruan_id = "2";
+        $pers5->logo = "mitsubishi.png";
+        $pers5->save();
     }
 }

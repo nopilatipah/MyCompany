@@ -1,6 +1,73 @@
-@extends('layouts.app')
+@php
+$komponen = App\Komponen::find(1);
+@endphp
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Masuk Sebagai Admin</title>
+    <link rel="stylesheet" href="{{ asset('css/log.css') }}">
+    <link rel="shortcut icon" href="{{ asset('img/'.$komponen->logo) }}">
+</head>
+<body>
 
-@section('content')
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active">  </h2>
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="{{ asset('img/'.$komponen->logo) }}" id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
+    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+    {{ csrf_field() }}
+      <input type="email" id="login" class="fadeIn second" name="email" placeholder="Alamat E-Mail">
+      <br>
+      @if ($errors->has('email'))
+        <span class="help-block">
+            <strong>{{ $errors->first('email') }}</strong>
+        </span>
+      @endif
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Kata Sandi">
+      <br>
+      @if ($errors->has('password'))
+        <span class="help-block">
+            <strong>{{ $errors->first('password') }}</strong>
+        </span>
+      @endif
+      <input type="submit" class="fadeIn fourth" value="Masuk">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="{{ route('password.request') }}">Lupa Kata Sandi</a>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -65,5 +132,4 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
+</div> -->
