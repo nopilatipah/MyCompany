@@ -21,6 +21,7 @@ class CreateArtikelsTable extends Migration
             $table->text('konten');
             $table->string('foto')->nullable()->default('default.png');
             $table->string('author');
+            $table->integer('author_id');
             $table->integer('views')->nullable()->default('0');
             $table->integer('like')->nullable()->default('0');
             $table->integer('unlike')->nullable()->default('0');

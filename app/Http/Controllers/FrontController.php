@@ -14,6 +14,9 @@ use App\Kontak;
 use App\Kejuruan;
 use App\Ekskul;
 use App\Fasilitas;
+use App\Notifications\NotifyPostOwner;
+use App\User;
+use Vinkla\Instagram\Instagram;
 
 class FrontController extends Controller
 {
@@ -61,20 +64,10 @@ class FrontController extends Controller
 
     public function galeri()
     {
-        $link = Kontak::find(5);
-        $items = [];
-
-        
-        $client = new \GuzzleHttp\Client;
-
-        $url = sprintf('https://www.instagram.com/smkassalaam/media');
-
-        $response = $client->get($url);
-
-        $items = json_decode((string) $response->getBody(), true)['items'];
-
-
-        return view('frontend.galeri',compact('items'));
+        $instagram = new Instagram('6754770736.1677ed0.a6499dbf6f3e40279017182e324b98ad');
+        $instagram->get();
+        dd($instagram);
+        return view('frontend.galeri',compact('instagram'));
     }
 
     public function berita()
@@ -191,6 +184,9 @@ class FrontController extends Controller
         $komentar->nama_belakang = $request->nama_belakang;
         $komentar->komentar = $request->komentar;
         $komentar->save();
+
+        $artikel = Artikel::find($request->id);
+        // User::find(1)->notify(new NotifyPostOwner($artikel));
 
         alert()->success('Komentar Terkirim')->autoclose(3500);
         return view('frontend.berita-lengkap', compact('berita'));

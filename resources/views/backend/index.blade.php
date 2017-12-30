@@ -24,12 +24,12 @@
           </a>
         </li>
 
+        @role('admin')
         <li>
           <a href="{{ route('akun.index') }}">
             <i class="fa fa-group"></i> <span>Akun Author</span>
           </a>
         </li>
-        
         <li class="treeview">
           <a href="#">
             <i class="fa fa-th-list"></i>
@@ -65,7 +65,40 @@
         
         <li class="header">KOMPONEN WEBSITE</li>
         <li><a href="{{ route('utama.index') }}"><i class="fa fa-laptop"></i> <span>Tampilan Utama</span></a></li>
-        <li><a href="#"><i class="fa fa-clone"></i> <span>Informasi Tambahan</span></a></li>
+        <li><a href="{{ route('info.index') }}"><i class="fa fa-clone"></i> <span>Informasi Tambahan</span></a></li>
+        @endrole
+
+        @role('artikel')
+        <li><a href="{{ route('artikel.index') }}"><i class="fa fa-laptop"></i> <span>Artikel</span></a></li>
+        <li><a href="{{ route('info.index') }}"><i class="fa fa-clone"></i> <span>Informasi Tambahan</span></a></li>
+        @php
+        $pes = App\Pesan::where('status','=',0)->count();
+        @endphp
+        <li>
+          <a href="{{ route('pesan.index') }}">
+            <i class="fa fa-envelope"></i> <span>Pesan</span>
+            @if($pes > 0)
+            <span class="pull-right-container">
+              <small class="label pull-right bg-yellow">{{$pes}}</small>
+            </span>
+            @endif
+          </a>
+        </li>
+        @endrole
+
+        @role('ekskul')
+        <li><a href="{{ route('ekskul.index') }}"><i class="fa fa-laptop"></i> <span>Ekstrakurikuler</span></a></li>
+        <li><a href="{{ route('prestasi.index') }}"><i class="fa fa-laptop"></i> <span>Prestasi</span></a></li>
+        @endrole
+
+        @role('fasilitas')
+        <li><a href="{{ route('fasilitas.index') }}"><i class="fa fa-laptop"></i> <span>Fasilitas</span></a></li>
+        @endrole
+
+        @role('kejuruan')
+        <li><a href="{{ route('kejuruan.index') }}"><i class="fa fa-laptop"></i> <span>Kejuruan</span></a></li>
+        <li><a href="{{ route('alumni.index') }}"><i class="fa fa-laptop"></i> <span>Testimoni</span></a></li>
+        @endrole
       </ul>
     </section>
     <!-- /.sidebar -->

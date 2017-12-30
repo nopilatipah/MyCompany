@@ -54,8 +54,10 @@ class ArtikelController extends Controller
             'foto'=>'image|max:20048']);
         
         $author = Auth::user()->name;
+        $author_id = Auth::user()->id;
         $artikel= new Artikel;
         $artikel->author = $author;
+        $artikel->author_id = $author_id;
         $artikel->judul = $request->judul;
         $artikel->konten = $request->konten;
         $artikel->tgl_kegiatan = $request->tgl_kegiatan;

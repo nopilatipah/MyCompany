@@ -17,7 +17,9 @@ Route::get('/kategori/{id}','FrontController@kategori');
 Route::post('/komentar','FrontController@komentar');
 Route::get('/galeri','FrontController@galeri');
 Route::get('/detail-kejuruan/{id}','FrontController@detailkejuruan');
-
+Route::get('/akun','AkunController@profil');
+Route::post('/akun/editpass','AkunController@updatePassword');
+Route::post('akun/editprofil','AkunController@editprofil');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -46,6 +48,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']], function(){
 	Route::resource('kontak','KontakController');
 	Route::resource('fasilitas','FasilitasController');
 	Route::resource('alumni','AlumniController');
+	Route::resource('info','InfoController');
 });
 
 Route::get('vendor/add', function()

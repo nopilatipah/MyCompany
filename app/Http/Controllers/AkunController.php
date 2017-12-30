@@ -43,6 +43,12 @@ class AkunController extends Controller
         //
     }
 
+    public function profil()
+    {
+        $user = Auth::user();
+        return view('backend.akun',compact('user'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -122,6 +128,29 @@ class AkunController extends Controller
         return redirect()->route('akun.index');
     }
 
+    public function editprofil(Request $request)
+    {
+        $user = Auth::user();
+        $this->validate($request, [
+            'name'=>'required|max:255',
+            'email'=>'required|unique:users,email,'.$user->id
+            ]);
+
+        $user->update($request->only('name','email'));
+
+        
+        $memberRole = DB::table('role_user')->where('user_id',$user->id)->first();
+        $Role = Role::where('id',$request->role)->first();
+        
+        $user->roles()->detach($memberRole->role_id);
+        $user->roles()->attach($request->role);
+
+        $user->akses = $Role->display_name;
+        $user->save();
+
+        alert()->success('Perubahan Tersimpan')->autoclose(3500);
+        return redirect('akun');    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -135,5 +164,22 @@ class AkunController extends Controller
             alert()->success('Akun Terhapus')->autoclose(3500);
 
         return redirect()->route('akun.index');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $user = Auth::user();
+        $this->validate($request,[
+            'password'=>'required|passcheck:'.$user->password,
+            'new_password'=>'required|confirmed|min:6',
+        ],
+        [
+            'password.passcheck'=>'Kata Sandi Lama Tidak Sesuai'
+        ]);
+        $user->password=bcrypt($request->get('new_password'));
+        $user->save();
+        
+        alert()->success('Kata Sandi Tersimpan')->autoclose(3500);
+        return redirect('akun');
     }
 }

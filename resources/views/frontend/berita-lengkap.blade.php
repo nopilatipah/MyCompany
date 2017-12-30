@@ -327,7 +327,7 @@ fieldset[disabled] .btn-template-main.active {
 @endsection
 
 @section('content')
-<br><br><br><br><br><br>
+<br><br><br><br><br>
 
         <section id="callaction" class="home-section paddingtop-40">    
             <div class="container">
@@ -396,7 +396,7 @@ fieldset[disabled] .btn-template-main.active {
                         <div class="row">
                           <div class="wow fadeInUp" data-wow-delay="0.1s">
                             <div class="col-md-2">
-                              <img src="{{ asset('img/default.png') }}" class="img-responsive img-circle">
+                              <img src="{{ asset('img/default.png') }}" class="img-responsive img-circle" style="height: 90px">
                             </div>
                           </div>
                           <div class="wow fadeInRight" data-wow-delay="0.1s">
