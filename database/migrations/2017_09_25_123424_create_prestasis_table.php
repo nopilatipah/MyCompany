@@ -17,7 +17,7 @@ class CreatePrestasisTable extends Migration
             $table->increments('id');
             $table->string('judul');
             $table->string('gambar');
-            $table->text('keterangan')->nullable();
+            $table->string('keterangan')->nullable()->default('-');
             $table->timestamps();
         });
     }

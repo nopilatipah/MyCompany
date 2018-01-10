@@ -4,7 +4,7 @@
 
 <style>
   #map-canvas{
-    width: 1080px;
+    width: 1070px;
     height: 400px;
   }
 

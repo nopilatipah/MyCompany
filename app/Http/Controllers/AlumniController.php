@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Alumni;
+use Illuminate\Support\Facades\File;
 
 class AlumniController extends Controller
 {
@@ -46,7 +47,7 @@ class AlumniController extends Controller
             'nama'=>'required|unique:alumnis,nama',
             'kejuruan'=>'required',
             'pekerjaan'=>'required',
-            'testimoni'=>'required',
+            'testimoni'=>'required', 
             'foto'=>'image|max:20048']);
         
 

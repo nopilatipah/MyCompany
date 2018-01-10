@@ -248,6 +248,12 @@ $komponen = App\Komponen::find(1);
 <script src="{{ asset('js/selectize.min.js') }}"></script>
 <script src="/js/custom.js"></script>
 
+<script type="text/javascript">
+  $('.js-selectize').selectize({
+    sortField:'text'
+  });
+</script>
+
 
 @yield('scripts')
 </body>

@@ -33,14 +33,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $chart = Charts::database(Pengunjung::all(), 'bar', 'highcharts')
+        $chart = Charts::database(Pengunjung::all(), 'bar', 'fusioncharts')
         ->title('Statistika Pengunjung')
         ->elementLabel("Total")
         ->responsive(false)
         ->groupByMonth('2018', true);
 
-        $charts = Charts::database(Artikel::all(), 'pie', 'highcharts')
-        ->title('Statistika Artikel')
+        $charts = Charts::database(Artikel::all(), 'donut', 'fusioncharts')
+        ->title('Banyak Artikel Perbulan')
         ->elementLabel("Total")
         ->responsive(false)
         ->groupByMonth();
@@ -50,11 +50,9 @@ class HomeController extends Controller
 
     public function bintang()
     {
-        $komponen = Komponen::find(1);
-        $sambutan = Profil::find(1);
-        $lokasi = Vendor::find(1);
-        $bb = new Bintang;
-        $bb->jumlah = 1;
+        
+        $bb = Bintang::find(1);
+        $bb->jumlah = $bb->jumlah + 1;
         $bb->save();
 
         alert()->success('Terimakasih Atas Dukungan Anda')->autoclose(3500);

@@ -161,9 +161,8 @@
                   
                       <tr>
                    <th>No</th>
-                   <th>Foto Fasilitas</th>
-                   <th>Judul</th>
-                   <th>Keterangan</th>
+                   <th>Foto Ekstrakurikuler</th>
+                   <th>Nama Ekstrakurikuler</th>
                    <th colspan="2">Opsi</th>
                   </tr>
                   @php

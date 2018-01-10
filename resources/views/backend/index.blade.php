@@ -129,7 +129,7 @@
           @php
           $pp = App\Pengunjung::all();
           $kom = App\Komentar::all();
-          $bb = App\Bintang::all();
+          $bb = App\Bintang::find(1);
           @endphp
           <div class="small-box bg-green">
             <div class="inner">
@@ -147,7 +147,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>{{$bb->count()}}</h3>
+              <h3>{{$bb->jumlah}}</h3>
 
               <p>Total Bintang</p>
             </div>

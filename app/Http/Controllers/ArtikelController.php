@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Artikel;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use DB;
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Fasilitas;
+use Illuminate\Support\Facades\File;
 
 class FasilitasController extends Controller
 {

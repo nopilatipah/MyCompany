@@ -43,7 +43,7 @@
             <i class="fa fa-group"></i> <span>Akun Author</span>
           </a>
         </li>
-        <li class="treeview active">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-th-list"></i>
             <span>Form Sekolah</span>

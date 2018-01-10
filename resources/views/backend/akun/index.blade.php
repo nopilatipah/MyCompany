@@ -190,7 +190,7 @@
                                 <div class="form-group{{ $errors->has('role') ? 'has-error' : '' }}">
                                   {!! Form::label('role','Hak Akses *',['class'=>'col-md-4']) !!}
                                   <div class="col-md-8">
-                                    <select name="role" placeholder="Pilih Hak Akses" required="">
+                                    <select name="role" class="js-selectize" placeholder="Pilih Hak Akses" required="">
                                     <option></option>
                                       @php
                                         $hak = App\Role::where('id','!=','1')->get();

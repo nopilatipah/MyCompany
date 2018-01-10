@@ -17,7 +17,7 @@ class CreateAgendasTable extends Migration
             $table->increments('id');
             $table->string('tanggal');
             $table->string('kegiatan');
-            $table->text('keterangan');
+            $table->string('keterangan')->nullable()->default('-');
             $table->timestamps();
         });
     }

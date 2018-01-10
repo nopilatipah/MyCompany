@@ -277,7 +277,7 @@
                   <span class="text">{{$data->tanggal}} :</span>
                   <span class="text">{{$data->kegiatan}}</span>
                   <!-- Emphasis label -->
-                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+                  <small class="label label-danger"><i class="fa fa-clock-o"></i> {{$data->created_at->diffForHumans()}}</small>
                   <!-- General tools such as edit or delete-->
                   <div class="tools">
                     <button class="btn btn-warning btn-xs"><i class="fa fa-edit"></i></button>
