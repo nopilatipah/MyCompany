@@ -15,7 +15,7 @@ class CreatePengunjungsTable extends Migration
     {
         Schema::create('pengunjungs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('address');
+            $table->string('address',45);
             $table->timestamps();
         });
     }

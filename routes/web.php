@@ -4,7 +4,9 @@ Route::get('/','FrontController@index');
 Route::get('/profil','FrontController@profil');
 Route::get('/kejuruan','FrontController@kejuruan');
 Route::get('/fasilitas','FrontController@fasilitas');
+Route::get('/fasilitas/{id}','FrontController@fasilitasfilter');
 Route::get('/ekstrakurikuler','FrontController@ekskul');
+Route::get('/ekstrakurikuler/{id}','FrontController@ekskulfilter');
 Route::get('/prestasi','FrontController@prestasi');
 Route::get('/berita','FrontController@berita');
 Route::post('/berita', 'FrontController@search');
@@ -18,6 +20,7 @@ Route::post('/komentar','FrontController@komentar');
 Route::get('/galeri','FrontController@galeri');
 Route::get('/detail-kejuruan/{id}','FrontController@detailkejuruan');
 Route::get('/akun','AkunController@profil');
+Route::get('/bintang','HomeController@bintang');
 Route::post('/akun/editpass','AkunController@updatePassword');
 Route::post('akun/editprofil','AkunController@editprofil');
 Auth::routes();
@@ -49,6 +52,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']], function(){
 	Route::resource('fasilitas','FasilitasController');
 	Route::resource('alumni','AlumniController');
 	Route::resource('info','InfoController');
+	Route::resource('agenda','AgendaController');
 });
 
 Route::get('vendor/add', function()

@@ -151,7 +151,7 @@
                               </div>
                               {!! Form::label('tgl_kegiatan','Tgl Kegiatan *',['class'=>'col-md-2 col-md-offset-1']) !!}
                               <div class="col-md-3">
-                                    {!! Form::text('tgl_kegiatan',null,['class'=>'form-control']) !!}
+                                    {!! Form::date('tgl_kegiatan',null,['class'=>'form-control']) !!}
                                     {!! $errors->first('tgl_kegiatan','<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>

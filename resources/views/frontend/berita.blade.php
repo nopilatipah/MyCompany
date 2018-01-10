@@ -328,7 +328,7 @@ fieldset[disabled] .btn-template-main.active {
 @endsection
 
 @section('content')
-<br><br><br><br><br><br>
+<br><br><br><br><br>
 
         <section id="callaction" class="home-section paddingtop-40">    
             <div class="container">

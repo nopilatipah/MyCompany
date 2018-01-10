@@ -125,7 +125,7 @@
         <div class="col-md-12">
           <div class="box box-info">
             {!! Form::model($kejuruan, ['url'=>route('kejuruan.destroy',$kejuruan->id), 'method'=>'delete', 'id'=>'myform']) !!}
-            {!! Form::close() !!}
+            {!! Form::close() !!} 
             <div class="box-header">
               <h3 class="box-title">Ubah Kejuruan {{ $kejuruan->nama }}
                 <small>SMK Assalaam Bandung</small>
@@ -207,7 +207,7 @@
       <!-- ./row -->
     </section>
 
-    <script type="text/javascript">
+<script type="text/javascript">
   $('button#delete').on('click', function(){
   swal({   
     title: "Apakah Anda Yakin ?",

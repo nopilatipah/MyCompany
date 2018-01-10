@@ -1,9 +1,7 @@
 @extends('layouts.user')
 
 @section('navbar')
-<script type="text/javascript" src="{{asset('js/instafeed.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/custom.js')}}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
               <ul class="nav navbar-nav">
@@ -27,6 +25,18 @@
 @endsection
 
 @section('content')
-<br><br><br><br><br><br><br><br><br><br>
-<div id="instafeed"></div>
+
+<section id="facilities" class="home-section paddingbot-60">
+<div class="container">
+<div class="wow lightSpeedIn" data-wow-delay="0.1s">
+  <div class="section-heading text-center">
+    <h2 class="h-bold">Galeri SMK Assalaam Bandung <b></b></h2>
+    <p>Instagram : <i>@SMKASSALAAM</i></p>
+  </div>
+</div>
+<div class="divider-short"></div><br>
+<div id="instafeed" class="row"></div>
+</div>
+</section>
+
 @endsection

@@ -25,37 +25,65 @@
 
 @section('content')
 
-    
-        
-    <!-- Section: works -->
-    <section id="facilities" class="home-section paddingbot-60">
-    <br>
+    <section id="doctor" class="home-section paddingbot-60">
         <div class="container marginbot-50">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-8 col-lg-offset-2">
                     <div class="wow fadeInDown" data-wow-delay="0.1s">
-                    <div class="section-heading">
-                    <h2 class="h-bold">Fasilitas SMK Assalaam Bandung</h2>
+                    <div class="section-heading text-center">
+                    <h2 class="h-bold">Fasilitas {{$komponen->nama_sekolah}}</h2>
+                    <p>Fasilitas Yang Disediakan Sekolah</p>
                     </div>
                     </div>
-                    <hr>
+                    <div class="divider-short"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                
+                <div class="wow fadeInDown" data-wow-delay="0.1s">
+                <a href="{{url('fasilitas')}}" class="btn btn-skin">Semua</a>
+                @php
+                $kategori = App\KategoriFasilitas::all();
+                @endphp
+                @foreach($kategori as $data)
+                <a href="{{url('fasilitas',$data->id)}}" class="btn btn-skin">{{$data->nama}}</a>
+                @endforeach
+                <br><br>
+
+                @if($fasilitas->count() == 0)
+                <b><i>Fasilitas Belum Tersedia</i></b>
+                @endif
+                
+                @if($fasilitas->count() > 0)
+                
+                <div id="grid-container" class="cbp-l-grid-team">
+                <ul>
+                    @foreach($fasilitas as $data)
+                    <li class="cbp-item psychiatrist">
+                        <a href="" class="cbp-caption cbp-singlePage">
+                            <div class="cbp-caption-defaultWrap">
+                                <img src="{{asset('img/1.jpg')}}" alt="" width="100%">
+                            </div>
+                            
+                        </a>
+                        <a href="" class="cbp-singlePage cbp-l-grid-team-name">{{$data->judul}}</a>
+                    </li>
+                    @endforeach
+                </ul>
+                </div>
+
+                @endif
+
+                
+                </div>
+
                 </div>
             </div>
         </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12" >
-                    <div class="wow bounceInUp" data-wow-delay="0.2s">
-                    <div id="owl-works" class="owl-carousel">
-                        @foreach($fasilitas as $data)
-                        <div class="item"><a href="{{ asset('img/'.$data->foto) }}" title="{{$data->nama}}" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="{{ asset('img/'.$data->foto) }}" class="img-responsive" alt="img"></a></div>
-                        @endforeach
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
-    <!-- /Section: works -->
 @endsection

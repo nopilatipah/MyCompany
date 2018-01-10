@@ -44,7 +44,7 @@ class PesanController extends Controller
         $pesan = Pesan::create($request->all());
         $komponen = Komponen::find(1);
         alert()->success('Terimakasih Anda Telah Menghubungi Kami','Pesan Terkirim')->autoclose(3500);
-        return view('frontend.kontak', compact('komponen'));
+        return redirect('/kontak');
     }
 
     /**

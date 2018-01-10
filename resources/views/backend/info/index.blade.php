@@ -130,10 +130,64 @@
                 <small>SMK Assalaam Bandung</small>
               </h3>
               @if($info->count() > 0)
-              <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal-info">
+              <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#editinfo">
               <span class="fa fa-edit"></span>
                 &nbsp &nbsp Ubah Informasi
               </button>
+              <div class="modal modal-primary fade" id="editinfo">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Tambahkan Informasi Pendaftaran</h4>
+              </div>
+              <div class="modal-body">
+                {!! Form::open(['url'=>route('info.store'), 'method'=>'post', 'files'=>'true','class'=>'form-horizontal']) !!}
+                    <div class="form-group{{ $errors->has('tgl_daftar') ? 'has-error' : '' }}">
+                      {!! Form::label('tgl_daftar','Tanggal Pendaftaran *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::text('tgl_daftar',null,['class'=>'form-control','required','placeholder'=>'Contoh : 12 - 30 Juni 2018']) !!}
+                        {!! $errors->first('tgl_daftar', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('waktu') ? 'has-error' : '' }}">
+                      {!! Form::label('waktu','Waktu Pendaftaran *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::text('waktu',null,['class'=>'form-control','required','placeholder'=>'Contoh : 08.00 - 14.00 WIB']) !!}
+                        {!! $errors->first('waktu', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('lokasi') ? 'has-error' : '' }}">
+                      {!! Form::label('lokasi','Lokasi Pendaftaran *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::text('lokasi',null,['class'=>'form-control','required','placeholder'=>'Contoh : Kampus SMK Assalaam']) !!}
+                        {!! $errors->first('lokasi', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('syarat') ? 'has-error' : '' }}">
+                      {!! Form::label('syarat','Persyaratan *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::textarea('syarat',null,['class'=>'form-control','required','placeholder'=>'']) !!}
+                        {!! $errors->first('syarat', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+                    
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>
+                {!! Form::submit('Simpan', ['class'=>'btn btn-warning']) !!}
+              </div>
+              {!! Form::close() !!}
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+</div>
               @endif
               <hr>
             </div>
@@ -158,15 +212,33 @@
                     </tr>
                     <tr>
                       <td><ul class="todo-list"><li><span class="text">Syarat Pendaftaran</span></li></ul></td>
-                      <td><button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#editpass"><span class="fa fa-eye"></span>&nbsp &nbsp Lihat Persyaratan</button> </td>
+                      <td><button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#syarat{{$data->id}}"><span class="fa fa-eye"></span>&nbsp &nbsp Lihat Persyaratan</button>
+                      <div class="modal modal-default fade" id="syarat{{$data->id}}">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title">Syarat Pendaftaran</h4>
+                            </div>
+                            <div class="modal-body">
+                              <textarea class="form-control">{{$data->syarat}}</textarea>
+                          </div>
+                          <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                      </div> </td>
                     </tr>
                     <tr>
                       <td></td>
-                      <td><button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#editpass">Tutup Pendaftaran</button></td>
+                      {!! Form::model($data, ['url'=>route('info.destroy',$data->id), 'method'=>'delete', 'id'=>'myform']) !!}
+                      {!! Form::close() !!}
+                      <td><button id="delete" class="btn btn-danger pull-right"><span class="fa fa-trash"></span> Tutup Pendaftaran</button></td>
                     </tr>
                   </table>
                 </div>
               </center>
+
               @endforeach
               @endif
               @if($info->count() == 0)
@@ -185,15 +257,11 @@
               <h3 class="box-title">Agenda Kegiatan Sekolah</h3>
 
               <div class="box-tools pull-right">
-                <ul class="pagination pagination-sm inline">
-                  <li><a href="#">&laquo;</a></li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">&raquo;</a></li>
-                </ul>
+                {{ $agenda->links() }}
+
               </div>
             </div>
+            <br>
             <!-- /.box-header -->
             <div class="box-body">
               <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
@@ -212,8 +280,8 @@
                   <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
                   <!-- General tools such as edit or delete-->
                   <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
+                    <button class="btn btn-warning btn-xs"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
                   </div>
                 </li>
                 @endforeach
@@ -221,7 +289,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
-              <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Tambah Kegiatan</button>
+              <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#agenda"><i class="fa fa-plus"></i> Tambah Kegiatan</button>
             </div>
           </div>
         </div>
@@ -284,16 +352,65 @@
             <!-- /.modal-content -->
           </div>
           <!-- /.modal-dialog -->
-    </div>
+</div>
+
+<div class="modal modal-primary fade" id="agenda">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Tambahkan Kegiatan Sekolah</h4>
+              </div>
+              <div class="modal-body">
+                {!! Form::open(['url'=>route('agenda.store'), 'method'=>'post', 'files'=>'true','class'=>'form-horizontal']) !!}
+                    <div class="form-group{{ $errors->has('tanggal') ? 'has-error' : '' }}">
+                      {!! Form::label('tanggal','Tanggal Kegiatan *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::text('tanggal',null,['class'=>'form-control','required','placeholder'=>'Contoh : 12 - 30 Juni 2018']) !!}
+                        {!! $errors->first('tanggal', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('kegiatan') ? 'has-error' : '' }}">
+                      {!! Form::label('kegiatan','Nama Kegiatan *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::text('kegiatan',null,['class'=>'form-control','required','placeholder'=>'Contoh : Peringatan Hari Sumpah Pemuda']) !!}
+                        {!! $errors->first('kegiatan', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('keterangan') ? 'has-error' : '' }}">
+                      {!! Form::label('keterangan','Keterangan *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::textarea('keterangan',null,['class'=>'form-control','required','placeholder'=>'']) !!}
+                        {!! $errors->first('keterangan', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+                    
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>
+                {!! Form::submit('Simpan', ['class'=>'btn btn-primary']) !!}
+              </div>
+              {!! Form::close() !!}
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+</div>
+
+        
 
   <script type="text/javascript">
   $('button#delete').on('click', function(){
   swal({   
     title: "Apakah Anda Yakin ?",
-    text: "Anda Tidak Dapat Mengembalikan Data Fasilitas !",         type: "warning",   
+    text: "Informasi Pendaftaran Akan Terhapus !",         type: "warning",   
     showCancelButton: true,   
     confirmButtonColor: "#DD6B55",
-    confirmButtonText: "Ya, Hapus Fasilitas !", 
+    confirmButtonText: "Ya, Tutup Pendaftaran !", 
     closeOnConfirm: false 
   }, 
        function(){   

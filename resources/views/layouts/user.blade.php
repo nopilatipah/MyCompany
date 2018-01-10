@@ -37,6 +37,14 @@ $komponen = App\Komponen::find(1);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+  <script type="text/javascript" src="{{asset('js/instafeed.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/custom.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/magnific.min.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/magnific.css')}}">
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
     
     <style type="text/css">
@@ -70,7 +78,7 @@ $komponen = App\Komponen::find(1);
                 <div class="row">
                 <div class="wow fadeInLeft" data-wow-duration="2s" data-wow-delay="0.2s">
                     <div class="col-sm-6 col-md-6">
-                    <p class="bold text-left">COMPANY PROFILE</p>
+                    <p class="bold text-left"><a href="{{url('/bintang')}}" class="btn btn-skin btn-xs">Beri Kami Bintang</a></p>
                     </div>
                 </div>
                  <div class="wow fadeInRight" data-wow-delay="0.1s">
@@ -87,7 +95,7 @@ $komponen = App\Komponen::find(1);
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="{{url('/')}}">
                 <div class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0.2s">
                     <img src="{{ asset('img/'.$komponen->logo) }}" alt="" height="50" />
                 </div>
@@ -223,7 +231,6 @@ $komponen = App\Komponen::find(1);
     <script src="{{ asset('Frontend/Medicio/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('Frontend/Medicio/js/nivo-lightbox.min.js') }}"></script>
     <script src="{{ asset('Frontend/Medicio/js/custom.js') }}"></script>
-    
 </body>
 
 </html>

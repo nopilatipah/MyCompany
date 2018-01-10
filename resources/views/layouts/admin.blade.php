@@ -34,8 +34,6 @@ $komponen = App\Komponen::find(1);
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
-  <link rel="stylesheet" href="{{ asset('table/css/jquery.dataTables.css') }}">
-  <link rel="stylesheet" href="{{ asset('table/css/dataTables.bootstrap.css') }}">
   <link rel="stylesheet" href="{{ asset('css/selectize.css') }}">
   <link rel="stylesheet" href="{{ asset('css/selectize.bootstrap3.css') }}">
 
@@ -56,7 +54,7 @@ $komponen = App\Komponen::find(1);
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{{url('/home')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>P</span>
       <!-- logo for regular state and mobile devices --> 
@@ -247,8 +245,6 @@ $komponen = App\Komponen::find(1);
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('AdminLTE/dist/js/demo.js') }}"></script>
 
-<script src="{{ asset('table/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('table/js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/selectize.min.js') }}"></script>
 <script src="/js/custom.js"></script>
 

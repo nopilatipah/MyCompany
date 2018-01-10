@@ -15,9 +15,10 @@ class InfoController extends Controller
      */
     public function index()
     {
-        $agenda = Agenda::all();
+        $agenda = Agenda::paginate(6);
         $info = Info::all();
-        return view('backend.info.index', compact('agenda','info'));
+        $editinfo = Info::all();
+        return view('backend.info.index', compact('agenda','info','editinfo'));
     }
 
     /**
@@ -44,7 +45,7 @@ class InfoController extends Controller
         $info->lokasi = $request->lokasi;
         $info->syarat = $request->syarat;
         $info->save();
-
+        alert()->success('Informasi Tersimpan')->autoclose(3500);
         return redirect()->route('info.index');
     }
 
@@ -90,6 +91,9 @@ class InfoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $info = Info::find($id);
+        $info->delete();
+        alert()->success('Pendaftaran Ditutup')->autoclose(3500);
+        return redirect()->route('info.index');
     }
 }

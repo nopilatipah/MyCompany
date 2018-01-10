@@ -25,7 +25,7 @@
 
 @section('content') 
 
-<br><br><br><br><br><br>
+<br><br><br><br><br>
 @foreach($kejuruan as $data)
         
     <section id="service" class="home-section nopadding paddingtop-60">
@@ -48,10 +48,22 @@
                     <h3>Program Pembelajaran</h3>
                     <p>{!!$data->program!!}</p>
                 </div>
+                <br>
+                <div class="wow fadeInDown" data-wow-delay="0.1s">
+                @php
+                $kk = App\Perusahaan::where('kejuruan_id','=',$data->id)->get();
+                @endphp
+                <div class="col-sm-7">
+                @foreach($kk as $k)
+                <img src="{{asset('img/'.$k->logo)}}" style="width: 100px;">&nbsp &nbsp &nbsp
+                @endforeach
+                </div>
+                </div>
                 
             </div>
             
         </div>
+        
         <hr>      
         </div>
     </section>

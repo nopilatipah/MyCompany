@@ -16,15 +16,25 @@ use App\Ekskul;
 use App\Fasilitas;
 use App\Notifications\NotifyPostOwner;
 use App\User;
+use App\Prestasi;
+use App\Pengunjung;
 use Vinkla\Instagram\Instagram;
 
 class FrontController extends Controller
 {
     public function index()
     {
+        
         $komponen = Komponen::find(1);
         $sambutan = Profil::find(1);
         $lokasi = Vendor::find(1);
+        $ss = Pengunjung::where('address','=', \Request::getClientIp())->get();
+        if ($ss->count() == 0)
+        {
+            $pp = new Pengunjung;
+            $pp->address = \Request::getClientIp();
+            $pp->save();
+        }
         return view('frontend.index',compact('komponen','sambutan','lokasi'));
     }
 
@@ -50,11 +60,27 @@ class FrontController extends Controller
         return view('frontend.fasilitas',compact('fasilitas','komponen'));
     }
 
+    public function fasilitasfilter($id)
+    {
+        $komponen = Komponen::find(1);
+        $fasilitas = Fasilitas::where('kategori','=',$id)->get();
+        return view('frontend.fasilitas',compact('fasilitas','komponen'));
+    }
+
     public function ekskul()
     {
         $komponen = Komponen::find(1);
         $ekskul = Ekskul::all();
-        return view('frontend.ekskul',compact('ekskul','komponen'));
+        $prestasi = Prestasi::all();
+        return view('frontend.ekskul',compact('ekskul','komponen','prestasi'));
+    }
+
+    public function ekskulfilter($id)
+    {
+        $prestasi = Prestasi::all();
+        $komponen = Komponen::find(1);
+        $ekskul = Ekskul::where('kategori_id','=',$id)->get();
+        return view('frontend.ekskul',compact('ekskul','komponen','prestasi'));
     }
 
     public function prestasi()
@@ -66,7 +92,7 @@ class FrontController extends Controller
     {
         $instagram = new Instagram('6754770736.1677ed0.a6499dbf6f3e40279017182e324b98ad');
         $instagram->get();
-        dd($instagram);
+        // dd($instagram);
         return view('frontend.galeri',compact('instagram'));
     }
 
