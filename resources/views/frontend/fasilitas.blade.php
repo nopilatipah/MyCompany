@@ -66,7 +66,7 @@
                     <li class="cbp-item psychiatrist">
                         <a href="" class="cbp-caption cbp-singlePage">
                             <div class="cbp-caption-defaultWrap">
-                                <img src="{{asset('img/1.jpg')}}" alt="" width="100%">
+                                <img src="{{asset('img/'.$data->foto)}}" alt="" width="100%">
                             </div>
                             
                         </a>
