@@ -102,7 +102,8 @@ class FrontController extends Controller
                         ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
                         ->select('artikels.*', 'kategori_artikels.nama as kategori')
                         ->orderBy('artikels.id','desc')->paginate(2);
-        return view('frontend.berita', ['berita' => $berita]);
+        $tags = DB::table('tagging_tags')->get();
+        return view('frontend.berita', ['berita' => $berita,'tags' => $tags]);
     }
 
     public function search(Request $request)
@@ -123,8 +124,9 @@ class FrontController extends Controller
                         ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
                         ->select('artikels.*', 'kategori_artikels.nama as kategori')
                         ->orderBy('artikels.id','desc')->paginate(2);
+         $tags = DB::table('tagging_tags')->get();
     
-        return view('frontend.pencarian', compact('hasil','jml','cari','berita'));
+        return view('frontend.pencarian', compact('hasil','jml','cari','berita','tags'));
     }
 
     public function kontak()
@@ -141,8 +143,9 @@ class FrontController extends Controller
         $views = $berita->views + 1;
         $berita->views = $views;
         $berita->save();
+         $tags = DB::table('tagging_tags')->get();
 
-        return view('frontend.berita-lengkap', compact('berita'));
+        return view('frontend.berita-lengkap', compact('berita','tags'));
     }
 
     public function detailkejuruan($id)
@@ -172,8 +175,28 @@ class FrontController extends Controller
             ->where('artikels.kategori_id','=',$id)
             ->count();
         $kateg = KategoriArtikel::find($id);
+         $tags = DB::table('tagging_tags')->get();
         
-        return view('frontend.kategori', compact('berita','jml','kateg','bb'));
+        return view('frontend.kategori', compact('berita','jml','kateg','bb','tags'));
+    }
+
+    public function tags($id)
+    {
+        $berita = DB::table('artikels')
+            ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
+            ->join('tagging_tagged','tagging_tagged.taggable_id','=','artikels.id')
+            ->select('artikels.*', 'tagging_tagged.tag_name', 'kategori_artikels.nama as kategori')
+            ->where('tagging_tagged.tag_name','=',$id)
+            ->orderBy('artikels.id','desc')->paginate(2);
+        $bb = DB::table('artikels')
+            ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
+            ->join('tagging_tagged','tagging_tagged.taggable_id','=','artikels.id')
+            ->select('artikels.*', 'kategori_artikels.nama as kategori', 'tagging_tagged.tag_name')
+            ->orderBy('artikels.id','desc')->paginate(2);
+        $jml = $berita->count();
+        $tg = DB::table('tagging_tags')->where('name','=',$id)->first();
+         $tags = DB::table('tagging_tags')->get();
+        return view('frontend.tags', compact('berita','jml','bb','tags','tg'));
     }
 
     public function like($id)

@@ -21,6 +21,7 @@
         "santigarcor/laratrust": "3.0.*",
         "uxweb/sweet-alert": "^1.4",
         "vinkla/instagram": "^8.0",
+        "weboap/visitor": "^2.0",
         "yajra/laravel-datatables-oracle": "~6.0"
     },
     "require-dev": {

@@ -159,11 +159,8 @@ class AkunController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
-            alert()->success('Akun Terhapus')->autoclose(3500);
-
-        return redirect()->route('akun.index');
+        User::delete($id);
+        return response()->json(['success'=>"Product Deleted successfully.", 'tr'=>'tr_'.$id]);
     }
 
     public function updatePassword(Request $request)

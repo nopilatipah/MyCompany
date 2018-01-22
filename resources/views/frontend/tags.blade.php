@@ -324,6 +324,7 @@ fieldset[disabled] .btn-template-main.active {
   border-color: #38a7bb;
 }       
 </style>
+
 @endsection
 
 @section('content')
@@ -333,122 +334,102 @@ fieldset[disabled] .btn-template-main.active {
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
+                    @if($jml == 0)
+                    <div class="callaction bg-gray">
+                    <div class="wow fadeInUp" data-wow-delay="0.1s">
+                      <div class="cta-text">
+                        <h5><span class="fa fa-search"></span>&nbsp&nbsp&nbsp<b><i>Artikel Dengan Tag "{{$tg->name}}" Tidak Tersedia</i></b></h5>
+                      </div>
+                    </div>
+                    </div><br>
+                    @foreach($bb as $data)
                         <div class="callaction bg-gray">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="wow fadeInUp" data-wow-delay="0.1s">
                                         <div class="cta-text">
-                                            <h3>{{$berita->judul}}</h3>
+                                            <h3>{{$data->judul}}</h3>
                                             <p>
-                                                <span class="fa fa-user"></span> {{$berita->author}} &nbsp&nbsp&nbsp
-                                                <span class="fa fa-calendar"></span> {{$berita->tgl_kegiatan}} &nbsp&nbsp&nbsp
-                                                <span class="fa fa-eye"></span> {{$berita->views}} Pembaca &nbsp&nbsp&nbsp
+                                                <span class="fa fa-user"></span> {{$data->author}} &nbsp&nbsp&nbsp
+                                                <span class="fa fa-calendar"></span> {{$data->tgl_kegiatan}} &nbsp&nbsp&nbsp
+                                                <span class="fa fa-eye"></span> {{$data->views}} Pembaca &nbsp&nbsp&nbsp
                                                 @php
-                                                $komen = App\Komentar::where('artikel_id','=',$berita->id)->count();
+                                                $komen = App\Komentar::where('artikel_id','=',$data->id)->count();
                                                 @endphp
                                                 <span class="fa fa-comments"></span> {{$komen}} Komentar &nbsp&nbsp&nbsp
-                                                @php
-                                                $kategori = App\KategoriArtikel::find($berita->kategori_id)
-                                                @endphp
-                                                <span class="fa fa-tag"></span> {{$kategori->nama}}</h3>
-                                            <p> &nbsp&nbsp&nbsp
+                                                <span class="fa fa-tag"></span> {{$data->kategori}} &nbsp&nbsp&nbsp
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-4">
                                     <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
-                                    <img src="{{ asset('img/'.$berita->foto) }}" class="img-responsive">
-                                    </div>
+                                    <img src="{{ asset('img/'.$data->foto) }}" class="img-responsive">
                                     </div>
                                     
-                                    <div class="col-md-12">
-                                    <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
-                                        <p></p>
-                                        {!! $berita->konten !!}
+                                    </div>
+                                    <div class="col-md-8">
+                                      <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
+                                        {!! str_limit($data->konten, 250) !!}
+                                                
                                       </div>
+                                        <div class="wow lightSpeedIn" data-wow-delay="0.1s">
+                                            <div class="cta-btn">
+                                                <a href="{{ url('/baca-selengkapnya', $data->id) }}" class="btn btn-skin">Baca Selengkapnya</a>  
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>  
                             </div>
                         </div>
                         <br>
-                        <div class="row">
-                          <div class="wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="cta-text">
-                              <div class="col-md-9">
-                                 <h3>{{$komen}} KOMENTAR</h3>
-                              </div>
-                              <div class="col-md-3">
-                                 <a href="{{ url('/unlike', $berita->id) }}" class="btn btn-skin">{{ $berita->unlike }} <span class="fa fa-thumbs-o-down"></span></a>
-                                <a href="{{ url('/like', $berita->id) }}" class="btn btn-skin pull-right">{{ $berita->like }} <span class="fa fa-thumbs-o-up"></span></a>
-                              </div>
-                            </div>
-                        </div>
-                        </div>
-                        <hr>
-                        @php
-                        $komentar = App\Komentar::where('artikel_id','=',$berita->id)->get();
-                        @endphp
-                        @if($komentar->count() == 0)
-                        <p align="center">Belum Ada Komentar</p>
-                        @endif
-                        @if($komentar->count() > 0)
-                        @foreach($komentar as $kmn)
-                        <div class="row">
-                          <div class="wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="col-md-2">
-                              <img src="{{ asset('img/default.png') }}" class="img-responsive img-circle" style="height: 90px">
-                            </div>
-                          </div>
-                          <div class="wow fadeInRight" data-wow-delay="0.1s">
-                            <div class="col-md-10">
-                                <p><b>{{$kmn->nama_depan}} {{$kmn->nama_belakang}}</b></p>
-                                <p>{{$kmn->komentar}}</p>
-                            </div>
-                          </div>
-                        </div>
-                        <br>
-                        @endforeach
-                        @endif
-                        <hr>
+                      @endforeach
+                    @endif
+                    @if($jml > 0)
+                      @foreach($berita as $data)
                         <div class="callaction bg-gray">
-                          <div class="wow fadeInDown" data-wow-delay="0.1s">
-                          <h3>Tambahkan Komentar</h3>
-                          <hr>
-                          <form method="post" action="/komentar">
-                          {{ csrf_field() }}
-                                <input type="hidden" name="id" value="{{$berita->id}}">
-                                <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="firstname">Nama Depan</label>
-                                            <input type="text" name="nama_depan" class="form-control" id="firstname">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="wow fadeInUp" data-wow-delay="0.1s">
+                                        <div class="cta-text">
+                                            <h3>{{$data->judul}}</h3>
+                                            <p>
+                                                <span class="fa fa-user"></span> {{$data->author}} &nbsp&nbsp&nbsp
+                                                <span class="fa fa-calendar"></span> {{$data->tgl_kegiatan}} &nbsp&nbsp&nbsp
+                                                <span class="fa fa-eye"></span> {{$data->views}} Pembaca &nbsp&nbsp&nbsp
+                                                @php
+                                                $komen = App\Komentar::where('artikel_id','=',$data->id)->count();
+                                                @endphp
+                                                <span class="fa fa-comments"></span> {{$komen}} Komentar &nbsp&nbsp&nbsp
+                                                <span class="fa fa-tag"></span> {{$data->kategori}} &nbsp&nbsp&nbsp
+                                            </p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="lastname">Nama Belakang</label>
-                                            <input type="text" name="nama_belakang" class="form-control" id="lastname">
+                                    <div class="col-md-4">
+                                    <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
+                                    <img src="{{ asset('img/'.$data->foto) }}" class="img-responsive">
+                                    </div>
+                                    
+                                    </div>
+                                    <div class="col-md-8">
+                                      <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
+                                        {!! str_limit($data->konten, 250) !!}
+                                                
+                                      </div>
+                                        <div class="wow lightSpeedIn" data-wow-delay="0.1s">
+                                            <div class="cta-btn">
+                                                <a href="{{ url('/baca-selengkapnya', $data->id) }}" class="btn btn-skin">Baca Selengkapnya</a>  
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="message">Komentar</label>
-                                            <textarea id="message" name="komentar" class="form-control"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                  <button type="submit" class="btn btn-skin btn-lg pull-right">Kirim Komentar</button>
-                                </div>
-                                
-                                </div>
-                                <!-- /.row -->
-                                </div>
-                                
-                            </form>
-                          </div>
+                                </div>  
+                            </div>
                         </div>
                         <br>
+                      @endforeach
+                    
+                      
+                      {{ $berita->links() }}
+                      @endif
                         
                     </div>
                     <div class="col-md-3">
@@ -537,13 +518,8 @@ fieldset[disabled] .btn-template-main.active {
                                     $kategori = App\KategoriArtikel::all();
                                     @endphp
                                     @foreach($kategori as $kat)
-                                    @if($kat->id == $berita->kategori_id)
-                                    <li class="active"><a href="{{ url('/kategori',$kat->id) }}">{{$kat->nama}}</a>
-                                    </li>
-                                    @else
                                     <li><a href="{{ url('/kategori',$kat->id) }}">{{$kat->nama}}</a>
                                     </li>
-                                    @endif
                                     @endforeach
                                 </ul>
                             </div>

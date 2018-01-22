@@ -75,6 +75,9 @@ class ArtikelController extends Controller
         }
 
         $artikel->save();
+
+        $tags = explode(",", $request->tags);
+        $artikel->tag($tags);
         
         
         // dd($artikel);

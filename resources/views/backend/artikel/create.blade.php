@@ -178,10 +178,12 @@
                                     <input type="file" name="foto" class="btn btn-default btn-block" required=""></input>
                                     {!! $errors->first('foto','<p class="help-block">:message</p>') !!}
                                 </div>
+                                {!! Form::label('tags','Tags *',['class'=>'col-md-2']) !!}
+                                <div class="col-md-4">
+                                  <input data-role="tagsinput" type="text" name="tags" class="form-control">
+                                </div>
                             </div>
                             <br>
-
-                           
 
                             <hr>
                             <div class="form-group">

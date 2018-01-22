@@ -16,6 +16,7 @@ Route::get('/baca-selengkapnya/{id}','FrontController@selengkapnya');
 Route::get('/like/{id}','FrontController@like');
 Route::get('/unlike/{id}','FrontController@unlike');
 Route::get('/kategori/{id}','FrontController@kategori');
+Route::get('/filter/tags/{id}','FrontController@tags');
 Route::post('/komentar','FrontController@komentar');
 Route::get('/galeri','FrontController@galeri');
 Route::get('/detail-kejuruan/{id}','FrontController@detailkejuruan');
@@ -74,4 +75,6 @@ Route::post('vendor/add', function()
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::delete('akun/delete/{id}', 'AkunController@destroy');
 

@@ -540,22 +540,10 @@ fieldset[disabled] .btn-template-main.active {
                             <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                             <div class="panel-body">
                                 <ul class="tag-cloud">
-                                    <li><a href="#"><i class="fa fa-tags"></i> html5</a> 
+                                    @foreach($tags as $tag)
+                                    <li><a href="{{url('/filter/tags',$tag->name)}}"><i class="fa fa-tags"></i> {{$tag->name}}</a> 
                                     </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i> css3</a> 
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i> jquery</a> 
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i> ajax</a> 
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i> php</a> 
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i> responsive</a> 
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i> visio</a> 
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i> bootstrap</a> 
-                                    </li>
+                                  @endforeach
                                 </ul>
                             </div>
                             </div>
