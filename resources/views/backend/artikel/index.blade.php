@@ -170,7 +170,7 @@
                     <td><img src="{{asset('img/'.$data->foto)}}" class="img-responsive img-thumbnail" alt="" style="height: 40px;"></td>
                     <td>{!! str_limit($data->judul, 30) !!}</td>
                     <td>{!! str_limit($data->konten, 30) !!}</td>
-                    <td><a href="{{route('artikel.edit',$data->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Lihat</a></td>
+                    <td><a href="{{route('artikel.edit',$data->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Ubah</a></td>
                     {!! Form::model($data, ['url'=>route('artikel.destroy',$data->id), 'method'=>'delete', 'id'=>'myform']) !!}
                     {!! Form::close() !!}
                     <td>

@@ -32,7 +32,13 @@ class ProfilsSeeder extends Seeder
 
         $profil->sambutan="<p><strong>Assalamualaikum Wr, Wb. </strong></p>
 
-<p>SMK Assalaam adalah Sekolah Menengah Kejuruan yang memiliki kelompok kompetensi keahlian Teknik Kendaraan Ringan, Teknik Sepeda Motor, dan Rekayasa Perangkat Lunak. Dengan dukungan dunia usaha dan dunia industri program pembelajaran disusun berdasarkan kolaborasi dari kurikulum dinas pendidikan dan kebutuhan kompetensi dunia industri, sehingga lulusan SMK Assalaam siap menghadapi tantangan industri masa depan.SMK Assalaam berupaya untuk terus menerus mensinkronisasikan kurikulumnya dengan kurikulum di negara-negara maju dan mensikronisasikan dengan Dunia Usaha/Dunia Industri. Sarana dan prasarana yang ada di SMK Assalaam juga disinkronisasikan dengan Dunia Usaha/Dunia Industri sehingga pembelajaran yang ada dapat mendekati Dunia Usaha/Dunia Industri.Lulusannya telah tersebar di berbagai Dunia Usaha/Dunia Industri. Kesempatan untuk melanjutkan studi dan bekerja sangat terbuka luas bagi lulusannya. Bagi siswa yang ingin bekerja &amp; berprestasi didukung langsung oleh Dunia Industri sesuai dengan kualifikasi yang di persyaratkan oleh perusahaan.Kepala Sekolah SMK Assalaam H. Muhammad Luthfi Almanfaluthi, S.T.</p>";
+<p>SMK Assalaam adalah Sekolah Menengah Kejuruan yang memiliki kelompok kompetensi keahlian Teknik Kendaraan Ringan, Teknik Sepeda Motor, dan Rekayasa Perangkat Lunak. Dengan dukungan dunia usaha dan dunia industri program pembelajaran disusun berdasarkan kolaborasi dari kurikulum dinas pendidikan dan kebutuhan kompetensi dunia industri, sehingga lulusan SMK Assalaam siap menghadapi tantangan industri masa depan.SMK Assalaam berupaya untuk terus menerus mensinkronisasikan kurikulumnya dengan kurikulum di negara-negara maju dan mensikronisasikan dengan Dunia Usaha/Dunia Industri. Sarana dan prasarana yang ada di SMK Assalaam juga disinkronisasikan dengan Dunia Usaha/Dunia Industri sehingga pembelajaran yang ada dapat mendekati Dunia Usaha/Dunia Industri.Lulusannya telah tersebar di berbagai Dunia Usaha/Dunia Industri. Kesempatan untuk melanjutkan studi dan bekerja sangat terbuka luas bagi lulusannya. Bagi siswa yang ingin bekerja &amp; berprestasi didukung langsung oleh Dunia Industri sesuai dengan kualifikasi yang di persyaratkan oleh perusahaan.</p>
+
+<p>&nbsp;</p>
+
+<p>Kepala Sekolah SMK Assalaam</p>
+
+<p>H. Muhammad Luthfi Almanfaluthi, S.T.</p>";
 
         $profil->foto="ms6.png";
         $profil->save();

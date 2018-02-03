@@ -19,6 +19,7 @@ use App\User;
 use App\Prestasi;
 use App\Pengunjung;
 use Vinkla\Instagram\Instagram;
+use App\Alumni;
 
 class FrontController extends Controller
 {
@@ -28,6 +29,7 @@ class FrontController extends Controller
         $komponen = Komponen::find(1);
         $sambutan = Profil::find(1);
         $lokasi = Vendor::find(1);
+        $alumni = Alumni::all()->take(3);
         $ss = Pengunjung::where('address','=', \Request::getClientIp())->get();
         if ($ss->count() == 0)
         {
@@ -35,7 +37,7 @@ class FrontController extends Controller
             $pp->address = \Request::getClientIp();
             $pp->save();
         }
-        return view('frontend.index',compact('komponen','sambutan','lokasi'));
+        return view('frontend.index',compact('sambutan','alumni'));
     }
 
     public function profil()
@@ -154,7 +156,7 @@ class FrontController extends Controller
         $kejuruan = Kejuruan::find($id);
         $komponen = Komponen::find(1);
 
-        return view('frontend.detailkejuruan', compact('kejuruan','komponen'));
+        return view('frontend.kejuruan', compact('kejuruan','komponen'));
     }
 
     public function kategori($id)

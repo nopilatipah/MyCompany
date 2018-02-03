@@ -115,7 +115,7 @@
             <div class="box-header">
               <i class="ion ion-android-mail"></i>
 
-              <h3 class="box-title">Pesan Belum Dibaca</h3>
+              <h3 class="box-title">Pesan Pengunjung</h3>
 
               <div class="box-tools pull-right">
                 {{ $pesan->links() }}
@@ -145,33 +145,12 @@
                   </div>
                 </li>
                 @endforeach
-              </ul>
-            </div>
-            
-          </div>
-
-          <div class="box box-default">
-            <div class="box-header">
-              <i class="ion ion-android-mail"></i>
-
-              <h3 class="box-title">Pesan Terdahulu</h3>
-
-              <div class="box-tools pull-right">
-                {{ $dulu->links() }}
-              </div>
-
-            </div>
-            <br>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-              <ul class="todo-list">
-              @foreach($dulu as $data)
+                @foreach($dulu as $data)
                 <li>
                   <!-- drag handle -->
                   <i class="ion ion-android-mail"></i>
                   <!-- todo text -->
-                  <span class="text">{{$data->nama_depan}} {{$data->nama_belakang}}</span>
+                  {{$data->nama_depan}} {{$data->nama_belakang}}
                   <!-- Emphasis label -->
                   <small class="label label-warning"><i class="fa fa-clock-o"></i> {{$data->created_at}}</small>&nbsp
                   Subjek : {{$data->subjek}} || <i>{!! str_limit($data->pesan, 90) !!}</i>

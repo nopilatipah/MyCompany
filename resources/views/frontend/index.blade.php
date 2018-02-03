@@ -1,357 +1,359 @@
 @extends('layouts.user')
 
-@section('navbar')
-			<!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="{{url('/')}}">Beranda</a></li>
-                <li class="dropdown">
-                  <a href="" class="dropdown-toggle" data-toggle="dropdown">Sekolah <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="{{url('/profil')}}">Profil Umum</a></li>
-                    <li><a href="{{url('/kejuruan')}}">Kejuruan</a></li>
-                    <li><a href="{{url('/fasilitas')}}">Fasilitas</a></li>
-                    <li><a href="{{url('/ekstrakurikuler')}}">Ekstrakurikuler</a></li>
-                  </ul>
-                </li>
-                <li><a href="{{url('/berita')}}">Berita</a></li>
-                <li><a href="{{url('/galeri')}}">Galeri</a></li>
-                <li><a href="{{url('/kontak')}}">Kontak</a></li>
-                
-              </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-@endsection
-
 @section('content')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
-
-<style type="text/css">
-    .testimonial{ margin: 0 20px 50px; }
-.testimonial .pic{
-    display: inline-block;
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    margin: 0 15px 15px 0;
-}
-.testimonial .pic img{
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-}
-.testimonial .testimonial-profile{
-    display: inline-block;
-    position: relative;
-    top: 15px;
-}
-.testimonial .title{
-    display: block;
-    font-size: 20px;
-    font-weight: 600;
-    color: #2f2f2f;
-    text-transform: capitalize;
-    margin: 0 0 7px 0;
-}
-.testimonial .post{
-    display: block;
-    font-size: 14px;
-    color: #067182;
-}
-.testimonial .description{
-    padding: 20px 22px;
-    background: #12aaaa;
-    font-size: 15px;
-    color: #fff;
-    line-height: 25px;
-    margin: 0;
-    position: relative;
-}
-.testimonial .description:before,
-.testimonial .description:after{
-    content: "";
-    border-width: 18px 0 0 18px;
-    border-style: solid;
-    border-color: #067182 transparent transparent;
-    position: absolute;
-    bottom: -18px;
-    left: 0;
-}
-.testimonial .description:after{
-    border-width: 18px 18px 0 0;
-    left: auto;
-    right: 0;
-}
-.owl-theme .owl-controls{
-    margin-top: 10px;
-    margin-left: 30px;
-}
-.owl-theme .owl-controls .owl-buttons div{
-    opacity: 0.8;
-    background: #fff;
-}
-.owl-prev:before,
-.owl-next:before{
-    content: "\f053";
-    font-family: 'FontAwesome';
-    font-size: 20px;
-    color: #1f487e;
-}
-.owl-next:before{ content: "\f054"; }
+@php
+$komponen = App\Komponen::find(1);
+$kejuruan = App\Kejuruan::all();
+$info = App\Info::find(1);
+$vendor = App\Vendor::find(1);
+$berita = App\Artikel::all()->take(4);
+@endphp
+<style>
+  #map-canvas{
+    width: 1350px;
+    height: 450px;
+  }
 </style>
-    <!-- Section: intro -->
-    <section id="intro" class="intro">
-        <div class="intro-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                    <div class="well well-trans">
-                    <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
-                    <h2 class="h-ultra">{{$komponen->nama_sekolah}}</h2>
-                    </div>
-                    <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
-                    <h4 class="h-light">{{$komponen->deskripsi}}</h4>
-                    </div>
-                    </div>
-                        <div class="well well-trans">
-                        <div class="wow fadeInRight" data-wow-delay="0.1s">
 
-                        <ul class="lead-list">
-                            <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Lokasi {{$komponen->nama_sekolah}}</strong><br />{{$lokasi->lokasi}}</span></li>
-                            <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Visi {{$komponen->nama_sekolah}}</strong><br />{!!$sambutan->visi!!}</span></li>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmOH1T0Znrn7UqKm8mxNU0c4au_SWIFo&amp;libraries=places"></script>
+
+<div class="ms-hero ms-hero-material">
+        <span class="ms-hero-bg"></span>
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-6 col-lg-7">
+              <div id="carousel-hero" class="carousel slide carousel-fade" data-ride="carousel" data-interval="8000">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item active">
+                    <div class="carousel-caption">
+                      <div class="ms-hero-material-text-container">
+                        <header class="ms-hero-material-title animated slideInLeft animation-delay-5">
+                          <h1 class="animated fadeInLeft animation-delay-15 font-smoothing">
+                            <strong>{{$komponen->nama_sekolah}}</strong></h1>
+                          <h2 class="animated fadeInLeft animation-delay-18">
+                            <span class="color-warning">{{$komponen->deskripsi}}</span></h2>
+                        </header>
+                        <ul class="ms-hero-material-list">
+                          <li class="">
+                            <div class="ms-list-icon animated zoomInUp animation-delay-18">
+                              <span class="ms-icon ms-icon-circle ms-icon-xlg color-warning shadow-3dp">
+                                <i class="zmdi zmdi-airplane"></i>
+                              </span>
+                            </div>
+                            <div class="ms-list-text animated fadeInRight animation-delay-19">Terakreditasi {{$komponen->akreditasi}}</div>
+                          </li>
+                          <li class="">
+                            <div class="ms-list-icon animated zoomInUp animation-delay-20">
+                              <span class="ms-icon ms-icon-circle ms-icon-xlg color-success shadow-3dp">
+                                <i class="zmdi zmdi-bike"></i>
+                              </span>
+                            </div>
+                            <div class="ms-list-text animated fadeInRight animation-delay-21">Keahlian Ganda Untuk Setiap Kejuruan Agar Siswa Dapat Menerapkannya didunia Kerja (Industri).</div>
+                          </li>
+                          <li class="">
+                            <div class="ms-list-icon animated zoomInUp animation-delay-22">
+                              <span class="ms-icon ms-icon-circle ms-icon-xlg color-danger shadow-3dp">
+                                <i class="zmdi zmdi-album"></i>
+                              </span>
+                            </div>
+                            <div class="ms-list-text animated fadeInRight animation-delay-23">Peralatan Praktik yang Up To Date sesuai dengan kebutuhan dunia Industri.</div>
+                          </li>
                         </ul>
-                        <p class="text-right wow bounceIn" data-wow-delay="0.4s">
-                        <a href="{{ url('/profil') }}" class="btn btn-skin btn-lg">Pelajari Selengkapnya <i class="fa fa-angle-right"></i></a>
-                        </p>
+                        <div class="ms-hero-material-buttons text-right">
+                          <div class="ms-hero-material-buttons text-right">
+                            <a href="{{url('profil')}}" class="btn btn-warning btn-raised animated fadeInLeft animation-delay-24 mr-2">
+                              <i class="zmdi zmdi-settings"></i> Lihat Profil Sekolah</a>
+                          </div>
                         </div>
-                        </div>
-
-
+                      </div>
+                      <!-- ms-hero-material-text-container -->
                     </div>
-                    <div class="col-lg-6">
-                        <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
-                        <center>
-                        <img src="{{ asset('img/'.$komponen->foto_utama) }}" class="img-responsive" alt=""/>
-                        </center>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="carousel-caption">
+                      <div class="ms-hero-material-text-container">
+                        <header class="ms-hero-material-title animated slideInLeft animation-delay-5">
+                          <h1 class="animated fadeInLeft animation-delay-15">
+                            <strong>Jaminan</strong> Pendidikan</h1>
+                          <h2 class="animated fadeInLeft animation-delay-18">{{$komponen->nama_sekolah}}</h2>
+                        </header>
+                        <ul class="ms-hero-material-list">
+                          <li class="">
+                            <div class="ms-list-icon animated zoomInUp animation-delay-18">
+                              <span class="ms-icon ms-icon-circle ms-icon-xlg color-info shadow-3dp">
+                                <i class="zmdi zmdi-city"></i>
+                              </span>
+                            </div>
+                            <div class="ms-list-text animated fadeInRight animation-delay-19">Anak didik dipersiapkan untuk bekerja, berwirausaha, maupun melanjutkan ke perguruan tinggi.</div>
+                          </li>
+                          <li class="">
+                            <div class="ms-list-icon animated zoomInUp animation-delay-20">
+                              <span class="ms-icon ms-icon-circle ms-icon-xlg color-royal shadow-3dp">
+                                <i class="zmdi zmdi-cake"></i>
+                              </span>
+                            </div>
+                            <div class="ms-list-text animated fadeInRight animation-delay-21">Lebih dari 100 Kerja sama dengan dunia Industri dan dunia Usaha.</div>
+                          </li>
+                          <li class="">
+                            <div class="ms-list-icon animated zoomInUp animation-delay-22">
+                              <span class="ms-icon ms-icon-circle ms-icon-xlg color-warning shadow-3dp">
+                                <i class="zmdi zmdi-coffee"></i>
+                              </span>
+                            </div>
+                            <div class="ms-list-text animated fadeInRight animation-delay-23">Sertifikasi Kompetensi akan didapatkan setelah melakukan Uji Kompetensi.</div>
+                          </li>
+                        </ul>
+                        <div class="ms-hero-material-buttons text-right">
+                          <div class="ms-hero-material-buttons text-right">
+                            <a href="{{url('profil')}}" class="btn btn-warning btn-raised animated fadeInLeft animation-delay-24 mr-2">
+                              <i class="zmdi zmdi-settings"></i> Lihat Profil Sekolah</a>
+                          </div>
                         </div>
-                    </div>                  
-                </div>      
+                      </div>
+                      <!-- ms-hero-material-text-container -->
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="carousel-caption">
+                      <div class="ms-hero-material-text-container">
+                        <header class="ms-hero-material-title animated slideInLeft animation-delay-5">
+                          <h1 class="animated fadeInLeft animation-delay-15">
+                            <strong>Pendaftaran</strong> Siswa Baru</h1>
+                          <h2 class="animated fadeInLeft animation-delay-18">{{$komponen->nama_sekolah}}</h2>
+                        </header>
+                        <ul class="ms-hero-material-list">
+                          <li class="">
+                            <div class="ms-list-icon animated zoomInUp animation-delay-18">
+                              <span class="ms-icon ms-icon-circle ms-icon-xlg color-info shadow-3dp">
+                                <i class="zmdi zmdi-city"></i>
+                              </span>
+                            </div>
+                            <div class="ms-list-text animated fadeInRight animation-delay-19">Dibuka Pada Tanggal {{$info->tgl_daftar}}</div>
+                          </li>
+                          <li class="">
+                            <div class="ms-list-icon animated zoomInUp animation-delay-20">
+                              <span class="ms-icon ms-icon-circle ms-icon-xlg color-royal shadow-3dp">
+                                <i class="zmdi zmdi-cake"></i>
+                              </span>
+                            </div>
+                            <div class="ms-list-text animated fadeInRight animation-delay-21">Bertempat di {{$info->lokasi}}</div>
+                          </li>
+                          <li class="">
+                            <div class="ms-list-icon animated zoomInUp animation-delay-22">
+                              <span class="ms-icon ms-icon-circle ms-icon-xlg color-warning shadow-3dp">
+                                <i class="zmdi zmdi-coffee"></i>
+                              </span>
+                            </div>
+                            <div class="ms-list-text animated fadeInRight animation-delay-23">Jam Kerja {{$info->waktu}}</div>
+                          </li>
+                        </ul>
+                        <div class="ms-hero-material-buttons text-right">
+                          <div class="ms-hero-material-buttons text-right">
+                            <a href="{{url('profil')}}" class="btn btn-warning btn-raised animated fadeInLeft animation-delay-24 mr-2">
+                              <i class="zmdi zmdi-settings"></i> Lihat Persyaratan</a>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- ms-hero-material-text-container -->
+                    </div>
+                  </div>
+                  
+                  <div class="carousel-controls">
+                    <!-- Controls -->
+                    <a class="left carousel-control animated zoomIn animation-delay-30" href="#carousel-hero" role="button" data-slide="prev">
+                      <i class="zmdi zmdi-chevron-left"></i>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control animated zoomIn animation-delay-30" href="#carousel-hero" role="button" data-slide="next">
+                      <i class="zmdi zmdi-chevron-right"></i>
+                      <span class="sr-only">Next</span>
+                    </a>
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                      <li data-target="#carousel-hero" data-slide-to="0" class="animated fadeInUpBig animation-delay-27 active"></li>
+                      <li data-target="#carousel-hero" data-slide-to="1" class="animated fadeInUpBig animation-delay-28"></li>
+                      <li data-target="#carousel-hero" data-slide-to="2" class="animated fadeInUpBig animation-delay-29"></li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>      
-    </section>
-    
-    <!-- /Section: intro -->
+            <div class="col-xl-6 col-lg-5">
+              <div class="ms-hero-img animated zoomInUp animation-delay-30">
+                <img src="{{asset('img/student-home.png')}}" alt="" class="img-fluid">
+                <div id="carousel-hero-img" class="carousel carousel-fade slide" data-ride="carousel" data-interval="3000">
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- container -->
+      </div>
+      <!-- ms-hero ms-hero-black -->
 
-    <!-- Section: services -->
-    <section id="service" class="home-section nopadding paddingtop-60">
-
-        <div class="container">
-
+      <div class="container mt-4">
         <div class="row">
-            <div class="col-sm-5">
-                <div class="wow fadeInUp" data-wow-delay="0.2s">
-                <img src="{{ asset('img/'.$sambutan->foto) }}" class="img-responsive" alt="" />
-                </div>
+          @foreach($berita as $data)
+          <div class="ms-feature col-xl-3 col-lg-6 col-md-6 card wow flipInX animation-delay-4">
+            <div class="text-center card-block">
+              <img src="{{asset('img/'.$data->foto)}}" width="200px">
+              <h4 class="color-info">{{$data->judul}}</h4>
+              <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus dicta error.</p>
+              <a href="" class="btn btn-info btn-raised">Baca Selengkapnya</a>
             </div>
-            <div class="col-sm-7">
-                <div class="wow fadeInDown" data-wow-delay="0.1s">
-                    <div class="section-heading">
-                    <h2 class="h-bold">Sambutan Kepala Sekolah</h2>
-                    </div>
-                    <hr>
-                    <p align="justify">{!!$sambutan->sambutan!!}</p>
-                </div>
-            </div>
-            
-        </div>      
+          </div>
+          @endforeach
         </div>
-    </section>
-    <!-- /Section: services -->
-    
-    
-    <!-- Section: testimonial -->
-    <section id="testimonial" class="home-section paddingbot-60">
-            <div class="container">
-                <div class="row">
-                    @php
-                    $alumni = App\Alumni::all();
-                    @endphp
-                       
-                    <div id="testimonial-slider" class="owl-carousel">
-                        @foreach($alumni as $al)
-                        <div class="testimonial">
-                            <div class="pic">
-                                <img src="{{asset('img/'.$al->foto)}}">
-                            </div>
-                            <div class="testimonial-profile">
-                                <h3 class="title">{{$al->nama}}</h3>
-                                <span class="post">{{$al->pekerjaan}}</span>
-                            </div>
-                            <p class="description">
-                                {{$al->testimoni}}
-                            </p>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
+      </div>
+
+      <div class="container mt-4">
+        <h2 class="text-center color-primary mb-2 wow fadeInDown animation-delay-4">Sekolah Menengah Kejuruan Assalaam Bandung</h2>
+        <p class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4"> Sekolah berkualitas dengan program pembelajaran yang berkualitas, sumber daya pengajar yang berkualitas, dan sarana prasarana yang lengkap dan mutakhir</p>
+        <div class="row">
+          @foreach($kejuruan as $data)
+          <div class="col-lg-4 col-sm-6">
+            <div class="card card-info wow zoomInUp animation-delay-5">
+              <div class="bg-info">
+                <img src="{{asset('img/'.$data->siswa)}}" alt="..." class="img-avatar-circle"> </div>
+              <div class="card-block pt-4 text-center">
+                <br>
+                <button class="btn btn-raised btn-primary" >{{$data->nama}}</button>
+                
+                
+              </div>
             </div>
-    </section>
-    <!-- /Section: testimonial -->
-    
-    <section id="nnn" class="home-section paddingbot-60">   
-        <div class="container marginbot-50">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="wow lightSpeedIn" data-wow-delay="0.1s">
-                    <div class="section-heading text-center">
-                    <h2 class="h-bold">Kerjasama Perusahaan</h2>
-                    <p>Perusahaan Yang Bekerja Sama Dengan SMK Assalaam Bandung</p>
-                    </div>
-                    </div>
-                    <div class="divider-short"></div>
-                </div>
-            </div>
-        </div>
-        @php
-        $pers = App\Perusahaan::all();
-        @endphp
-        <div class="container">
-            <div class="row">
-                <script src="{{asset('ss/js/jssor.slider-26.7.0.min.js')}}" type="text/javascript"></script>
-    <script type="text/javascript">
-        jssor_1_slider_init = function() {
-
-            var jssor_1_options = {
-              $AutoPlay: 1,
-              $AutoPlaySteps: 5,
-              $SlideDuration: 160,
-              $SlideWidth: 200,
-              $SlideSpacing: 3,
-              $Cols: 5,
-              $Align: 390,
-              $ArrowNavigatorOptions: {
-                $Class: $JssorArrowNavigator$,
-                $Steps: 5
-              },
-              $BulletNavigatorOptions: {
-                $Class: $JssorBulletNavigator$
-              }
-            };
-
-            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-
-            /*#region responsive code begin*/
-
-            var MAX_WIDTH = 980;
-
-            function ScaleSlider() {
-                var containerElement = jssor_1_slider.$Elmt.parentNode;
-                var containerWidth = containerElement.clientWidth;
-
-                if (containerWidth) {
-
-                    var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
-
-                    jssor_1_slider.$ScaleWidth(expectedWidth);
-                }
-                else {
-                    window.setTimeout(ScaleSlider, 30);
-                }
-            }
-
-            ScaleSlider();
-
-            $Jssor$.$AddEvent(window, "load", ScaleSlider);
-            $Jssor$.$AddEvent(window, "resize", ScaleSlider);
-            $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
-            /*#endregion responsive code end*/
-        };
-    </script>
-    <style>
-        /* jssor slider loading skin spin css */
-        .jssorl-009-spin img {
-            animation-name: jssorl-009-spin;
-            animation-duration: 1.6s;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-        }
-
-        @keyframes jssorl-009-spin {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-
-        .jssorb057 .i {position:absolute;cursor:pointer;}
-        .jssorb057 .i .b {fill:none;stroke:#fff;stroke-width:2000;stroke-miterlimit:10;stroke-opacity:0.4;}
-        .jssorb057 .i:hover .b {stroke-opacity:.7;}
-        .jssorb057 .iav .b {stroke-opacity: 1;}
-        .jssorb057 .i.idn {opacity:.3;}
-
-        .jssora073 {display:block;position:absolute;cursor:pointer;}
-        .jssora073 .a {fill:#ddd;fill-opacity:.7;stroke:#000;stroke-width:160;stroke-miterlimit:10;stroke-opacity:.7;}
-        .jssora073:hover {opacity:.8;}
-        .jssora073.jssora073dn {opacity:.4;}
-        .jssora073.jssora073ds {opacity:.3;pointer-events:none;}
-    </style>
-    <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1000px;height:150px;overflow:hidden;visibility:hidden;">
-        <!-- Loading Screen -->
-        <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
-            <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="{{asset('ss/img/spin.svg')}}" />
-        </div>
-        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:150px;overflow:hidden;">
-            @foreach($pers as $per)
-            <div data-p="43.75">
-                <img data-u="image" src="{{asset('img/'.$per->logo)}}" />
-            </div>
+          </div>
+          @endforeach
+          <div class="container mt-6">
+        <div class="panel panel-light panel-flat">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-3" role="tablist">
+            @foreach($kejuruan as $data)
+            <li class="nav-item wow fadeInDown animation-delay-6" role="presentation">
+              <a href="#{{$data->id}}" aria-controls="windows" role="tab" data-toggle="tab" class="nav-link withoutripple">
+                <i class="zmdi zmdi-tag"></i>
+                <span class="d-none d-md-inline">{{$data->nama}}</span>
+              </a>
+            </li>
             @endforeach
-        </div>
-        <!-- Bullet Navigator -->
-        <div data-u="navigator" class="jssorb057" style="position:absolute;bottom:12px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
-            <div data-u="prototype" class="i" style="width:16px;height:16px;">
-                <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                    <circle class="b" cx="8000" cy="8000" r="5000"></circle>
-                </svg>
-            </div>
-        </div>
-        <!-- Arrow Navigator -->
-        <div data-u="arrowleft" class="jssora073" style="width:50px;height:50px;top:0px;left:30px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                <path class="a" d="M4037.7,8357.3l5891.8,5891.8c100.6,100.6,219.7,150.9,357.3,150.9s256.7-50.3,357.3-150.9 l1318.1-1318.1c100.6-100.6,150.9-219.7,150.9-357.3c0-137.6-50.3-256.7-150.9-357.3L7745.9,8000l4216.4-4216.4 c100.6-100.6,150.9-219.7,150.9-357.3c0-137.6-50.3-256.7-150.9-357.3l-1318.1-1318.1c-100.6-100.6-219.7-150.9-357.3-150.9 s-256.7,50.3-357.3,150.9L4037.7,7642.7c-100.6,100.6-150.9,219.7-150.9,357.3C3886.8,8137.6,3937.1,8256.7,4037.7,8357.3 L4037.7,8357.3z"></path>
-            </svg>
-        </div>
-        <div data-u="arrowright" class="jssora073" style="width:50px;height:50px;top:0px;right:30px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                <path class="a" d="M11962.3,8357.3l-5891.8,5891.8c-100.6,100.6-219.7,150.9-357.3,150.9s-256.7-50.3-357.3-150.9 L4037.7,12931c-100.6-100.6-150.9-219.7-150.9-357.3c0-137.6,50.3-256.7,150.9-357.3L8254.1,8000L4037.7,3783.6 c-100.6-100.6-150.9-219.7-150.9-357.3c0-137.6,50.3-256.7,150.9-357.3l1318.1-1318.1c100.6-100.6,219.7-150.9,357.3-150.9 s256.7,50.3,357.3,150.9l5891.8,5891.8c100.6,100.6,150.9,219.7,150.9,357.3C12113.2,8137.6,12062.9,8256.7,11962.3,8357.3 L11962.3,8357.3z"></path>
-            </svg>
-        </div>
-    </div>
-    <script type="text/javascript">jssor_1_slider_init();</script>
-            </div>
-        </div>
-           
-    </section>
+          </ul>
+          <div class="panel-body">
+            <!-- Tab panes -->
+            
+            <div class="tab-content mt-5">
+              @foreach($kejuruan as $data)
+              <div role="tabpanel" class="tab-pane fade" id="{{$data->id}}">
+                <div class="row">
+                  <div class="col-lg-6 order-lg-2">
+                    <center>
+                    <img src="{{asset('img/'.$data->siswa)}}" alt="" class="img-fluid animated zoomIn animation-delay-8" width="400px"></center> </div>
+                  <div class="col-lg-6 order-lg-1">
+                    <h3 class="text-normal animated fadeInUp animation-delay-4">{{$data->nama}}</h3>
+                    <p class="lead lead-md animated fadeInUp animation-delay-6">{!!$data->profil!!}</p>
+                    <div class="">
+                      <button type="button" class="btn btn-primary btn-raised" data-toggle="modal" data-target="#myModal{{$data->id}}">
+                      <i class="zmdi zmdi-info"></i>Target Pembelajaran
+                      </button>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-    $("#testimonial-slider").owlCarousel({
-        items:2,
-        itemsDesktop:[1000,2],
-        itemsDesktopSmall:[979,2],
-        itemsTablet:[768,1],
-        pagination:false,
-        navigation:true,
-        navigationText:["",""],
-        autoPlay:true
-    });
-});
-</script>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal modal-default" id="myModal{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog animated zoomIn animated-3x" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title color-primary" id="myModalLabel">{{$data->nama}}</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                        </div>
+                        <div class="modal-body">
+                            {!!$data->program!!}
+                        </div>
+                        
+                    </div>
+                </div>
+              </div>
+              @endforeach
+              
+            </div>
+          </div>
+        </div>
+        <!-- panel -->
+      </div>
+        </div>
+      </div>
+      <!-- container -->
+      <div class="wrap wrap-mountain mt-6">
+        <div class="container">
+          <h2 class="text-center text-light mb-6 wow fadeInDown animation-delay-5">{{$komponen->nama_sekolah}} Sekolah
+            <strong>IDAMAN</strong></h2>
+          <div class="row">
+            <div class="col-lg-6 order-lg-2 mb-4  center-block">
+              <img src="{{asset('img/'.$sambutan->foto)}}" alt="" class="img-fluid center-block wow zoomIn animation-delay-12" height="200px"> </div>
+            <div class="col-lg-6 order-lg-1 pr-6">
+              <p class="wow fadeInLeft animation-delay-6">{!!$sambutan->sambutan!!}</p>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="wrap wrap-danger mt-6">
+        <h2 class="text-center no-m">Apa Yang Alumni Kami Katakan ??</h2>
+        <div id="carousel-example-generic" class="carousel carousel-cards carousel-fade slide" data-ride="carousel" data-interval="7000">
+          <!-- Indicators -->
+          
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+              <div class="carousel-caption">
+                <div class="container">
+                  <div class="row">
+                    @foreach($alumni as $data)
+                    <div class="col-lg-4">
+                      <div class="card animated flipInX animation-delay-2 mb-4">
+                        <blockquote class="blockquote blockquote-avatar withripple">
+                          <img src="{{asset('img/'.$data->foto)}}" alt="" class="avatar d-none d-sm-block">
+                          <p>{{$data->testimoni}}</p>
+                          <footer>{{$data->nama}}, {{$data->pekerjaan}}.</footer>
+                        </blockquote>
+                      </div>
+                    </div>
+                    @endforeach
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div id="map-canvas"></div>
+
+      <script>
+
+      var lat = {{ $vendor->lat }};
+      var lng = {{ $vendor->lng }};
+
+      var map = new google.maps.Map(document.getElementById('map-canvas'),{
+        center:{
+          lat: lat,
+          lng: lng
+        },
+        zoom:17
+      });
+
+      var marker = new google.maps.Marker({
+        position: {
+          lat: lat,
+          lng: lng
+        },
+        map: map
+      });
+      
+    </script>
 @endsection

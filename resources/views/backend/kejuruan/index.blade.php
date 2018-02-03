@@ -140,7 +140,7 @@
                         <img src="{{asset('img/'.$kejuruan->siswa)}}" class="img-responsive img-thumbnail" alt="" style="width: 225px; height: 225px;">
                         </a>
                         <br><br><br>
-                        <a href="{{ route('kejuruan.edit', $kejuruan->id) }}" class="btn btn-primary btn-block"><span class="fa fa-edit"></span> Detail Kejuruan</a>
+                        <a href="{{ route('kejuruan.edit', $kejuruan->id) }}" class="btn btn-primary btn-block"><span class="fa fa-edit"></span> Ubah Kejuruan</a>
                     </div>
                     </div>
                 </div>

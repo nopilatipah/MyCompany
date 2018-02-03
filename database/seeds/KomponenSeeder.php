@@ -20,7 +20,7 @@ class KomponenSeeder extends Seeder
         $komponen->tentang="Anda dapat mengikuti berbagai macam kegiatan dan informasi mengenai SMK Assalaam Bandung melalui media sosial. Ataupun anda dapat berkomunikasi langsung dengan kami melalui kontak yang tersedia di website ini. Kunjungi SMK Assalaam, Lihat dan Bandingkan !!";
         $komponen->akreditasi="A";
         $komponen->motto="SEKOLAH IDAMAN";
-        $komponen->foto_utama="ms4.png";
+        $komponen->foto_utama="student-home.png";
         $komponen->save();
 
         $facebook = new Kontak();

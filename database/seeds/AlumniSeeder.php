@@ -22,7 +22,7 @@ class AlumniSeeder extends Seeder
         $al1->nama = "Nopi Latipah";
         $al1->kejuruan = "Teknik Sepeda Motor";
         $al1->pekerjaan = "Mekanik";
-        $al1->testimoni = "Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te,nostrud Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te";
+        $al1->testimoni = "Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te,nostrud Ne eam errem semper.";
         $al1->foto = "1.jpg";
         $al1->save();
 
@@ -30,7 +30,7 @@ class AlumniSeeder extends Seeder
         $al2->nama = "John Corner";
         $al2->kejuruan = "Teknik Kendaraan Ringan";
         $al2->pekerjaan = "Mekanik";
-        $al2->testimoni = "Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te,nostrud Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te";
+        $al2->testimoni = "Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te,nostrud Ne eam errem semper.";
         $al2->foto = "2.jpg";
         $al2->save();
 
@@ -38,7 +38,7 @@ class AlumniSeeder extends Seeder
         $al3->nama = "Erlangga Saputra";
         $al3->kejuruan = "Teknik Sepeda Motor";
         $al3->pekerjaan = "Mekanik";
-        $al3->testimoni = "Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te,nostrud Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te";
+        $al3->testimoni = "Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te,nostrud Ne eam errem semper. ";
         $al3->foto = "4.jpg";
         $al3->save();
 
@@ -52,17 +52,17 @@ class AlumniSeeder extends Seeder
 
         $agenda = new Agenda();
         $agenda->tanggal = "2018-01-11";
-        $agenda->kegiatan = "Praujikom";
+        $agenda->kegiatan = "Pra Uji Kompentensi 2018";
         $agenda->save();
 
         $agenda2 = new Agenda();
         $agenda2->tanggal = "2018-02-11";
-        $agenda2->kegiatan = "Ujikom";
+        $agenda2->kegiatan = "Uji Kompentensi 2018";
         $agenda2->save();
 
         $agenda3 = new Agenda();
         $agenda3->tanggal = "2018-02-25";
-        $agenda3->kegiatan = "Ujian Sekolah";
+        $agenda3->kegiatan = "Ujian Sekolah 2018";
         $agenda3->save();
 
         $agenda4 = new Agenda();

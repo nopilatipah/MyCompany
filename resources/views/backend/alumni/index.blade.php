@@ -178,7 +178,7 @@
                     <span class="fa fa-edit"></span>
                       Ubah
                     </button>
-                    <div class="modal modal-warning fade" id="edit{{$data->id}}">
+                    <div class="modal modal-default fade" id="edit{{$data->id}}">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -290,7 +290,7 @@
     </section>
     <!-- /.content -->
 
-    <div class="modal modal-info fade" id="modal-info">
+    <div class="modal modal-default fade" id="modal-info">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">

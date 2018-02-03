@@ -177,7 +177,7 @@
       <!-- Main row -->
       {!! Charts::styles() !!}
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="box box-info">
             <div class="box-header">
               
@@ -186,20 +186,6 @@
             <div class="box-body pad">
 
               {!! $chart->html() !!}
-              
-            </div>
-             
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="box box-info">
-            <div class="box-header">
-              
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body pad">
-
-              {!! $charts->html() !!}
               
             </div>
              
