@@ -7,6 +7,7 @@ $kejuruan = App\Kejuruan::all();
 $info = App\Info::find(1);
 $vendor = App\Vendor::find(1);
 $berita = App\Artikel::all()->take(4);
+$pers = App\Perusahaan::all();
 @endphp
 <style>
   #map-canvas{
@@ -151,8 +152,8 @@ $berita = App\Artikel::all()->take(4);
                         </ul>
                         <div class="ms-hero-material-buttons text-right">
                           <div class="ms-hero-material-buttons text-right">
-                            <a href="{{url('profil')}}" class="btn btn-warning btn-raised animated fadeInLeft animation-delay-24 mr-2">
-                              <i class="zmdi zmdi-settings"></i> Lihat Persyaratan</a>
+                            <button data-toggle="modal" data-target="#myModal" class="btn btn-warning btn-raised animated fadeInLeft animation-delay-24 mr-2">
+                              <i class="zmdi zmdi-settings"></i> Lihat Persyaratan</button>
                           </div>
                         </div>
                       </div>
@@ -197,12 +198,15 @@ $berita = App\Artikel::all()->take(4);
       <div class="container mt-4">
         <div class="row">
           @foreach($berita as $data)
+          @php
+          $komen = App\Komentar::where('artikel_id','=',$data->berita)->count();
+          @endphp
           <div class="ms-feature col-xl-3 col-lg-6 col-md-6 card wow flipInX animation-delay-4">
             <div class="text-center card-block">
-              <img src="{{asset('img/'.$data->foto)}}" width="200px">
+              <img src="{{asset('img/'.$data->foto)}}" width="200px" height="120px">
               <h4 class="color-info">{{$data->judul}}</h4>
-              <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus dicta error.</p>
-              <a href="" class="btn btn-info btn-raised">Baca Selengkapnya</a>
+              <p class=""><i class="fa fa-user"> {{$data->author}}</i> || <i class="fa fa-comments"> {{$komen}}</i></p>
+              <a href="" class="btn btn-danger btn-raised">Baca Selengkapnya</a>
             </div>
           </div>
           @endforeach
@@ -301,6 +305,18 @@ $berita = App\Artikel::all()->take(4);
         </div>
       </div>
       
+      <div class="container mt-4">
+        <div class="row">
+          @foreach($pers as $data)
+          <div class="ms-feature col-xl-3 col-lg-6 col-md-6 card wow flipInX animation-delay-4">
+            <div class="text-center card-block">
+              <img src="{{asset('img/'.$data->logo)}}" height="150px">
+            </div>
+          </div>
+          @endforeach
+        </div>
+      </div>
+
 
       <div class="wrap wrap-danger mt-6">
         <h2 class="text-center no-m">Apa Yang Alumni Kami Katakan ??</h2>
@@ -331,6 +347,23 @@ $berita = App\Artikel::all()->take(4);
           </div>
         </div>
       </div>
+
+      <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title color-primary" id="myModalLabel">Syarat Pendaftaran Peserta Didik Baru</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+            </div>
+            <div class="modal-body">
+                {{$info->syarat}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
 
         <div id="map-canvas"></div>
 

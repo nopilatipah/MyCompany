@@ -103,8 +103,9 @@ class FrontController extends Controller
         $berita = DB::table('artikels')
                         ->join('kategori_artikels','kategori_artikels.id','=','artikels.kategori_id')
                         ->select('artikels.*', 'kategori_artikels.nama as kategori')
-                        ->orderBy('artikels.id','desc')->paginate(2);
+                        ->orderBy('artikels.id','desc')->paginate(5);
         $tags = DB::table('tagging_tags')->get();
+        
         return view('frontend.berita', ['berita' => $berita,'tags' => $tags]);
     }
 

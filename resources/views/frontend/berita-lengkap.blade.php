@@ -8,12 +8,15 @@
               <div class="card-block card-block-big">
                 <h1 class="no-mt">{{$berita->judul}}</h1>
                 <div class="mb-4">
-                  <img src="{{asset('img/default.png')}}" alt="..." class="img-circle mr-1" width="50px"> by
-                  <a href="javascript:void(0)">Victoria</a> in
-                  <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
+                  <img src="{{asset('img/default.png')}}" alt="..." class="img-circle mr-1" width="50px"> Oleh
+                  <a href="javascript:void(0)">{{$berita->author}}</a> Kategori
+                  @php
+                  $kat = App\KategoriArtikel::where('id','=',$berita->kategori_id)->first();
+                  @endphp
+                  <a href="javascript:void(0)" class="ms-tag ms-tag-info">{{$kat->nama}}</a>
                   <span class="ml-1 d-none d-sm-inline">
                     <i class="zmdi zmdi-time mr-05 color-info"></i>
-                    <span class="color-medium-dark">April 15, 2015</span>
+                    <span class="color-medium-dark">{{$berita->created_at->diffForHumans()}}</span>
                   </span>
                   <span class="ml-1">
                     <i class="zmdi zmdi-comments color-royal mr-05"></i> 25</span>
@@ -22,6 +25,30 @@
                 <p align="justify">{!!$berita->konten!!}</p>
               </div>
             </div>
+            <div class="card animated fadeInLeftTiny animation-delay-5">
+              <div class="col-lg-12">
+          <div id="disqus_thread"></div>
+          </div>
+        </div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://company-profile-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
           </div>
           <div class="col-lg-4">
             <div class="card card-primary animated fadeInUp animation-delay-7">

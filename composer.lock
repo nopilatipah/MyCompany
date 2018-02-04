@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d494c365c8af4317f2f1c7b309038fd8",
+    "content-hash": "ab8f0700a8a511df5753f297a35929b6",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -2680,6 +2680,7 @@
                 "xls",
                 "xlsx"
             ],
+            "abandoned": "phpoffice/phpspreadsheet",
             "time": "2015-05-01T07:00:55+00:00"
         },
         {
@@ -3081,6 +3082,53 @@
                 "uuid"
             ],
             "time": "2017-09-22T20:46:04+00:00"
+        },
+        {
+            "name": "roumen/disqus",
+            "version": "v1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laravelium/laravel-disqus.git",
+                "reference": "bb160b22f5ded911218ddcf395e8e0cb1c3ac0ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laravelium/laravel-disqus/zipball/bb160b22f5ded911218ddcf395e8e0cb1c3ac0ba",
+                "reference": "bb160b22f5ded911218ddcf395e8e0cb1c3ac0ba",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~4|~5",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Roumen\\Disqus": "src/"
+                },
+                "files": [
+                    "src/Roumen/Disqus/disqusapi/disqusapi.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache"
+            ],
+            "authors": [
+                {
+                    "name": "Roumen Damianoff",
+                    "email": "roumen@dawebs.com",
+                    "homepage": "https://roumen.it",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Disqus API package for Laravel 5.",
+            "homepage": "http://roumen.it/projects/laravel-disqus",
+            "keywords": [
+                "disqus",
+                "laravel"
+            ],
+            "time": "2015-05-16T16:31:33+00:00"
         },
         {
             "name": "rtconner/laravel-tagging",

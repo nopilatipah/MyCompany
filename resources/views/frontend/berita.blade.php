@@ -4,17 +4,14 @@
 @php
 $komponen = App\Komponen::find(1);
 @endphp
-<div class="ms-hero-page ms-hero-img-keyboard ms-hero-bg-primary mb-6">
-        <div class="container">
-          <div class="text-center">
-            <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">Berita Seputar {{$komponen->nama_sekolah}}</h1>
-          </div>
-        </div>
-      </div>
+
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
             @foreach($berita as $data)
+            @php
+            $tagged = DB::table('tagging_tagged')->where('taggable_id','=',$data->id)->get();
+            @endphp
             <article class="card mb-4 wow materialUp animation-delay-5">
               <figure class="ms-thumbnail ms-thumbnail-diagonal">
                 <img src="{{asset('img/'.$data->foto)}}" alt="" class="img-fluid">
@@ -44,9 +41,9 @@ $komponen = App\Komponen::find(1);
                 <div class="row">
                   <div class="col-md-6">
                     <div class="mt-1">
-                      <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
-                      <a href="javascript:void(0)" class="ms-tag ms-tag-danger">Productivity</a>
-                      <a href="javascript:void(0)" class="ms-tag ms-tag-royal">Resources</a>
+                      @foreach($tagged as $tg)
+                      <a href="javascript:void(0)" class="ms-tag ms-tag-danger">{{$tg->tag_name}}</a>
+                      @endforeach
                     </div>
                   </div>
                   <div class="col-md-6">

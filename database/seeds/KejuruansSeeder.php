@@ -98,9 +98,9 @@ class KejuruansSeeder extends Seeder
         $pers->save();
 
         $pers2 = new Perusahaan();
-        $pers2->nama = "PT. Belogix";
+        $pers2->nama = "Toyota";
         $pers2->kejuruan_id = "2";
-        $pers2->logo = "logo1.png";
+        $pers2->logo = "toyota.png";
         $pers2->save();
 
         $pers3 = new Perusahaan();

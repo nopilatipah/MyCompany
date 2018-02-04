@@ -28,20 +28,33 @@ $kategori = App\KategoriFasilitas::all();
         @if($fasilitas->count() > 0)
         @foreach($fasilitas as $fas)
           <div class="col-lg-4 col-md-6">
-            <div class="card card-warning wow zoomInUp mb-4 animation-delay-5">
+            <div class="card card-primary wow zoomInUp mb-4 animation-delay-5">
             <div class="ms-thumbnail-container wow fadeInUp">
                     <figure class="ms-thumbnail ms-thumbnail-top ms-thumbnail-info">
                       <img src="{{asset('img/'.$fas->foto)}}" alt="" class="img-fluid">
                       <figcaption class="ms-thumbnail-caption text-center">
                         <div class="ms-thumbnail-caption-content">
                           <h3 class="ms-thumbnail-caption-title">{{$fas->judul}}</h3>
-                          
+                          <button data-toggle="modal" data-target="#myModal{{$fas->id}}" class="btn btn-primary btn-raised">
+                           Lihat</button>
                         </div>
                       </figcaption>
                     </figure>
                   </div>
             </div>
           </div>
+          <div class="modal" id="myModal{{$fas->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+              <img src="{{asset('img/'.$fas->foto)}}" width="750px">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
           @endforeach
           @endif
         </div>
