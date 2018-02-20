@@ -306,6 +306,7 @@ $pers = App\Perusahaan::all();
       </div>
       
       <div class="container mt-4">
+        <h2 class="text-center color-primary mb-2 wow fadeInDown animation-delay-4">Perusahaan Yang Bekerja Sama Dengan SMK Assalaam</h2>
         <div class="row">
           @foreach($pers as $data)
           <div class="ms-feature col-xl-3 col-lg-6 col-md-6 card wow flipInX animation-delay-4">

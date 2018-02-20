@@ -24,6 +24,8 @@ Route::get('/akun','AkunController@profil');
 Route::get('/bintang','HomeController@bintang');
 Route::post('/akun/editpass','AkunController@updatePassword');
 Route::post('akun/editprofil','AkunController@editprofil');
+Route::post('kirimpesan','FrontController@kirimpesan');
+Route::delete('pesanDeleteAll', 'PesanController@deleteAll');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -54,6 +56,8 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']], function(){
 	Route::resource('alumni','AlumniController');
 	Route::resource('info','InfoController');
 	Route::resource('agenda','AgendaController');
+	Route::resource('sejarah','SejarahController');
+	Route::resource('keunggulan','KeunggulanController');
 });
 
 Route::get('vendor/add', function()

@@ -50,7 +50,7 @@ class KomponenSeeder extends Seeder
         $ig = new Kontak();
         $ig->jenis="Instagram";
         $ig->kontak="@Smkassalaam";
-        $ig->link="www.instagram.com";
+        $ig->link="https://www.instagram.com/smkassalaam/";
         $ig->save();
 
         $wa = new Kontak();

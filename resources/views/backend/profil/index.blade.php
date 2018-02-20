@@ -1,6 +1,19 @@
 @extends('layouts.admin')
 
 @section('header')
+<style type="text/css">
+  .custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+.custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
+</style>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -49,19 +62,6 @@
           </ul>
         </li>
         
-        @php
-        $pes = App\Pesan::where('status','=',0)->count();
-        @endphp
-        <li>
-          <a href="{{ route('pesan.index') }}">
-            <i class="fa fa-envelope"></i> <span>Pesan</span>
-            @if($pes > 0)
-            <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">{{$pes}}</small>
-            </span>
-            @endif
-          </a>
-        </li>
         
         <li class="header">KOMPONEN WEBSITE</li>
         <li><a href="{{ route('utama.index') }}"><i class="fa fa-laptop"></i> <span>Tampilan Utama</span></a></li>
@@ -113,29 +113,6 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <div class="box box-info">
-            <div class="box-header">
-              <h3 class="box-title">Keunggulan
-                <small>SMK Assalaam Bandung</small>
-              </h3>
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fa fa-minus"></i></button>
-                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                  <i class="fa fa-times"></i></button>
-              </div>
-              <!-- /. tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body pad">
-                <div>
-                  
-                </div>
-                <br>
-            </div>
-          </div>
           
           <div class="box box-info">
             <div class="box-header">
@@ -162,31 +139,7 @@
             </div>
           </div>
           <!-- /.box -->
-          <div class="box box-info">
-            <div class="box-header">
-              <h3 class="box-title">Sejarah Singkat
-                <small>SMK Assalaam Bandung</small>
-              </h3>
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fa fa-minus"></i></button>
-                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                  <i class="fa fa-times"></i></button>
-              </div>
-              <!-- /. tools -->
-            </div>
-            <!-- /.box-hzeader -->
-            <div class="box-body pad">
-                <div>
-                  {!! Form::textarea('sejarah',null,['class'=>'ckeditor', 'id'=>'editor1', 'name'=>'sejarah', 'rows'=>'10', 'cols'=>'80']) !!}
-                </div>
-                <br>
-                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Simpan Perubahan Sejarah</button>
-            </div>
-
-          </div>
+          
           <!-- /.box -->
           <div class="col-md-4">
           <div class="box box-info">
@@ -296,6 +249,223 @@
           <!-- /.box -->
           </div>
           <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Sejarah
+                <small>SMK Assalaam Bandung</small>
+              </h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                  <i class="fa fa-times"></i></button>
+              </div>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-hzeader -->
+            <div class="box-body pad">
+
+                <table class="table table-striped custab table-responsive">
+                  <thead>
+                  
+                      <tr>
+                   <th>No</th>
+                   <th>Waktu</th>
+                   <th>Judul</th>
+                   <th>Keterangan</th>
+                   <th colspan="2">Opsi</th>
+                  </tr>
+                  @php
+                  $no = 1;
+                  @endphp
+                  @foreach($sejarah as $data)
+                  <tr>
+                    <td>{{$no}}</td>
+                    <td>{{$data->waktu}}</td>
+                    <td>{{$data->judul}}</td>
+                    <td>{!! str_limit($data->keterangan, 50) !!}</td>
+                    <td>
+                    <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit{{$data->id}}">
+                    <span class="fa fa-edit"></span>
+                      Ubah
+                    </button>
+                    <div class="modal modal-default fade" id="edit{{$data->id}}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Ubah Data Riwayat</h4>
+                          </div>
+                          <div class="modal-body">
+                            {!! Form::model($data,['url'=>route('sejarah.update',$data->id), 'method'=>'put', 'files'=>'true','class'=>'form-horizontal']) !!}
+                                
+                                <div class="form-group{{ $errors->has('waktu') ? 'has-error' : '' }}">
+                                  {!! Form::label('name','Waktu *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::text('waktu',null,['class'=>'form-control','required','placeholder'=>'Contoh : Tahun 2018']) !!}
+                                    {!! $errors->first('waktu', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                                <div class="form-group{{ $errors->has('judul') ? 'has-error' : '' }}">
+                                  {!! Form::label('name','Judul Riwayat *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::text('judul',null,['class'=>'form-control','required','placeholder'=>'Contoh : Peresmian Jurusan Multimedia']) !!}
+                                    {!! $errors->first('judul', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                                <div class="form-group{{ $errors->has('keterangan') ? 'has-error' : '' }}">
+                                  {!! Form::label('name','Keterangan Riwayat *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::textarea('keterangan',null,['class'=>'form-control','required','size'=>'5x3']) !!}
+                                    {!! $errors->first('keterangan', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                                
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>
+                              {!! Form::submit('Simpan', ['class'=>'btn btn-warning']) !!}
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                            <!-- /.modal-content -->
+                      </div>
+                          <!-- /.modal-dialog -->
+                    </div></td>
+                    {!! Form::model($data, ['url'=>route('sejarah.destroy',$data->id), 'method'=>'delete', 'id'=>'myform']) !!}
+                    {!! Form::close() !!}
+                    <td>
+                    <button id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+                    </td>
+                    
+                  </tr>
+
+
+                  @php
+                  $no++;
+                  @endphp
+
+                  @endforeach
+                  </thead>
+                         
+                  </table>
+                  {{ $sejarah->links() }}
+                <br>
+                <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#sejarah"><i class="fa fa-plus"></i> Tambah Riwayat</button>
+            </div>
+
+          </div>
+          <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Keunggulan
+                <small>SMK Assalaam Bandung</small>
+              </h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                  <i class="fa fa-times"></i></button>
+              </div>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+             <div class="box-body pad">
+
+                <table class="table table-striped custab table-responsive">
+                  <thead>
+                  
+                      <tr>
+                   <th>No</th>
+                   <th>Keunggulan</th>
+                   <th colspan="2">Opsi</th>
+                  </tr>
+                  @php
+                  $no = 1;
+                  @endphp
+                  @foreach($keunggulan as $data)
+                  <tr>
+                    <td>{{$no}}</td>
+                    <td>{!! str_limit($data->keunggulan, 100) !!}</td>
+                    <td>
+                    <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit{{$data->id}}">
+                    <span class="fa fa-edit"></span>
+                      Ubah
+                    </button>
+                    <div class="modal modal-default fade" id="edit{{$data->id}}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Ubah Keunggulan</h4>
+                          </div>
+                          <div class="modal-body">
+                            {!! Form::model($data,['url'=>route('keunggulan.update',$data->id), 'method'=>'put', 'files'=>'true','class'=>'form-horizontal']) !!}
+                                
+                                <div class="form-group{{ $errors->has('waktu') ? 'has-error' : '' }}">
+                                  {!! Form::label('name','Waktu *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::text('waktu',null,['class'=>'form-control','required','placeholder'=>'Contoh : Tahun 2018']) !!}
+                                    {!! $errors->first('waktu', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                                <div class="form-group{{ $errors->has('judul') ? 'has-error' : '' }}">
+                                  {!! Form::label('name','Judul Riwayat *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::text('judul',null,['class'=>'form-control','required','placeholder'=>'Contoh : Peresmian Jurusan Multimedia']) !!}
+                                    {!! $errors->first('judul', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                                <div class="form-group{{ $errors->has('keterangan') ? 'has-error' : '' }}">
+                                  {!! Form::label('name','Keterangan Riwayat *',['class'=>'col-md-4']) !!}
+                                  <div class="col-md-8">
+                                    {!! Form::textarea('keterangan',null,['class'=>'form-control','required','size'=>'5x3']) !!}
+                                    {!! $errors->first('keterangan', '<p class="help-block">:message</p>') !!}
+                                  </div>
+                                </div>
+                                
+                          </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>
+                              {!! Form::submit('Simpan', ['class'=>'btn btn-warning']) !!}
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                            <!-- /.modal-content -->
+                      </div>
+                          <!-- /.modal-dialog -->
+                    </div></td>
+                    {!! Form::model($data, ['url'=>route('sejarah.destroy',$data->id), 'method'=>'delete', 'id'=>'myform']) !!}
+                    {!! Form::close() !!}
+                    <td>
+                    <button id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+                    </td>
+                    
+                  </tr>
+
+
+                  @php
+                  $no++;
+                  @endphp
+
+                  @endforeach
+                  </thead>
+                         
+                  </table>
+                  {{ $keunggulan->links() }}
+                <br>
+                <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#keunggulan"><i class="fa fa-plus"></i> Tambah Keunggulan</button>
+            </div>
+          </div>
+          
+          </div>
+
+          <div class="col-md-12">
           <br>
           <button type="submit" class="btn btn-primary btn-lg btn-block pull-right"><i class="fa fa-save"></i> Simpan Semua Perubahan</button>
           </div>
@@ -346,4 +516,94 @@
 
 {!! Form::close() !!}
   
+<div class="modal modal-default fade" id="sejarah">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Tambah Riwayat Baru</h4>
+              </div>
+              <div class="modal-body">
+                {!! Form::open(['url'=>route('sejarah.store'), 'method'=>'post', 'files'=>'true','class'=>'form-horizontal']) !!}
+                    
+                    <div class="form-group{{ $errors->has('waktu') ? 'has-error' : '' }}">
+                      {!! Form::label('waktu','Waktu *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::text('waktu',null,['class'=>'form-control','required','placeholder'=>'26 April 2018']) !!}
+                        {!! $errors->first('waktu', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+                    <div class="form-group{{ $errors->has('judul') ? 'has-error' : '' }}">
+                      {!! Form::label('judul','Judul Riwayat *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::text('judul',null,['class'=>'form-control','required','placeholder'=>'Pembukaan Jurusan RPL']) !!}
+                        {!! $errors->first('judul', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+                    <div class="form-group{{ $errors->has('keterangan') ? 'has-error' : '' }}">
+                      {!! Form::label('keterangan','Keterangan Riwayat *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::textarea('keterangan',null,['class'=>'form-control', 'size'=>'5x3']) !!}
+                        {!! $errors->first('keterangan', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>
+                {!! Form::submit('Simpan', ['class'=>'btn btn-primary']) !!}
+              </div>
+              {!! Form::close() !!}
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+</div>
+
+<div class="modal modal-default fade" id="keunggulan">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Tambah Keunggulan Baru</h4>
+              </div>
+              <div class="modal-body">
+                {!! Form::open(['url'=>route('keunggulan.store'), 'method'=>'post', 'files'=>'true','class'=>'form-horizontal']) !!}
+                    
+                    <div class="form-group{{ $errors->has('keunggulan') ? 'has-error' : '' }}">
+                      {!! Form::label('keunggulan','Keunggulan *',['class'=>'col-md-4']) !!}
+                      <div class="col-md-8">
+                        {!! Form::textarea('keunggulan',null,['class'=>'form-control','required']) !!}
+                        {!! $errors->first('keunggulan', '<p class="help-block">:message</p>') !!}
+                      </div>
+                    </div>
+                    
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>
+                {!! Form::submit('Simpan', ['class'=>'btn btn-primary']) !!}
+              </div>
+              {!! Form::close() !!}
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+</div>
+
+<script type="text/javascript">
+  $('button#delete').on('click', function(){
+  swal({   
+    title: "Apakah Anda Yakin ?",
+    text: "Anda Tidak Dapat Mengembalikan Data Riwayat !",         type: "warning",   
+    showCancelButton: true,   
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Ya, Hapus Riwayat !", 
+    closeOnConfirm: false 
+  }, 
+       function(){   
+    $("#myform").submit();
+  });
+})
+</script>
 @endsection

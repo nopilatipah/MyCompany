@@ -107,6 +107,7 @@
 
 @section('content')
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
 <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -127,15 +128,16 @@
             <div class="box-body">
               <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
               <ul class="todo-list">
-              @foreach($pesan as $data)
+              @foreach($pesans as $data)
+                @if($data->status == 0)
                 <li>
                   <!-- drag handle -->
                   <i class="ion ion-android-mail"></i>
                   <!-- todo text -->
                   <span class="text">{{$data->nama_depan}} {{$data->nama_belakang}}</span>
                   <!-- Emphasis label -->
-                  <small class="label label-warning"><i class="fa fa-clock-o"></i> {{$data->created_at}}</small>&nbsp
-                  Subjek : {{$data->subjek}} || <i>{!! str_limit($data->pesan, 90) !!}</i>
+                  <small class="label label-warning"><i class="fa fa-clock-o"></i> <b>{{$data->created_at}}</b></small>&nbsp
+                  <b>Subjek : {{$data->subjek}} || </b> <i><b>{!! str_limit($data->pesan, 90) !!}</b></i>
                   <!-- General tools such as edit or delete-->
                   <div class="tools">
                     {!! Form::model($data, ['url'=>route('pesan.destroy',$data->id), 'method'=>'delete', 'id'=>'myform']) !!}
@@ -144,24 +146,27 @@
                     <button id="delete" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
                   </div>
                 </li>
-                @endforeach
-                @foreach($dulu as $data)
+                @endif
+                @if($data->status == 1)
                 <li>
                   <!-- drag handle -->
                   <i class="ion ion-android-mail"></i>
                   <!-- todo text -->
-                  {{$data->nama_depan}} {{$data->nama_belakang}}
+                  {{$data->nama_depan}} {{$data->nama_belakang}} 
                   <!-- Emphasis label -->
                   <small class="label label-warning"><i class="fa fa-clock-o"></i> {{$data->created_at}}</small>&nbsp
-                  Subjek : {{$data->subjek}} || <i>{!! str_limit($data->pesan, 90) !!}</i>
+                  Subjek : {{$data->subjek}} ||  <i> {!! str_limit($data->pesan, 90) !!}</i>
                   <!-- General tools such as edit or delete-->
                   <div class="tools">
                     {!! Form::model($data, ['url'=>route('pesan.destroy',$data->id), 'method'=>'delete', 'id'=>'myform']) !!}
                     {!! Form::close() !!}
+                    <a href="{{route('pesan.show',$data->id)}}" class="btn btn-info btn-xs">Baca</a>
                     <button id="delete" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
                   </div>
                 </li>
+                @endif
                 @endforeach
+
               </ul>
             </div>
             

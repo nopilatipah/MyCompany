@@ -62,19 +62,6 @@
           </ul>
         </li>
         
-        @php
-        $pes = App\Pesan::where('status','=',0)->count();
-        @endphp
-        <li>
-          <a href="{{ route('pesan.index') }}">
-            <i class="fa fa-envelope"></i> <span>Pesan</span>
-            @if($pes > 0)
-            <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">{{$pes}}</small>
-            </span>
-            @endif
-          </a>
-        </li>
         
         <li class="header">KOMPONEN WEBSITE</li>
         <li><a href="{{ route('utama.index') }}"><i class="fa fa-laptop"></i> <span>Tampilan Utama</span></a></li>
@@ -156,7 +143,7 @@
               
               <div class="col-md-10 col-md-offset-1">
                <!-- tabel akun -->
-               <table class="table table-striped custab">
+               <table class="table table-striped custab table-responsive">
                   <thead>
                   
                       <tr>
@@ -174,7 +161,7 @@
                     <td>{{$no}}</td>
                     <td><img src="{{asset('img/'.$data->foto)}}" class="img-responsive img-thumbnail" alt="" style="height: 40px;"></td>
                     <td>{{$data->judul}}</td>
-                    <td>{{$data->keterangan}}</td>
+                    <td>{!! str_limit($data->keterangan, 50) !!}</td>
                     <td>
                     <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit{{$data->id}}">
                     <span class="fa fa-edit"></span>
@@ -393,7 +380,7 @@
           <!-- /.modal-dialog -->
         </div>
   
-  <script type="text/javascript">
+<script type="text/javascript">
   $('button#delete').on('click', function(){
   swal({   
     title: "Apakah Anda Yakin ?",

@@ -1,32 +1,9 @@
 @extends('layouts.user')
 
-@section('navbar')
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-              <ul class="nav navbar-nav">
-                <li><a href="{{url('/')}}">Beranda</a></li>
-                <li class="dropdown">
-                  <a href="" class="dropdown-toggle" data-toggle="dropdown">Sekolah <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="{{url('/profil')}}">Profil Umum</a></li>
-                    <li><a href="{{url('/kejuruan')}}">Kejuruan</a></li>
-                    <li class="active"><a href="{{url('/fasilitas')}}">Fasilitas</a></li>
-                    <li><a href="{{url('/ekstrakurikuler')}}">Ekstrakurikuler</a></li>
-                  </ul>
-                </li>
-                <li><a href="{{url('/berita')}}">Berita</a></li>
-                <li><a href="{{url('/galeri')}}">Galeri</a></li>
-                <li><a href="{{url('/kontak')}}">Kontak</a></li>
-                
-              </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-@endsection
-
 @section('content')
+<script type="text/javascript" src="{{asset('js/instafeed.min.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
 
-<section id="facilities" class="home-section paddingbot-60">
 <div class="container">
 <div class="wow lightSpeedIn" data-wow-delay="0.1s">
   <div class="section-heading text-center">
@@ -37,6 +14,20 @@
 <div class="divider-short"></div><br>
 <div id="instafeed" class="row"></div>
 </div>
-</section>
 
+<script type="text/javascript">
+  $( document ).ready(function() {
+  var userFeed = new Instafeed({
+    get: 'user',
+    userId: '6885603018',
+    limit: 24,
+    resolution: 'standard_resolution',
+    accessToken: '6885603018.1677ed0.c249151918964b2b976ccd5c9c28a4ab',
+    sortBy: 'most-recent',
+    template: '<div class="col-md-3 gallery instaimg"><a href="'+image+'" title="" target="_blank"><img src="'+image+'" alt="" class="img-responsive"/></a></div>',
+  });
+  userFeed.run();
+
+})
+</script>
 @endsection

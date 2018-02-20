@@ -6,7 +6,7 @@ $komponen = App\Komponen::find(1);
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SMK Assalaam</title>
+  <title>{{$komponen->nama_sekolah}}</title>
   <link rel="shortcut icon" href="{{ asset('img/'.$komponen->logo) }}">
 
   <script type="text/javascript" src="{{ asset('ckeditor/ckeditor.js') }}"></script>
@@ -66,80 +66,13 @@ $komponen = App\Komponen::find(1);
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-      @php
-      $pesan = App\Pesan::where('status','=',0)->count();
-      $komentar = App\Komentar::where('status','=',0)->count();
-      @endphp
+      
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-              @if($pesan > 0)
-              <span class="label label-success">{{$pesan}}</span>
-              @endif
-            </a>
-            @if($pesan > 0)
-            @php
-            $daftar = App\Pesan::where('status','=',0)->get();
-            @endphp
-            <ul class="dropdown-menu">
-              <li class="header">{{$pesan}} Pesan Baru</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  @foreach($daftar as $data)
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="{{asset('img/default.png')}}" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        {{$data->nama_depan}} {{$data->nama_belakang}}
-                        <small><i class="fa fa-clock-o"></i> {{$data->created_at->diffForHumans()}}</small>
-                      </h4>
-                      <p>{!! str_limit($data->pesan, 30) !!}</p>
-                    </a>
-                  </li>
-                  @endforeach
-                  <!-- end message -->
-                </ul>
-              </li>
-              <li class="footer"><a href="{{ route('pesan.index') }}">Lihat Semua Pesan</a></li>
-            </ul>
-            @endif
-          </li>
+          
           <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              @if($komentar > 0)
-              <span class="label label-warning">{{$komentar}}</span>
-              @endif
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">Anda Memiliki {{$komentar}} Notifikasi</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                @if($komentar > 0)
-                @php
-                $com = App\Komentar::where('status','=',0)->get();
-                @endphp
-                <ul class="menu">
-                  @foreach($com as $data2)
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-comment text-aqua"></i> <b>{{$data2->nama_depan}}</b> Mengomentari : <i>"{!! str_limit($data2->komentar, 10) !!}"</i>
-                    </a>
-                  </li>
-                  @endforeach
-                </ul>
-                @endif
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li>
+          
           
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

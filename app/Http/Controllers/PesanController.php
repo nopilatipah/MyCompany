@@ -19,8 +19,9 @@ class PesanController extends Controller
     public function index()
     {
         $pesan = DB::table('pesans')->select('pesans.*')->where('status',0)->paginate(10);
+        $pesans = DB::table('pesans')->select('pesans.*')->orderBy('pesans.id','desc')->paginate(10);
         $dulu = DB::table('pesans')->select('pesans.*')->where('status',1)->paginate(10);
-        return view('backend.pesan.index', compact('pesan','dulu'));
+        return view('backend.pesan.index', compact('pesan','pesans','dulu'));
     }
 
     /**
@@ -114,6 +115,13 @@ class PesanController extends Controller
             alert()->success('Pesan Terhapus')->autoclose(3500);
 
         return redirect()->route('pesan.index');
+    }
+
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        DB::table("products")->whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['success'=>"Products Deleted successfully."]);
     }
 
     public function kirim(Request $request, $id)

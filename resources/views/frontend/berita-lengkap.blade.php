@@ -1,6 +1,26 @@
 @extends('layouts.user')
 
 @section('content')
+<style type="text/css">
+  .video{
+    position: relative;
+    padding-bottom: 50%;
+  }
+  .video iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .image{
+    position: relative;
+    padding-bottom: 50%;
+  }
+  .image img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+</style>
 <div class="container">
         <div class="row">
           <div class="col-lg-8">
@@ -21,7 +41,9 @@
                   <span class="ml-1">
                     <i class="zmdi zmdi-comments color-royal mr-05"></i> 25</span>
                 </div>
-                <img src="{{asset('img/'.$berita->foto)}}" alt="" class="img-fluid mb-4">
+                <div class="image">
+                <img src="{{asset('img/'.$berita->foto)}}" alt="">
+                </div>
                 <p align="justify">{!!$berita->konten!!}</p>
               </div>
             </div>
@@ -51,13 +73,29 @@ s.setAttribute('data-timestamp', +new Date());
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
           </div>
           <div class="col-lg-4">
-            <div class="card card-primary animated fadeInUp animation-delay-7">
+            <div class="card card-warning animated fadeInUp animation-delay-7">
               <div class="card-header">
                 <h3 class="card-title">
-                  <i class="zmdi zmdi-apps"></i> Navigasi</h3>
+                  <i class="zmdi zmdi-search"></i> Cari Artikel</h3>
               </div>
+              <div class="card-block">
+                {!! Form::open(['url'=>url('/berita'), 'method'=>'post', 'class'=>'form-horizontal']) !!}
+                  <fieldset class="container">
+                          <div class="form-group row">
+                            <div class="col-lg-8">
+                              <input type="text" name="judul" class="form-control" id="inputName" placeholder="Judul Artikel" required=""> 
+                            </div>
+                            <div class="col-lg-2">
+                              <button type="submit" class="btn btn-warning btn-raised">Cari</button>
+                            </div>
+                          </div>
+                  </fieldset>
+                {!! Form::close() !!}
+              </div>
+            </div>
+            <div class="card animated fadeInUp animation-delay-7">
               <div class="card-tabs">
-                <ul class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-4" role="tablist">
+                <ul class="nav nav-tabs nav-tabs-full nav-tabs-3 shadow-2dp" role="tablist">
                   <li class="nav-item">
                     <a href="#favorite" aria-controls="favorite" role="tab" data-toggle="tab" class="nav-link withoutripple active">
                       <i class="no-mr zmdi zmdi-star"></i>
@@ -68,11 +106,7 @@ s.setAttribute('data-timestamp', +new Date());
                       <i class="no-mr zmdi zmdi-folder"></i>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="#archives" aria-controls="archives" role="tab" data-toggle="tab" class="nav-link withoutripple">
-                      <i class="no-mr zmdi zmdi-time"></i>
-                    </a>
-                  </li>
+                  
                   <li class="nav-item">
                     <a href="#tags" aria-controls="tags" role="tab" data-toggle="tab" class="nav-link withoutripple">
                       <i class="no-mr zmdi zmdi-tag-more"></i>
@@ -84,24 +118,27 @@ s.setAttribute('data-timestamp', +new Date());
                 <div role="tabpanel" class="tab-pane fade active show" id="favorite">
                   <div class="card-block">
                     <div class="ms-media-list">
+                      @php
+                      $populer = App\Artikel::whereRaw('views = (select max(`views`) from artikels)')->first();
+                      $kkk = App\KategoriArtikel::find($populer->kategori_id);
+                      @endphp
                       <div class="media mb-2">
                         <div class="media-left media-middle">
-                          <a href="#">
-                            <img class="d-flex mr-3 media-object media-object-circle" src="assets/img/demo/p75.jpg" alt="..."> </a>
+                          <a href="{{url('/baca-selengkapnya/'.$populer->id)}}">
+                            <img class="d-flex mr-3 media-object media-object-circle" src="{{asset('img/'.$populer->foto)}}" alt="..."> </a>
                         </div>
                         <div class="media-body">
-                          <a href="javascript:void(0)" class="media-heading">Lorem ipsum dolor sit amet in consectetur adipisicing</a>
+                          <a href="{{url('/baca-selengkapnya/'.$populer->id)}}" class="media-heading">{{$populer->judul}}</a>
                           <div class="media-footer text-small">
                             <span class="mr-1">
-                              <i class="zmdi zmdi-time color-info mr-05"></i> August 18, 2016</span>
+                              <i class="zmdi zmdi-time color-info mr-05"></i> {{date('d M Y', strtotime($populer->created_at))}}</span>
                             <span>
                               <i class="zmdi zmdi-folder-outline color-success mr-05"></i>
-                              <a href="javascript:void(0)">Design</a>
+                              <a href="{{url('kategori',$kkk->id)}}">{{$kkk->nama}}</a>
                             </span>
                           </div>
                         </div>
                       </div>
-                      
                     </div>
                   </div>
                 </div>
@@ -111,58 +148,22 @@ s.setAttribute('data-timestamp', +new Date());
                     $kategori = App\KategoriArtikel::all();
                     @endphp
                     @foreach($kategori as $data)
-                    <a href="" class="list-group-item list-group-item-action withripple">
-                      <i class=" color-info zmdi zmdi-tag-more"></i>{{$data->nama}}
-                      <span class="ml-auto badge-pill badge-pill-info">25</span>
+                    @php
+                    $jml = App\Artikel::where('kategori_id','=',$data->id)->count();
+                    @endphp
+                    <a href="{{url('kategori',$data->id)}}" class="list-group-item list-group-item-action withripple">
+                      <i class=" color-info zmdi zmdi-tag"></i>{{$data->nama}}
+                      <span class="ml-auto badge-pill badge-pill-info">{{$jml}}</span>
                     </a>
                     @endforeach
                   </div>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="archives">
-                  <div class="list-group">
-                    <a href="javascript:void(0)" class="list-group-item list-group-item-action withripple">
-                      <i class="zmdi zmdi-calendar"></i> January 2016
-                      <span class="ml-auto badge-pill">25</span>
-                    </a>
-                    <a href="javascript:void(0)" class="list-group-item list-group-item-action withripple">
-                      <i class="zmdi zmdi-calendar"></i> February 2016
-                      <span class="ml-auto badge-pill">14</span>
-                    </a>
-                    <a href="javascript:void(0)" class="list-group-item list-group-item-action withripple">
-                      <i class="zmdi zmdi-calendar"></i> March 2016
-                      <span class="ml-auto badge-pill">9</span>
-                    </a>
-                    <a href="javascript:void(0)" class="list-group-item list-group-item-action withripple">
-                      <i class="zmdi zmdi-calendar"></i> April 2016
-                      <span class="ml-auto badge-pill">12</span>
-                    </a>
-                    <a href="javascript:void(0)" class="list-group-item list-group-item-action withripple">
-                      <i class="zmdi zmdi-calendar"></i> June 2016
-                      <span class="ml-auto badge-pill">65</span>
-                    </a>
-                  </div>
-                </div>
+                
                 <div role="tabpanel" class="tab-pane fade" id="tags">
                   <div class="card-block text-center">
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Design</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Productivity</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Web</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Resources</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Multimedia</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">HTML5</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">CSS3</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Javascript</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Jquery</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Bootstrap</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Angular</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Gulp</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Atom</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Fonts</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Pictures</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Developers</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Code</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">SASS</a>
-                    <a href="javascript:void(0)" class="ms-tag ms-tag-primary">Less</a>
+                    @foreach($tags as $tag)
+                    <a href="{{url('/filter/tags',$tag->name)}}" class="ms-tag ms-tag-primary">{{$tag->name}}</a>
+                    @endforeach
                   </div>
                 </div>
               </div>
@@ -172,17 +173,9 @@ s.setAttribute('data-timestamp', +new Date());
                 <h3 class="card-title">
                   <i class="zmdi zmdi-play-circle-outline"></i> Feature Video</h3>
               </div>
-              <div data-type="vimeo" data-video-id="94747106"></div>
+              <div data-type="youtube" data-video-id="9ZfN87gSjvI"></div>
             </div>
-            <div class="card card-primary animated fadeInUp animation-delay-7">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="zmdi zmdi-widgets"></i> Text Widget</h3>
-              </div>
-              <div class="card-block">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat ipsam non eaque est architecto doloribus, labore nesciunt laudantium, ex id ea, cum facilis similique tenetur fugit nemo id minima possimus.</p>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>

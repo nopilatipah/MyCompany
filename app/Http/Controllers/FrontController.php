@@ -13,11 +13,13 @@ use App\Profil;
 use App\Kontak;
 use App\Kejuruan;
 use App\Ekskul;
+use App\Pesan;
 use App\Fasilitas;
 use App\Notifications\NotifyPostOwner;
 use App\User;
 use App\Prestasi;
 use App\Pengunjung;
+use App\Keunggulan;
 use Vinkla\Instagram\Instagram;
 use App\Alumni;
 
@@ -45,7 +47,8 @@ class FrontController extends Controller
         $profil = Profil::find(1);
         $komponen = Komponen::find(1);
         $lokasi = Vendor::find(1);
-        return view('frontend.profil',compact('profil','komponen','lokasi'));
+        $keunggulan  = Keunggulan::all();
+        return view('frontend.profil',compact('profil','komponen','lokasi','keunggulan'));
     }
 
     public function kejuruan()
@@ -64,9 +67,14 @@ class FrontController extends Controller
 
     public function fasilitasfilter($id)
     {
-        $komponen = Komponen::find(1);
-        $fasilitas = Fasilitas::where('kategori','=',$id)->get();
-        return view('frontend.fasilitas',compact('fasilitas','komponen'));
+        if($id == 'all'){
+             $fasilitas = Fasilitas::all();
+             return $fasilitas;
+        }else{
+            $fasilitas = Fasilitas::where('kategori','=',$id)->get();
+            return $fasilitas;
+        }
+             
     }
 
     public function ekskul()
@@ -79,10 +87,13 @@ class FrontController extends Controller
 
     public function ekskulfilter($id)
     {
-        $prestasi = Prestasi::all();
-        $komponen = Komponen::find(1);
-        $ekskul = Ekskul::where('kategori_id','=',$id)->get();
-        return view('frontend.ekskul',compact('ekskul','komponen','prestasi'));
+        if($id == 'all'){
+             $ekskul = Ekskul::all();
+             return $ekskul;
+        }else{
+            $ekskul = Ekskul::where('kategori_id','=',$id)->get();
+            return $ekskul;
+        }
     }
 
     public function prestasi()
@@ -243,4 +254,14 @@ class FrontController extends Controller
         alert()->success('Komentar Terkirim')->autoclose(3500);
         return view('frontend.berita-lengkap', compact('berita'));
     }
+
+    public function kirimpesan(Request $request)
+    {  
+        $pesan = Pesan::create($request->all());
+        $komponen = Komponen::find(1);
+        alert()->success('Terimakasih Anda Telah Menghubungi Kami','Pesan Terkirim')->autoclose(3500);
+        return redirect()->back();;
+    }
 }
+
+

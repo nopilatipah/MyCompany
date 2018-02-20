@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\Profil;
+use App\Sejarah;
+use App\Keunggulan;
 
 class ProfilsSeeder extends Seeder
 {
@@ -42,5 +44,66 @@ class ProfilsSeeder extends Seeder
 
         $profil->foto="ms6.png";
         $profil->save();
+
+
+        $sejarah1 = new Sejarah();
+        $sejarah1->waktu = "02 Mei 2009";
+        $sejarah1->judul = "Pendirian SMK Assalaam";
+        $sejarah1->keterangan = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus numquam, voluptatibus tempore sint nesciunt id accusantium corporis ea assumenda iure quos, temporibus accusamus cupiditate eveniet mollitia illum ipsum porro aut.";
+        $sejarah1->save();
+
+        $sejarah2 = new Sejarah();
+        $sejarah2->waktu = "Tahun 2013";
+        $sejarah2->judul = "Akreditasi A untuk TKR";
+        $sejarah2->keterangan = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus numquam, voluptatibus tempore sint nesciunt id accusantium corporis ea assumenda iure quos, temporibus accusamus cupiditate eveniet mollitia illum ipsum porro aut.";
+        $sejarah2->save();
+
+        $sejarah3 = new Sejarah();
+        $sejarah3->waktu = "Tahun 2013";
+        $sejarah3->judul = "Pembukaan Jurusan RPL";
+        $sejarah3->keterangan = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus numquam, voluptatibus tempore sint nesciunt id accusantium corporis ea assumenda iure quos, temporibus accusamus cupiditate eveniet mollitia illum ipsum porro aut.";
+        $sejarah3->save();
+
+        $sejarah4 = new Sejarah();
+        $sejarah4->waktu = "Tahun 2014";
+        $sejarah4->judul = "Pembukaan Jurusan TSM";
+        $sejarah4->keterangan = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus numquam, voluptatibus tempore sint nesciunt id accusantium corporis ea assumenda iure quos, temporibus accusamus cupiditate eveniet mollitia illum ipsum porro aut.";
+        $sejarah4->save();
+
+        $keunggulan1 = new Keunggulan();
+        $keunggulan1->keunggulan = "Program pembelajaran disusun berdasarkan standar Nasional dan dikembangkan berdasarkan kebutuhan industri serta  bekerjasama dengan DU/DI (Dunia Usaha/Dunia Industri)";
+        $keunggulan1->save();
+
+        $keunggulan2 = new Keunggulan();
+        $keunggulan2->keunggulan = "Menghasilkan lulusan yang siap bekerja,memiliki mentalitas kerja yang tangguh, dan memiliki keterampilan ganda (jurusan otomotif : Mobil + Motor, jurusan  RPL : programer + teknisi)";
+        $keunggulan2->save();
+
+        $keunggulan3 = new Keunggulan();
+        $keunggulan3->keunggulan = "Tenaga pendidik berasal dari lulusan perguruan-perguruan tinggi terkemuka, dan pelaku Industri.";
+        $keunggulan3->save();
+
+        $keunggulan4 = new Keunggulan();
+        $keunggulan4->keunggulan = "Setiap pelajaran praktek/paket keahlian dilaksanakan dengan menggunakan sistem blok, dengan 3 guru pengajar.";
+        $keunggulan4->save();
+
+        $keunggulan5 = new Keunggulan();
+        $keunggulan5->keunggulan = "Ujian Kompetensi diselenggarakan secara mandiri, menggunakan kendaraan dan alat yang mutakhir .";
+        $keunggulan5->save();
+
+        $keunggulan6 = new Keunggulan();
+        $keunggulan6->keunggulan = "Pengembangan karakter dibentuk atas dasar ajaran ISLAM sebagai fondasi utama dalam berbagai aktivitas siswa.";
+        $keunggulan6->save();
+
+        $keunggulan7 = new Keunggulan();
+        $keunggulan7->keunggulan = "Dibukanya layanan Bursa Kerja Khusus yang menyediakan pelatihan tambahan siswa untuk siap bekerja dan penyaluran lulusan ke dunia kerja";
+        $keunggulan7->save();
+
+        $keunggulan8 = new Keunggulan();
+        $keunggulan8->keunggulan = "Memiliki unit produksi SMK Assalaam yang menjadi laboratorium langsung bagi siswa dalam mengembangkan keterampilan kejuruannya.";
+        $keunggulan8->save();
+
+        $keunggulan9 = new Keunggulan();
+        $keunggulan9->keunggulan = "Sarana dan prasarana pembelajaran yang lengkap dan terkini";
+        $keunggulan9->save();
     }
 }

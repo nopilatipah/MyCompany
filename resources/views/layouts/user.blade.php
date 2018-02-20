@@ -24,8 +24,57 @@ $komponen = App\Komponen::find(1);
         <script src="assets/js/html5shiv.min.js"></script>
         <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
   </head>
   <body>
+
+    <!-- <a href="" data-toggle="modal" data-target="#pesan" class="ms-conf-btn ms-configurator-btn btn-circle btn-circle-raised btn-circle-primary animated rubberBand">
+      <i class="fa fa-comment"></i>
+    </a>
+
+    <div class="modal modal-primary" id="pesan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Kirim Pesan</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                </div>
+                <div class="modal-body">
+                  <form class="form-horizontal" method="post" action="{{url('kirimpesan')}}">
+                        {{ csrf_field() }}
+                        <fieldset class="container">
+                          <div class="form-group row">
+                            <div class="col-lg-6">
+                              <input type="text" name="nama_depan" class="form-control" id="inputName" placeholder="Nama Depan" required=""> </div>
+                              <div class="col-lg-6">
+                              <input type="text" name="nama_belakang" class="form-control" id="inputName" placeholder="Nama Belakang" required=""> </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-lg-12">
+                              <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Alamat Email" required=""> </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-lg-12">
+                              <input type="text" name="subjek" class="form-control" id="inputSubject" placeholder="Subjek" required=""> </div>
+                          </div>
+                          <div class="form-group row">
+                            <div class="col-lg-12">
+                              <textarea class="form-control" name="pesan" rows="3" id="textArea" placeholder="Pesan Anda..." required=""></textarea>
+                            </div>
+                          </div>
+                        </fieldset>
+                      
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-royal">Kirim</button>
+                </div>
+                </form>
+                        
+            </div>
+        </div>
+    </div> -->
     
     <div id="ms-preload" class="ms-preload">
       <div id="status">
@@ -49,40 +98,7 @@ $komponen = App\Komponen::find(1);
               </h1>
             </a>
           </div>
-          <div class="header-right">
-            <div class="share-menu">
-              <ul class="share-menu-list">
-                <li class="animated fadeInRight animation-delay-3">
-                  <a href="javascript:void(0)" class="btn-circle btn-google">
-                    <i class="zmdi zmdi-google"></i>
-                  </a>
-                </li>
-                <li class="animated fadeInRight animation-delay-2">
-                  <a href="javascript:void(0)" class="btn-circle btn-facebook">
-                    <i class="zmdi zmdi-facebook"></i>
-                  </a>
-                </li>
-                <li class="animated fadeInRight animation-delay-1">
-                  <a href="javascript:void(0)" class="btn-circle btn-twitter">
-                    <i class="zmdi zmdi-twitter"></i>
-                  </a>
-                </li>
-              </ul>
-              <a href="javascript:void(0)" class="btn-circle btn-circle-primary animated zoomInDown animation-delay-7">
-                <i class="zmdi zmdi-share"></i>
-              </a>
-            </div>
-            <a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal">
-              <i class="zmdi zmdi-account"></i>
-            </a>
-            <form class="search-form animated zoomInDown animation-delay-9">
-              <input id="search-box" type="text" class="search-input" placeholder="Search..." name="q" />
-              <label for="search-box">
-                <i class="zmdi zmdi-search"></i>
-              </label>
-            </form>
-            
-          </div>
+          
         </div>
       </header>
       <nav class="navbar navbar-expand-md  navbar-static ms-navbar ms-navbar-primary">
@@ -114,6 +130,7 @@ $komponen = App\Komponen::find(1);
                 <a href="{{url('/ekstrakurikuler')}}" class="nav-link dropdown-toggle animated fadeIn animation-delay-8">Ekstrakurikuler
                 </a>
               </li>
+              
               <li class="nav-item dropdown">
                 <a href="{{url('/berita')}}" class="nav-link dropdown-toggle animated fadeIn animation-delay-8">Berita
                 </a>
@@ -126,6 +143,7 @@ $komponen = App\Komponen::find(1);
         <!-- container -->
       </nav>
       
+      @include('sweet::alert')
       @yield('content')
       
       @php
@@ -214,15 +232,8 @@ $komponen = App\Komponen::find(1);
                   <a href="javascript:void(0)" class="btn-circle btn-youtube">
                     <i class="zmdi zmdi-youtube-play"></i>
                   </a>
-                  <br>
-                  <a href="javascript:void(0)" class="btn-circle btn-google">
-                    <i class="zmdi zmdi-google"></i>
-                  </a>
-                  <a href="javascript:void(0)" class="btn-circle btn-instagram">
+                  <a target="_blank" href="{{$ig->link}}" class="btn-circle btn-instagram">
                     <i class="zmdi zmdi-instagram"></i>
-                  </a>
-                  <a href="javascript:void(0)" class="btn-circle btn-github">
-                    <i class="zmdi zmdi-github"></i>
                   </a>
                 </div>
               </div>
@@ -460,5 +471,19 @@ $komponen = App\Komponen::find(1);
       ga('create', 'UA-90917746-2', 'auto');
       ga('send', 'pageview');
     </script>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/5a7ecacd4b401e45400cd5bc/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+    @stack('js')
   </body>
 </html>

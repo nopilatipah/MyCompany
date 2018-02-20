@@ -7,6 +7,8 @@ use App\Profil;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Session;
+use App\Sejarah;
+use App\Keunggulan;
 
 class ProfilController extends Controller
 {
@@ -14,7 +16,9 @@ class ProfilController extends Controller
     public function edit($id)
     {
         $profils=Profil::find($id);
-        return view('backend.profil.index')->with(compact('profils'));
+        $sejarah = Sejarah::paginate(5);
+        $keunggulan = Keunggulan::paginate(5);
+        return view('backend.profil.index')->with(compact('profils','sejarah','keunggulan'));
     }
 
     public function update(Request $request, $id)

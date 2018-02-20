@@ -59,19 +59,6 @@
           </ul>
         </li>
         
-        @php
-        $pes = App\Pesan::where('status','=',0)->count();
-        @endphp
-        <li>
-          <a href="{{ route('pesan.index') }}">
-            <i class="fa fa-envelope"></i> <span>Pesan</span>
-            @if($pes > 0)
-            <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">{{$pes}}</small>
-            </span>
-            @endif
-          </a>
-        </li>
         
         <li class="header">KOMPONEN WEBSITE</li>
         <li><a href="{{ route('utama.index') }}"><i class="fa fa-laptop"></i> <span>Tampilan Utama</span></a></li>
